@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import BookingModal from './BookingModal';
 
 const SKY = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_045255_3cb4b3c2-3cb5-4af9-93b4-bd88f2f883c3.png&w=1920&q=80';
 const STILL = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_045249_4f7fe287-c84b-479f-a953-04990fe1a3ac.png&w=1080&q=85';
@@ -10,6 +11,7 @@ export default function DriftlabHero({ onExploreStudio }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [soundOn, setSoundOn] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const audioStateRef = useRef({ ctx: null, gain: null });
 
   useEffect(() => {
@@ -622,15 +624,18 @@ export default function DriftlabHero({ onExploreStudio }) {
           >
             <a href="#" className="hover:underline">[Works]</a>
             <a href="#" className="hover:underline">[Agency]</a>
-            {onExploreStudio && (
-              <button
-                type="button"
-                onClick={onExploreStudio}
-                className="hover:underline font-semibold text-blush-700 bg-white/70 px-2.5 py-1 rounded-full border border-black/10 flex items-center gap-1 shadow-xs hover:bg-white"
-              >
-                <span>[Wedding Studio ↓]</span>
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setIsBookingModalOpen(true)}
+              className="pointer-events-auto font-sans font-semibold text-charcoal bg-white/90 hover:bg-white px-3.5 py-1.5 rounded-full border border-black/15 flex items-center gap-1.5 shadow-xs hover:shadow-md transition-all group cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                fontSize: 'calc(12 * var(--u))',
+                letterSpacing: '.04em'
+              }}
+            >
+              <span className="text-gold font-bold">✦</span>
+              <span className="uppercase tracking-wider">Book Now</span>
+            </button>
           </nav>
 
           {/* Index Indicators (01, 02, 03 for the 3 scroll changes) */}
@@ -838,6 +843,12 @@ export default function DriftlabHero({ onExploreStudio }) {
           </button>
         </div>
       </div>
+
+      {/* Luxury Bespoke Booking Suite Modal */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
     </div>
   );
 }
