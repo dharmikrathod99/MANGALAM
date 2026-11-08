@@ -11,7 +11,6 @@ import FaqSection from './components/FaqSection';
 import EnquirySection from './components/EnquirySection';
 import Footer from './components/Footer';
 import FloatingPetalsCanvas from './components/svg/FloatingPetalsCanvas';
-import FloatingConcierge from './components/FloatingConcierge';
 import DriftlabHero from './components/DriftlabHero';
 import BookingModal from './components/BookingModal';
 import { Sparkles } from './components/icons';
@@ -144,12 +143,6 @@ export default function App() {
         <Footer
           onSelectCollection={handleSelectCollection}
           onOpenEnquiry={() => setIsBookingModalOpen(true)}
-        />
-
-        {/* Floating Concierge (WhatsApp + Quick Book Now Button) */}
-        <FloatingConcierge
-          onOpenEnquiry={() => setIsBookingModalOpen(true)}
-          isVisible={true}
         />
       </div>
 
