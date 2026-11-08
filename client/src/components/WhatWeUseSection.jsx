@@ -34,14 +34,14 @@ export const BRANDS = [
     accentColor: '#0668E1'
   },
   {
-    id: 'apple',
+    id: 'animation-ui',
     index: '04 / 08',
-    name: 'APPLE',
-    role: 'Retina Typography & iOS Gestures',
-    description: 'Native Apple Calendar event integration, fluid iOS touch scrolling, and pixel-crisp display rendering.',
-    logo: 'https://framerusercontent.com/images/caZkXLl6Ju2aFJ52ZRqbel1eo.svg',
-    tag: 'Display Standards',
-    accentColor: '#1A1819'
+    name: 'ANIMATION UI',
+    role: 'Fluid Keyframes & Micro-Interactions',
+    description: 'Choreographed page choreography, spring-based scroll dynamics, and silky 60fps micro-interactions.',
+    logo: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="22" fill="%230b0b10"/><path d="M22 68C22 42.595 42.595 22 68 22" stroke="%23D8B879" stroke-width="6" stroke-linecap="round"/><path d="M32 78C32 52.595 52.595 32 78 32" stroke="%23A855F7" stroke-width="6" stroke-linecap="round"/><path d="M42 88C42 62.595 62.595 42 88 42" stroke="%23C084FC" stroke-width="6" stroke-linecap="round"/><circle cx="68" cy="22" r="6" fill="%23D8B879"/><circle cx="78" cy="32" r="6" fill="%23A855F7"/><circle cx="88" cy="42" r="6" fill="%23FAF5FF"/></svg>',
+    tag: 'Motion Dynamics',
+    accentColor: '#A855F7'
   },
   {
     id: 'openai',
@@ -54,14 +54,14 @@ export const BRANDS = [
     accentColor: '#10A37F'
   },
   {
-    id: 'tesla',
+    id: 'blender',
     index: '06 / 08',
-    name: 'TESLA',
-    role: 'Speed & Minimalist Architecture',
-    description: 'Obsessive performance optimization, zero bloat, and instantaneous mobile loading speeds worldwide.',
-    logo: 'https://framerusercontent.com/images/tZ37dPy7lpmPnFVgpQdIUyc58k.svg',
-    tag: 'Performance',
-    accentColor: '#E82127'
+    name: 'BLENDER',
+    role: '3D Wax Seals & Jewel Simulation',
+    description: 'Photorealistic 3D envelope modeling, tactile wax seal stamps, and dynamic light reflection simulation.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg',
+    tag: '3D Atelier Engine',
+    accentColor: '#EA7600'
   },
   {
     id: 'spotify',
@@ -74,14 +74,14 @@ export const BRANDS = [
     accentColor: '#1ED760'
   },
   {
-    id: 'nike',
+    id: 'photoshop',
     index: '08 / 08',
-    name: 'NIKE',
-    role: 'Aesthetic Identity & Craft Standards',
-    description: 'Iconic typography balance, bold visual clarity, and precision-crafted design principles.',
-    logo: 'https://framerusercontent.com/images/7JG0ZfLdH9nlPffFea6M6Ts0HrU.svg',
-    tag: 'Design Standards',
-    accentColor: '#111111'
+    name: 'ADOBE PHOTOSHOP',
+    role: 'Fine-Art Retouching & Floral Artistry',
+    description: 'High-resolution couple portrait retouching, archival botanical textures, and pure gold foil luster.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg',
+    tag: 'Digital Atelier Art',
+    accentColor: '#31A8FF'
   }
 ];
 
