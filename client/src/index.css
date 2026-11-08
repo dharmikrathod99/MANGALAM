@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #FFFDF8;
+    color: #2C2225;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  ::selection {
+    background-color: #F8DDE5;
+    color: #865365;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFDF8;
+}
+::-webkit-scrollbar-thumb {
+  background: #EBC0CE;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D8B879;
+}
+
+/* Luxury Gold & Shimmer Utility Classes */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #9A7426 0%, #D8B879 50%, #C8A252 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rose-gold-gradient {
+  background: linear-gradient(135deg, #865365 0%, #C77087 50%, #D8B879 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-ornate {
+  border: 1px solid #D8B879;
+  box-shadow: 0 0 0 3px #FFFDF8, 0 0 0 4px #D8B879;
+}
+
+.luxury-card-shadow {
+  box-shadow: 0 10px 30px -10px rgba(134, 83, 101, 0.08), 0 20px 40px -15px rgba(216, 184, 121, 0.12);
+}
+
+.luxury-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(134, 83, 101, 0.15), 0 30px 60px -20px rgba(216, 184, 121, 0.2);
+}
+
+/* 3D Envelope Perspectives */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Floating Flower Petals Animation */
+@keyframes petalDrift {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.petal-drift {
+  animation: petalDrift linear infinite;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* Driftlab Scroll Hero Styles */
+:root {
+  --u: min(calc(100vw / 1600), calc(100vh / 900));
+  --ink: #0b0b10;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --u: 1px;
+  }
+  .drift-logo {
+    left: 16px !important;
+    top: 16px !important;
+    font-size: 21px !important;
+  }
+  .drift-links {
+    right: 16px !important;
+    top: 19px !important;
+    font-size: 12px !important;
+  }
+  .drift-index {
+    display: none !important;
+  }
+  .drift-bar {
+    right: 6px !important;
+  }
+  .drift-cap {
+    width: calc(100% - 32px) !important;
+    left: 16px !important;
+    margin-left: 0 !important;
+    bottom: 72px !important;
+    font-size: 17px !important;
+    height: 70px !important;
+  }
+  .drift-cap svg {
+    width: 24px !important;
+    height: 16px !important;
+    margin-bottom: 6px !important;
+  }
+  .drift-cap p {
+    top: 22px !important;
+  }
+  .drift-cap br {
+    display: none !important;
+  }
+  .drift-panel {
+    top: auto !important;
+    bottom: 72px !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    text-align: left !important;
+    font-size: 21px !important;
+  }
+  .drift-main-headline {
+    bottom: 96px !important;
+  }
+  .drift-sound {
+    left: 16px !important;
+    bottom: 18px !important;
+  }
+  .drift-up {
+    right: 16px !important;
+    bottom: 18px !important;
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "weds",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "pnpm --prefix client dev",
+    "build": "pnpm --prefix client build",
+    "preview": "pnpm --prefix client preview"
+  }
+}
