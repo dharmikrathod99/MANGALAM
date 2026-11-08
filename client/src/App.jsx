@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import CollectionsSection from './components/CollectionsSection';
 import FeaturedGallerySection from './components/FeaturedGallerySection';
@@ -14,12 +13,14 @@ import Footer from './components/Footer';
 import FloatingPetalsCanvas from './components/svg/FloatingPetalsCanvas';
 import FloatingConcierge from './components/FloatingConcierge';
 import DriftlabHero from './components/DriftlabHero';
-import { ArrowDown, ArrowUp, Sparkles } from './components/icons';
+import BookingModal from './components/BookingModal';
+import { Sparkles } from './components/icons';
 
 export default function App() {
   const [selectedStudioDesign, setSelectedStudioDesign] = useState(null);
   const [enquiryPrefill, setEnquiryPrefill] = useState(null);
   const [isPastHero, setIsPastHero] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   // Track whether user has scrolled past the Driftlab hero
   useEffect(() => {
@@ -76,45 +77,45 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-ivory-100 text-charcoal font-sans selection:bg-blush-200 selection:text-blush-900 overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#dcd8f4] text-[#0b0b10] font-sans selection:bg-[#fbcfe8] selection:text-[#0b0b10] overflow-x-hidden">
 
       {/* 1. Driftlab WebGL2 Jellyfish Scroll-Driven Hero */}
       <section id="driftlab-hero" className="relative">
-        <DriftlabHero onExploreStudio={() => scrollToSection('wedding-studio')} />
+        <DriftlabHero
+          onExploreStudio={() => scrollToSection('wedding-studio')}
+          onOpenBooking={() => setIsBookingModalOpen(true)}
+        />
       </section>
 
-      {/* 2. Seamless Visual Bridge: Transitions naturally from lilac sky into luxury ivory studio */}
+      {/* 2. Seamless Visual Bridge: Transitions naturally from lilac sky into dreamy atelier */}
       <div
         id="wedding-studio"
-        className="relative bg-gradient-to-b from-[#dcd8f4] via-[#FBF5F8] to-[#FFFDF8] pt-16 pb-8 border-t border-black/5"
+        className="relative bg-gradient-to-b from-[#dcd8f4] via-[#eae6fc] to-[#f3f0ff] pt-16 pb-8 border-t border-black/5"
       >
         <div className="max-w-4xl mx-auto px-6 text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-blush-300 text-charcoal text-xs uppercase tracking-widest font-semibold shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-gold animate-spin-slow" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-[#c8c1ee] text-[#0b0b10] text-xs uppercase tracking-widest font-semibold shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#e5c07b] animate-spin-slow" />
             <span>Welcome to Rivayat & Co. Luxury Studio</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-charcoal font-normal">
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#0b0b10] font-normal">
             Heirloom Digital Wedding Invitations
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-charcoal-muted max-w-xl mx-auto font-light leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-[#4a4660] max-w-xl mx-auto font-light leading-relaxed">
             Scroll ahead to experience our bespoke multi-event suites, interactive wax seal unboxing, live customization studio, and instant WhatsApp broadcasting.
           </p>
-          <div className="w-20 h-[1.5px] bg-gold mx-auto mt-2" />
+          <div className="w-20 h-[1.5px] bg-[#D8B879] mx-auto mt-2" />
         </div>
       </div>
 
-      {/* 3. The Complete Luxury E-Wedding Atelier */}
+      {/* 3. The Complete Luxury E-Wedding Atelier (No Navbar, matching Hero lilac & pink theme) */}
       <div className="relative">
         {/* Floating Flower Petals (gentle drifting blossoms) */}
         <FloatingPetalsCanvas isVisible={isPastHero} />
 
-        {/* Sticky Header & Navigation - Only visible when inside wedding atelier */}
-        <Navbar onOpenEnquiry={() => handleOpenEnquiry()} isVisible={isPastHero} />
-
         <main>
           {/* Hero Section with interactive wax seal unboxing */}
           <HeroSection
-            onOpenEnquiry={() => handleOpenEnquiry()}
+            onOpenEnquiry={() => setIsBookingModalOpen(true)}
             onExplore={() => scrollToSection('gallery')}
           />
 
@@ -137,7 +138,7 @@ export default function App() {
           />
 
           {/* How It Works (4 Steps with bespoke SVG illustrations) */}
-          <HowItWorksSection onOpenEnquiry={() => handleOpenEnquiry()} />
+          <HowItWorksSection onOpenEnquiry={() => setIsBookingModalOpen(true)} />
 
           {/* Why Choose Us (8 USPs & Comparison) */}
           <WhyChooseUsSection />
@@ -161,12 +162,21 @@ export default function App() {
         {/* Footer */}
         <Footer
           onSelectCollection={handleSelectCollection}
-          onOpenEnquiry={() => handleOpenEnquiry()}
+          onOpenEnquiry={() => setIsBookingModalOpen(true)}
         />
 
-        {/* Floating Concierge (WhatsApp + Quick Create) */}
-        <FloatingConcierge onOpenEnquiry={() => handleOpenEnquiry()} isVisible={isPastHero} />
+        {/* Floating Concierge (WhatsApp + Quick Book Now Button) */}
+        <FloatingConcierge
+          onOpenEnquiry={() => setIsBookingModalOpen(true)}
+          isVisible={true}
+        />
       </div>
+
+      {/* Global Interactive Booking Modal */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
 
     </div>
   );

@@ -86,19 +86,19 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-ivory-100 via-blush-50/50 to-ivory-100 relative overflow-hidden border-t border-blush-200">
+    <section id="contact" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#dcd8f4] relative overflow-hidden border-t border-[#c8c1ee]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blush-100/90 border border-blush-200 text-blush-900 text-xs tracking-[0.2em] uppercase font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-gold" />
             Concierge Consultation
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#0b0b10] font-normal tracking-tight">
             Commission Your Wedding Stationery
           </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
+          <p className="font-sans text-base sm:text-lg text-[#0b0b10]/70 font-light leading-relaxed">
             Fill the enquiry details below to receive a personalized digital proposal and draft within 24 hours, or connect directly on WhatsApp.
           </p>
           <div className="w-24 h-[1px] bg-gold mx-auto mt-4" />
@@ -108,7 +108,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Comprehensive Enquiry Form */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-blush-200 shadow-xl relative">
+          <div className="lg:col-span-7 bg-white/95 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/60 shadow-xl relative">
             <DecorativeCorner className="absolute top-4 left-4 w-6 h-6 text-gold/50" />
             <div className="absolute top-4 right-4 scale-x-[-1]">
               <DecorativeCorner className="w-6 h-6 text-gold/50" />
@@ -329,7 +329,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 rounded-full bg-charcoal text-ivory-100 text-xs sm:text-sm uppercase tracking-widest font-semibold hover:bg-blush-700 transition-all duration-300 shadow-md flex items-center justify-center gap-2 group disabled:opacity-60"
+                    className="w-full py-4 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs sm:text-sm uppercase tracking-widest font-semibold transition-all duration-300 shadow-md flex items-center justify-center gap-2 group disabled:opacity-60 cursor-pointer"
                   >
                     <span>{isSubmitting ? 'Submitting Your Brief...' : 'Submit Wedding Design Brief'}</span>
                     <Sparkles className="w-4 h-4 text-gold group-hover:rotate-12 transition-transform" />
@@ -356,15 +356,15 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Direct Channels Card */}
-            <div className="bg-ivory-50 rounded-3xl p-7 sm:p-8 border border-blush-300 space-y-6 shadow-sm">
-              <h3 className="font-serif text-2xl text-charcoal font-normal">
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-7 sm:p-8 border border-[#c8c1ee]/60 space-y-6 shadow-sm">
+              <h3 className="font-serif text-2xl text-[#0b0b10] font-normal">
                 Rivayat Design Atelier
               </h3>
-              <p className="text-xs sm:text-sm text-charcoal-muted font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#0b0b10]/70 font-light leading-relaxed">
                 We work directly with couples, wedding planners, and families across timezones. Every consultation is personal, responsive, and attentive.
               </p>
 
-              <div className="space-y-4 pt-2 border-t border-blush-200">
+              <div className="space-y-4 pt-2 border-t border-[#c8c1ee]/40">
                 {/* WhatsApp */}
                 <a
                   href={`https://wa.me/${BRAND_INFO.contact.whatsappClean}?text=Hello%20Rivayat%20Studio!%20I'd%20love%20to%20discuss%20an%20e-wedding%20card.`}

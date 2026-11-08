@@ -5,12 +5,12 @@ import { DecorativeCorner } from './svg/WeddingMotifs';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
-    <section id="collections" className="py-24 bg-ivory-50 relative border-t border-blush-200/50">
+    <section id="collections" className="py-24 bg-[#eae6fc] relative border-t border-[#c8c1ee]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blush-100/70 border border-blush-200 text-blush-900 text-xs tracking-[0.2em] uppercase font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
             <Sparkles className="w-3.5 h-3.5 text-gold" />
             Curated Stationery Suites
           </div>
@@ -28,7 +28,7 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
           {COLLECTIONS.map((col, idx) => (
             <div
               key={col.id}
-              className="group relative bg-ivory-100 rounded-2xl border border-blush-200/80 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
+              className="group relative bg-white/95 rounded-2xl border border-[#c8c1ee]/70 overflow-hidden shadow-xs hover:shadow-xl hover:border-gold transition-all duration-500 flex flex-col justify-between"
             >
               {/* Image & Preview Container */}
               <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-blush-100/40">

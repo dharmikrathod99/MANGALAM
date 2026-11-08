@@ -75,7 +75,7 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
   };
 
   return (
-    <section id="hero" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-ivory-100 via-blush-50 to-ivory-100">
+    <section id="hero" className="relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] border-t border-[#c8c1ee]/40">
       {/* Subtle Ornamental Background Elements */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-40">
         <FloralVines />

@@ -11,14 +11,14 @@ export default function FloatingConcierge({ onOpenEnquiry, isVisible = true }) {
     <aside aria-label="Quick Concierge Actions" className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 transition-all duration-500 animate-fadeIn">
       {/* Friendly Tooltip Pill */}
       {showTooltip && (
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-blush-300 max-w-xs animate-fadeIn flex items-start gap-2.5">
-          <div className="p-1.5 rounded-full bg-blush-100 text-gold-deep flex-shrink-0">
-            <Sparkles className="w-4 h-4 text-gold" />
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-[#c8c1ee] max-w-xs animate-fadeIn flex items-start gap-2.5">
+          <div className="p-1.5 rounded-full bg-[#ede9fe] text-gold-deep flex-shrink-0">
+            <Sparkles className="w-4 h-4 text-[#D8B879]" />
           </div>
           <div className="text-xs">
-            <p className="font-semibold text-charcoal">Planning a wedding?</p>
-            <p className="text-charcoal-muted font-light text-[11px] leading-tight mt-0.5">
-              Chat with our design director on WhatsApp for instant proofs & ideas.
+            <p className="font-semibold text-[#0b0b10]">Planning your celebration?</p>
+            <p className="text-[#4a4660] font-light text-[11px] leading-tight mt-0.5">
+              Click Book Now to customize your design type and upload your couple photos!
             </p>
           </div>
           <button
@@ -33,13 +33,13 @@ export default function FloatingConcierge({ onOpenEnquiry, isVisible = true }) {
 
       {/* Floating Action Buttons */}
       <div className="flex items-center gap-2">
-        {/* Create Invitation Pill */}
+        {/* Book Now Invitation Pill */}
         <button
           onClick={() => onOpenEnquiry()}
-          className="hidden sm:inline-flex items-center gap-2 px-4 py-3 rounded-full bg-charcoal text-ivory-100 text-xs uppercase tracking-wider font-semibold shadow-xl hover:bg-blush-700 transition-all duration-300 border border-gold/40 hover:scale-105"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#0b0b10] text-[#f3f0ff] hover:bg-[#be185d] text-xs uppercase tracking-wider font-semibold shadow-2xl transition-all duration-300 border border-[#D8B879]/60 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-white/60"
         >
-          <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
-          <span>Create Card</span>
+          <Sparkles className="w-3.5 h-3.5 text-[#F7E99A] animate-pulse" />
+          <span>Book Now</span>
         </button>
 
         {/* WhatsApp Button */}

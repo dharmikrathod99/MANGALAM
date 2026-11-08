@@ -8,14 +8,14 @@
   }
   
   body {
-    background-color: #FFFDF8;
-    color: #2C2225;
+    background-color: #dcd8f4;
+    color: #0b0b10;
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   ::selection {
-    background-color: #F8DDE5;
-    color: #865365;
+    background-color: #fbcfe8;
+    color: #0b0b10;
   }
 }
 
@@ -24,14 +24,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFFDF8;
+  background: #dcd8f4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #EBC0CE;
+  background: #c8c1ee;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D8B879;
+  background: #f472b6;
 }
 
 /* Luxury Gold & Shimmer Utility Classes */
@@ -123,7 +123,8 @@
     top: 16px !important;
     font-size: 21px !important;
   }
-  .drift-links {
+  .drift-links,
+  .drift-book-btn {
     right: 16px !important;
     top: 19px !important;
     font-size: 12px !important;

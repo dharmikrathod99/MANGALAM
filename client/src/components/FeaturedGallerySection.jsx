@@ -48,13 +48,13 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
   };
 
   return (
-    <section id="gallery" className="py-24 bg-ivory-100 relative">
+    <section id="gallery" className="py-24 bg-[#f3f0ff] relative border-t border-[#c8c1ee]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blush-100/80 border border-blush-200 text-blush-900 text-xs tracking-[0.2em] uppercase font-medium">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
               <Sparkles className="w-3.5 h-3.5 text-gold" />
               Atelier Portfolio
             </div>

@@ -5,12 +5,12 @@ import { DecorativeCorner } from './svg/WeddingMotifs';
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 bg-gradient-to-b from-ivory-100 via-blush-50/40 to-ivory-100 relative overflow-hidden border-t border-blush-200/50">
+    <section className="py-24 bg-gradient-to-b from-[#eae6fc] via-[#f3f0ff] to-[#eae6fc] relative overflow-hidden border-t border-[#c8c1ee]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blush-100/90 border border-blush-200 text-blush-900 text-xs tracking-[0.2em] uppercase font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
             <Sparkles className="w-3.5 h-3.5 text-gold" />
             Love Notes & Celebrations
           </div>

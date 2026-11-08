@@ -7,7 +7,7 @@ const VIDEO = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07l
 const WORDS = ['WEDDING INVITATIONS', 'CELEBRATING LOVE', 'YOUR INVITATION'];
 const STEP = 0.50, GAP = 3.4, RADIUS = 9, CAM = 11, FOCAL = 8.14;
 
-export default function DriftlabHero({ onExploreStudio }) {
+export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [soundOn, setSoundOn] = useState(false);
@@ -611,32 +611,42 @@ export default function DriftlabHero({ onExploreStudio }) {
             </svg>
           </a>
 
-          {/* Links */}
-          <nav
-            className="drift-links pointer-events-auto absolute flex items-center"
+          {/* Top Right: [Book Now] Action Button replacing [Wedding Studio ↓] */}
+          <div
+            className="drift-book-btn pointer-events-auto absolute flex items-center"
             style={{
-              right: 'calc(38 * var(--u))',
-              top: 'calc(24 * var(--u))',
-              gap: 'calc(18 * var(--u))',
-              fontSize: 'calc(13 * var(--u))',
-              letterSpacing: '.04em'
+              right: 'calc(30 * var(--u))',
+              top: 'calc(20 * var(--u))',
+              zIndex: 40
             }}
           >
-            <a href="#" className="hover:underline">[Works]</a>
-            <a href="#" className="hover:underline">[Agency]</a>
             <button
               type="button"
-              onClick={() => setIsBookingModalOpen(true)}
-              className="pointer-events-auto font-sans font-semibold text-charcoal bg-white/90 hover:bg-white px-3.5 py-1.5 rounded-full border border-black/15 flex items-center gap-1.5 shadow-xs hover:shadow-md transition-all group cursor-pointer hover:scale-105 active:scale-95"
-              style={{
-                fontSize: 'calc(12 * var(--u))',
-                letterSpacing: '.04em'
+              onClick={() => {
+                if (onOpenBooking) {
+                  onOpenBooking();
+                } else {
+                  setIsBookingModalOpen(true);
+                }
               }}
+              className="pointer-events-auto flex items-center gap-1.5 transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-xs hover:shadow-md"
+              style={{
+                height: 'calc(32 * var(--u))',
+                padding: '0 calc(14 * var(--u))',
+                borderRadius: '99px',
+                background: 'rgba(255, 255, 255, 0.90)',
+                border: '1px solid rgba(11, 11, 16, 0.12)',
+                color: '#5a3346',
+                font: '600 calc(13 * var(--u))/1 "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
+                letterSpacing: '.03em',
+                backdropFilter: 'blur(8px)'
+              }}
+              aria-label="Book Now - Custom Wedding Invitation Suite"
             >
-              <span className="text-gold font-bold">✦</span>
-              <span className="uppercase tracking-wider">Book Now</span>
+              <span className="text-[#D8B879]" style={{ fontSize: 'calc(11 * var(--u))' }}>✦</span>
+              <span>[Book Now]</span>
             </button>
-          </nav>
+          </div>
 
           {/* Index Indicators (01, 02, 03 for the 3 scroll changes) */}
           <div

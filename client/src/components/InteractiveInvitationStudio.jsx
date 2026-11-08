@@ -340,7 +340,7 @@ export default function InteractiveInvitationStudio({ initialDesign, onOpenEnqui
   };
 
   return (
-    <section id="interactive-preview" className="py-24 bg-gradient-to-b from-ivory-50 via-blush-50/40 to-ivory-100 relative overflow-hidden border-t border-blush-200/60">
+    <section id="interactive-preview" className="py-24 bg-gradient-to-b from-[#eae6fc] via-[#f3f0ff] to-[#eae6fc] relative overflow-hidden border-t border-[#c8c1ee]/40">
       
       {/* Decorative Background Mandalas */}
       <div className="absolute top-10 right-10 pointer-events-none opacity-20">
