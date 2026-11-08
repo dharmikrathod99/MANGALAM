@@ -783,6 +783,14 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
             </div>
           </div>
 
+          {/* Ethereal Seamless Bottom Atmosphere Feather into Atelier */}
+          <div
+            className="absolute bottom-0 inset-x-0 h-28 sm:h-40 pointer-events-none z-10"
+            style={{
+              background: 'linear-gradient(to bottom, rgba(220, 216, 244, 0) 0%, rgba(220, 216, 244, 0.45) 45%, rgba(220, 216, 244, 0.92) 80%, #dcd8f4 100%)'
+            }}
+          />
+
           {/* Sound Pill */}
           <button
             onClick={toggleSound}

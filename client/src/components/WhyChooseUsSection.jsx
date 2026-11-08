@@ -16,7 +16,7 @@ export default function WhyChooseUsSection() {
   };
 
   return (
-    <section id="why-choose-us" className="py-24 bg-gradient-to-b from-[#eae6fc] via-[#f3f0ff] to-[#eae6fc] relative overflow-hidden border-t border-[#c8c1ee]/40">
+    <section id="why-choose-us" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}

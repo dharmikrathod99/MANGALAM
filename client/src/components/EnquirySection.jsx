@@ -86,7 +86,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#dcd8f4] relative overflow-hidden border-t border-[#c8c1ee]/40">
+    <section id="contact" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#dcd8f4] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         {/* Section Header */}

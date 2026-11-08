@@ -5,40 +5,9 @@ import MandalaPattern from './svg/MandalaPattern';
 import WaxSeal from './svg/WaxSeal';
 import { WeddingRings, Butterfly, DecorativeCorner } from './svg/WeddingMotifs';
 
-export default function HeroSection({ onOpenEnquiry, onExplore }) {
+export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onExplore }) {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(false);
-
-  // The 3 Signature Hero Lines
-  const heroLines = [
-    {
-      part1: "Beautiful Digital Wedding Invitations,",
-      part2: "Made Just for Your Big Day.",
-      label: "Your Big Day",
-      badge: "✦ Artisan Indian Heritage • Modern Digital Atelier"
-    },
-    {
-      part1: "Love Deserves a",
-      part2: "Beautiful Invitation.",
-      label: "Love Deserves",
-      badge: "✦ Heirloom Stationery Studio"
-    },
-    {
-      part1: "Your Day. Your Story.",
-      part2: "Your Invitation.",
-      label: "Your Invitation",
-      badge: "✦ Bespoke Multi-Event Suites"
-    }
-  ];
-  const [activeLineIdx, setActiveLineIdx] = useState(0);
-
-  // Auto-rotate hero lines every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveLineIdx((prev) => (prev + 1) % heroLines.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [heroLines.length]);
 
   // Gentle acoustic sitar/chime Web Audio synthesis
   const playGentleChime = () => {
@@ -75,25 +44,32 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
   };
 
   return (
-    <section id="hero" className="relative pt-20 pb-20 md:pt-28 md:pb-28 overflow-hidden bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] border-t border-[#c8c1ee]/40">
+    <section
+      id={id}
+      className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden bg-gradient-to-b from-[#dcd8f4] via-[#eae6fc] to-[#f3f0ff]"
+    >
+      {/* Dreamy Celestial Jellyfish & Lilac Sky Glow Blobs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-pink-400/15 blur-[120px] pointer-events-none -z-0" />
+      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] rounded-full bg-[#c8c1ee]/35 blur-[100px] pointer-events-none -z-0" />
+
       {/* Subtle Ornamental Background Elements */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-40">
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-30">
         <FloralVines />
       </div>
 
-      <div className="absolute top-20 left-4 md:left-12 pointer-events-none opacity-20 animate-spin-slow">
+      <div className="absolute top-16 left-4 md:left-12 pointer-events-none opacity-15 animate-spin-slow">
         <MandalaPattern className="w-48 h-48 md:w-72 md:h-72 text-gold" />
       </div>
 
-      <div className="absolute top-1/3 right-4 md:right-16 pointer-events-none opacity-20">
+      <div className="absolute top-1/3 right-4 md:right-16 pointer-events-none opacity-15">
         <MandalaPattern className="w-40 h-40 md:w-64 md:h-64 text-blush-400" />
       </div>
 
       {/* Floating subtle butterflies */}
-      <div className="absolute top-32 right-1/4 pointer-events-none hidden md:block animate-float-slow">
+      <div className="absolute top-24 right-1/4 pointer-events-none hidden md:block animate-float-slow">
         <Butterfly className="w-8 h-8 text-gold" />
       </div>
-      <div className="absolute bottom-24 left-1/5 pointer-events-none hidden md:block animate-float-reverse">
+      <div className="absolute bottom-20 left-1/5 pointer-events-none hidden md:block animate-float-reverse">
         <Butterfly className="w-6 h-6 text-blush-400" />
       </div>
 
@@ -103,82 +79,78 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
           {/* Left Column: Editorial Headline & Copy */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-7">
             {/* Studio Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ivory-100 border border-gold/40 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#c8c1ee] shadow-xs">
               <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
-              <span className="text-xs uppercase tracking-[0.22em] text-charcoal-soft font-medium">
-                {heroLines[activeLineIdx].badge}
+              <span className="text-xs uppercase tracking-[0.22em] text-[#0b0b10] font-semibold">
+                ✦ Bespoke Wedding Atelier • Interactive Suite
               </span>
             </div>
 
-            {/* Main Heading - Featuring the 3 requested lines */}
+            {/* Main Heading */}
             <div className="space-y-3">
-              <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-normal tracking-tight text-charcoal leading-[1.14] min-h-[120px] sm:min-h-[150px] md:min-h-[180px] transition-all duration-500">
-                {heroLines[activeLineIdx].part1}{' '}
+              <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-normal tracking-tight text-[#0b0b10] leading-[1.12]">
+                Heirloom Digital Invitations, <br />
                 <span className="italic font-display block mt-1.5 text-blush-700 animate-fadeIn">
-                  {heroLines[activeLineIdx].part2}
+                  Unboxed with Devotion.
                 </span>
               </h1>
-
-              {/* Responsive 3-Line Switcher Buttons */}
-              <div className="flex items-center justify-center lg:justify-start gap-2 pt-1">
-                {heroLines.map((item, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveLineIdx(idx)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition-all ${
-                      activeLineIdx === idx
-                        ? 'bg-charcoal text-ivory-100 font-semibold shadow-xs ring-1 ring-gold/50'
-                        : 'bg-white/80 text-charcoal-muted hover:text-charcoal border border-blush-200'
-                    }`}
-                  >
-                    <span className="text-[10px] text-gold font-bold">0{idx + 1}</span>
-                    <span className="text-[11px] font-medium">{item.label}</span>
-                  </button>
-                ))}
-              </div>
             </div>
 
             {/* Supporting Description */}
-            <p className="font-sans text-base sm:text-lg md:text-xl text-charcoal-muted max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-              Thoughtfully designed digital wedding invitations that turn your special moments into unforgettable memories. 
-              Gilded with sacred Indian motifs, romantic watercolor botanicals, and instant WhatsApp elegance.
+            <p className="font-sans text-base sm:text-lg md:text-xl text-[#0b0b10]/75 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+              Experience the future of wedding celebrations. Tap the regal wax seal on the right to unveil our interactive celebration suite — featuring multi-event cards, sacred Sanskrit shlokas, acoustic melodies, and instant WhatsApp broadcasting.
             </p>
+
+            {/* Feature Pills */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+                <span className="text-gold">👑</span>
+                <span>Royal & Contemporary Suites</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+                <span className="text-blush-700">💌</span>
+                <span>Interactive Wax Seal Unboxing</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+                <span className="text-emerald-700">📲</span>
+                <span>1-Tap WhatsApp Broadcasting</span>
+              </div>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <button
                 onClick={() => onOpenEnquiry()}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-charcoal text-ivory-100 text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold hover:bg-blush-700 transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-3 group border border-charcoal hover:border-blush-700"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-3 group cursor-pointer"
               >
-                <span>Create Your Invitation</span>
+                <span>Book Your Invitation</span>
                 <Sparkles className="w-4 h-4 text-gold group-hover:rotate-12 transition-transform" />
               </button>
 
               <button
                 onClick={() => onExplore()}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-ivory-100/80 hover:bg-ivory-100 text-charcoal text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold border border-blush-300 hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 hover:bg-white text-[#0b0b10] text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold border border-[#c8c1ee] hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer"
               >
-                <span>Explore Invitations</span>
-                <ArrowRight className="w-4 h-4 text-charcoal-muted group-hover:translate-x-1 group-hover:text-gold transition-all" />
+                <span>Explore 12 Collections</span>
+                <ArrowRight className="w-4 h-4 text-[#0b0b10]/60 group-hover:translate-x-1 group-hover:text-gold transition-all" />
               </button>
             </div>
 
             {/* Trust Markers / Highlights */}
-            <div className="pt-6 border-t border-blush-200/80 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+            <div className="pt-6 border-t border-[#c8c1ee]/50 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
               <div>
                 <div className="flex items-center gap-1 text-gold text-sm font-semibold">
                   <Star className="w-4 h-4 fill-gold text-gold" />
                   <span>4.9 / 5.0</span>
                 </div>
-                <p className="text-xs text-charcoal-muted mt-0.5">12,000+ Couples</p>
+                <p className="text-xs text-[#0b0b10]/60 mt-0.5">12,000+ Couples</p>
               </div>
 
               <div>
-                <div className="text-sm font-semibold text-charcoal">
+                <div className="text-sm font-semibold text-[#0b0b10]">
                   24–48 Hours
                 </div>
-                <p className="text-xs text-charcoal-muted mt-0.5">Rapid Dispatch</p>
+                <p className="text-xs text-[#0b0b10]/60 mt-0.5">Rapid Dispatch</p>
               </div>
 
               <div>
@@ -186,7 +158,7 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   WhatsApp
                 </div>
-                <p className="text-xs text-charcoal-muted mt-0.5">1-Tap Sharing</p>
+                <p className="text-xs text-[#0b0b10]/60 mt-0.5">1-Tap Sharing</p>
               </div>
             </div>
           </div>
@@ -203,20 +175,20 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
               
               {/* Floating Helper Pill */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 text-charcoal text-[11px] font-medium shadow-md border border-blush-200">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 text-[#0b0b10] text-[11px] font-medium shadow-md border border-[#c8c1ee]">
                   <Sparkles className="w-3 h-3 text-gold" />
-                  {isEnvelopeOpen ? 'Click seal to close' : 'Click wax seal to open'}
+                  {isEnvelopeOpen ? '✦ Click seal to close' : '✦ Click wax seal to open'}
                 </span>
               </div>
 
               {/* Envelope Body */}
               <div
                 onClick={handleEnvelopeToggle}
-                className="relative cursor-pointer select-none transition-all duration-700 bg-ivory-100 rounded-2xl p-4 border border-blush-300 shadow-2xl overflow-visible hover:shadow-blush-300/50"
+                className="relative cursor-pointer select-none transition-all duration-700 bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-[#c8c1ee]/60 shadow-2xl overflow-visible hover:shadow-purple-300/30"
               >
                 
                 {/* Envelope Outer Pocket Sleeve */}
-                <div className="relative bg-gradient-to-b from-[#FAF4EC] to-[#FFFDF8] rounded-xl border border-gold/40 p-3 pt-6 min-h-[460px] flex flex-col justify-between overflow-hidden">
+                <div className="relative bg-gradient-to-b from-[#FAF8FF] to-[#F3F0FF] rounded-xl border border-gold/40 p-3 pt-6 min-h-[460px] flex flex-col justify-between overflow-hidden">
                   
                   {/* Ornate Stationery Corners */}
                   <DecorativeCorner className="absolute top-2 left-2 w-6 h-6 text-gold/60" />
@@ -232,7 +204,7 @@ export default function HeroSection({ onOpenEnquiry, onExplore }) {
 
                   {/* Inner Sliding Invitation Card */}
                   <div
-                    className={`relative z-10 bg-ivory-50 rounded-lg border border-gold/50 p-5 text-center transition-all duration-700 ease-out shadow-lg ${
+                    className={`relative z-10 bg-white rounded-lg border border-gold/50 p-5 text-center transition-all duration-700 ease-out shadow-lg ${
                       isEnvelopeOpen
                         ? '-translate-y-20 scale-102 ring-2 ring-gold/40 shadow-2xl'
                         : 'translate-y-0 scale-98 opacity-95'

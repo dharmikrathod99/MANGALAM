@@ -87,34 +87,15 @@ export default function App() {
         />
       </section>
 
-      {/* 2. Seamless Visual Bridge: Transitions naturally from lilac sky into dreamy atelier */}
-      <div
-        id="wedding-studio"
-        className="relative bg-gradient-to-b from-[#dcd8f4] via-[#eae6fc] to-[#f3f0ff] pt-16 pb-8 border-t border-black/5"
-      >
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-[#c8c1ee] text-[#0b0b10] text-xs uppercase tracking-widest font-semibold shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#e5c07b] animate-spin-slow" />
-            <span>Welcome to Rivayat & Co. Luxury Studio</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#0b0b10] font-normal">
-            Heirloom Digital Wedding Invitations
-          </h2>
-          <p className="font-sans text-xs sm:text-sm text-[#4a4660] max-w-xl mx-auto font-light leading-relaxed">
-            Scroll ahead to experience our bespoke multi-event suites, interactive wax seal unboxing, live customization studio, and instant WhatsApp broadcasting.
-          </p>
-          <div className="w-20 h-[1.5px] bg-[#D8B879] mx-auto mt-2" />
-        </div>
-      </div>
-
-      {/* 3. The Complete Luxury E-Wedding Atelier (No Navbar, matching Hero lilac & pink theme) */}
+      {/* 2. The Complete Luxury E-Wedding Atelier (Seamless Flow from Lilac Sky) */}
       <div className="relative">
         {/* Floating Flower Petals (gentle drifting blossoms) */}
-        <FloatingPetalsCanvas isVisible={isPastHero} />
+        <FloatingPetalsCanvas isVisible={true} />
 
         <main>
           {/* Hero Section with interactive wax seal unboxing */}
           <HeroSection
+            id="wedding-studio"
             onOpenEnquiry={() => setIsBookingModalOpen(true)}
             onExplore={() => scrollToSection('gallery')}
           />

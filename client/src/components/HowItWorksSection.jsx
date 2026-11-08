@@ -17,7 +17,7 @@ export default function HowItWorksSection({ onOpenEnquiry }) {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-[#f3f0ff] relative border-t border-[#c8c1ee]/40">
+    <section id="how-it-works" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

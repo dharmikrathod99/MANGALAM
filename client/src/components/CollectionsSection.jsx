@@ -5,7 +5,7 @@ import { DecorativeCorner } from './svg/WeddingMotifs';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
-    <section id="collections" className="py-24 bg-[#eae6fc] relative border-t border-[#c8c1ee]/40">
+    <section id="collections" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}
