@@ -139,11 +139,11 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
             {/* Trust Markers / Highlights */}
             <div className="pt-6 border-t border-[#c8c1ee]/50 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
               <div>
-                <div className="flex items-center gap-1 text-gold text-sm font-semibold">
-                  <Star className="w-4 h-4 fill-gold text-gold" />
-                  <span>4.9 / 5.0</span>
+                <div className="flex items-center gap-1 text-[#0b0b10] text-sm font-semibold">
+                  <Sparkles className="w-4 h-4 text-gold" />
+                  <span>100% Bespoke</span>
                 </div>
-                <p className="text-xs text-[#0b0b10]/60 mt-0.5">12,000+ Couples</p>
+                <p className="text-xs text-[#0b0b10]/60 mt-0.5">Crafted For You</p>
               </div>
 
               <div>

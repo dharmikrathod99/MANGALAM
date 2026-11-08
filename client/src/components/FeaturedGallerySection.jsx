@@ -179,8 +179,8 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
                   <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
                       <div className="flex items-center justify-between text-xs text-charcoal-muted mb-2">
-                        <span className="text-gold font-medium">★ {design.rating}</span>
-                        <span>{design.leadTime}</span>
+                        <span className="text-[#865365] font-medium text-[11px] bg-[#fce7f3] px-2.5 py-0.5 rounded-full border border-pink-200">✦ {design.tag || 'Bespoke Suite'}</span>
+                        <span className="text-[11px] font-mono">{design.leadTime}</span>
                       </div>
                       <p className="text-xs text-charcoal-muted line-clamp-2 font-light leading-relaxed">
                         {design.description}

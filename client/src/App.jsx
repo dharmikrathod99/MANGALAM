@@ -6,7 +6,7 @@ import InteractiveInvitationStudio from './components/InteractiveInvitationStudi
 import HowItWorksSection from './components/HowItWorksSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
 import PricingSection from './components/PricingSection';
-import TestimonialsSection from './components/TestimonialsSection';
+import SuiteFeaturesSection from './components/SuiteFeaturesSection';
 import FaqSection from './components/FaqSection';
 import EnquirySection from './components/EnquirySection';
 import Footer from './components/Footer';
@@ -126,8 +126,8 @@ export default function App() {
           {/* Pricing & Packages (Configurable prices, INR/USD toggle) */}
           <PricingSection onSelectPackage={handleSelectPackage} />
 
-          {/* Customer Testimonials */}
-          <TestimonialsSection />
+          {/* Interactive Suite Features & Inclusions */}
+          <SuiteFeaturesSection onOpenBooking={() => setIsBookingModalOpen(true)} />
 
           {/* FAQ Section (8 Accordion Questions) */}
           <FaqSection onOpenEnquiry={(topic) => handleOpenEnquiry(topic)} />

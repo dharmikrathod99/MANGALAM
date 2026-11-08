@@ -132,9 +132,11 @@ export default function InvitationDetailModal({ design, onClose, onCustomize }) 
           {/* Right Column: Specifications, Inclusions & CTAs */}
           <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between space-y-6">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-gold mb-1">
-                <span>★ {design.rating}</span>
-                <span className="text-charcoal-muted">({design.reviewsCount} reviews)</span>
+              <div className="flex items-center gap-2 text-xs font-semibold mb-2">
+                <span className="text-[#865365] bg-[#fce7f3] px-2.5 py-0.5 rounded-full border border-pink-200">
+                  ✦ {design.tag || 'Bespoke Atelier Collection'}
+                </span>
+                <span className="text-charcoal-muted text-[11px]">• {design.leadTime}</span>
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-charcoal mb-2">
