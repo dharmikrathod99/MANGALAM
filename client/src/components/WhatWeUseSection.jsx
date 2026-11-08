@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import OptionWheel from './OptionWheel';
-import { Sparkles, CheckCircle2 } from './icons';
-import { DecorativeCorner } from './svg/WeddingMotifs';
+import { Sparkles } from './icons';
 
 export const BRANDS = [
   {
@@ -86,8 +85,8 @@ export const BRANDS = [
   }
 ];
 
-export default function WhatWeUseSection({ onOpenBooking }) {
-  const [selectedIndex, setSelectedIndex] = useState(4); // Default to OpenAI as seen in user screenshot
+export default function WhatWeUseSection() {
+  const [selectedIndex, setSelectedIndex] = useState(4); // Default to OpenAI as shown in user screenshot
   const activeBrand = BRANDS[selectedIndex] || BRANDS[0];
 
   const brandNames = BRANDS.map((b) => b.name);
@@ -108,7 +107,7 @@ export default function WhatWeUseSection({ onOpenBooking }) {
         
         {/* Top Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-semibold shadow-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-xs border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-semibold shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-gold" />
             What We Use • Modern Tech Stack
           </div>
@@ -121,145 +120,73 @@ export default function WhatWeUseSection({ onOpenBooking }) {
           <div className="w-24 h-[1.5px] bg-[#D8B879] mx-auto mt-4" />
         </div>
 
-        {/* 2-Column Split: Wheel takes the whole left side, Icon showcase on the right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        {/* 2-Column Split: Transparent OptionWheel on Left, Transparent Icon Display on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Dedicated entirely to the OptionWheel taking the whole left part */}
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="relative w-full h-[480px] sm:h-[520px] md:h-[550px] bg-white/80 backdrop-blur-md rounded-3xl border border-[#c8c1ee]/70 shadow-xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between">
-              
-              {/* Ornate Stationery Corners */}
-              <DecorativeCorner className="absolute top-3 left-3 w-5 h-5 text-gold/40 pointer-events-none" />
-              <div className="absolute top-3 right-3 scale-x-[-1] pointer-events-none">
-                <DecorativeCorner className="w-5 h-5 text-gold/40" />
-              </div>
-              <div className="absolute bottom-3 left-3 scale-y-[-1] pointer-events-none">
-                <DecorativeCorner className="w-5 h-5 text-gold/40" />
-              </div>
-              <div className="absolute bottom-3 right-3 scale-[-1] pointer-events-none">
-                <DecorativeCorner className="w-5 h-5 text-gold/40" />
-              </div>
-
-              {/* Top Instruction Header */}
-              <div className="relative z-20 flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#0b0b10]/60 select-none">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#D8B879] animate-ping" />
-                  <span>Drag or scroll to select platform:</span>
-                </div>
-                <span className="text-[11px] text-[#5a3346] font-semibold bg-[#FAF8FF] px-2.5 py-0.5 rounded-full border border-[#c8c1ee]/50">
-                  {activeBrand.index}
-                </span>
-              </div>
-
-              {/* The OptionWheel taking the whole card */}
-              <div className="flex-1 w-full relative my-2 overflow-hidden">
-                <OptionWheel
-                  items={brandNames}
-                  defaultSelected={selectedIndex}
-                  onChange={handleWheelChange}
-                  textColor="#8c86a8"
-                  activeColor="#0b0b10"
-                  side="left"
-                  fontSize={3.2}
-                  spacing={1.4}
-                  curve={1.1}
-                  tilt={6}
-                  blur={1.8}
-                  fade={0.25}
-                  smoothing={180}
-                  inset={32}
-                  loop={true}
-                  draggable={true}
-                  className="w-full h-full"
-                />
-              </div>
-
-              {/* Bottom Subtle Tagline */}
-              <div className="relative z-20 pt-2 border-t border-[#c8c1ee]/30 flex items-center justify-between text-[11px] font-mono text-[#0b0b10]/50 select-none">
-                <span>✦ React Bits • OptionWheel</span>
-                <span>Active: {activeBrand.name}</span>
-              </div>
+          {/* Left Column: Pure Transparent Background with ONLY Text Wheel */}
+          <div className="lg:col-span-7 flex flex-col justify-center bg-transparent">
+            <div className="relative w-full h-[460px] sm:h-[500px] md:h-[540px] bg-transparent flex flex-col justify-center">
+              <OptionWheel
+                items={brandNames}
+                defaultSelected={selectedIndex}
+                onChange={handleWheelChange}
+                textColor="#8c86a8"
+                activeColor="#0b0b10"
+                side="left"
+                fontSize={3.4}
+                spacing={1.4}
+                curve={1.1}
+                tilt={6}
+                blur={1.8}
+                fade={0.25}
+                smoothing={180}
+                inset={16}
+                loop={true}
+                draggable={true}
+                className="w-full h-full bg-transparent"
+              />
             </div>
           </div>
 
-          {/* Right Column: Icon & Brand Visual Showcase (Right Side) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-            
-            {/* Main Interactive Icon Card */}
-            <div className="relative w-full h-[410px] sm:h-[440px] md:h-[465px] bg-white/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/70 shadow-2xl flex flex-col items-center justify-center text-center group hover:border-[#D8B879] transition-all duration-500">
+          {/* Right Column: Pure Transparent Brand Icon & Identity */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center text-center bg-transparent">
+            <div className="relative w-full max-w-[360px] sm:max-w-[400px] flex flex-col items-center justify-center text-center bg-transparent">
               
-              {/* Ornate Stationery Corners */}
-              <DecorativeCorner className="absolute top-3 left-3 w-5 h-5 text-gold/60" />
-              <div className="absolute top-3 right-3 scale-x-[-1]">
-                <DecorativeCorner className="w-5 h-5 text-gold/60" />
-              </div>
-              <div className="absolute bottom-3 left-3 scale-y-[-1]">
-                <DecorativeCorner className="w-5 h-5 text-gold/60" />
-              </div>
-              <div className="absolute bottom-3 right-3 scale-[-1]">
-                <DecorativeCorner className="w-5 h-5 text-gold/60" />
-              </div>
-
               {/* Floating Atmosphere Halo Behind Icon */}
               <div
-                className="absolute w-44 h-44 rounded-full blur-3xl opacity-20 pointer-events-none transition-colors duration-500 -z-0"
+                className="absolute w-56 h-56 rounded-full blur-3xl opacity-25 pointer-events-none transition-colors duration-700 -z-0"
                 style={{ backgroundColor: activeBrand.accentColor || '#D8B879' }}
               />
 
-              {/* High-Resolution Brand Icon Display Box */}
-              <div className="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-b from-[#FAF8FF] to-[#F3F0FF] border border-[#c8c1ee]/70 flex items-center justify-center p-6 shadow-inner mb-5 group-hover:scale-105 transition-transform duration-300">
+              {/* High-Resolution Brand Icon Display - Clean & Transparent */}
+              <div className="relative z-10 w-32 h-32 sm:w-44 sm:h-44 flex items-center justify-center p-4 mb-3 transition-transform duration-500 hover:scale-105">
                 <img
                   src={activeBrand.logo}
                   alt={`${activeBrand.name} logo`}
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-sm transition-all duration-300"
+                  className="w-24 h-24 sm:w-32 sm:h-32 object-contain filter drop-shadow-md transition-all duration-300"
                   loading="lazy"
                 />
               </div>
 
               {/* Brand Name Headline & Role */}
-              <div className="relative z-10 space-y-1">
-                <span className="font-mono text-xs text-[#0b0b10]/60 uppercase tracking-[0.25em] block">
+              <div className="relative z-10 space-y-2 mt-1">
+                <span className="font-mono text-xs text-[#0b0b10]/60 uppercase tracking-[0.3em] block">
                   {activeBrand.tag}
                 </span>
-                <h4 className="font-serif text-3xl sm:text-4xl text-[#0b0b10] font-normal tracking-wider">
+                <h3 className="font-serif text-4xl sm:text-5xl text-[#0b0b10] font-normal tracking-wider">
                   {activeBrand.name}
-                </h4>
-                <p className="text-xs text-[#0b0b10]/70 font-light max-w-xs mx-auto line-clamp-2 pt-1">
+                </h3>
+                <p className="text-sm text-[#0b0b10]/75 font-light max-w-xs mx-auto leading-relaxed pt-1">
                   {activeBrand.role}
                 </p>
+                <div className="pt-2">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[#5a3346] tracking-wider uppercase bg-white/60 backdrop-blur-xs px-3 py-1 rounded-full border border-[#c8c1ee]/40 shadow-2xs">
+                    ✦ {activeBrand.index} Platform
+                  </span>
+                </div>
               </div>
 
-              {/* Status Badge */}
-              <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF8FF] border border-[#c8c1ee]/60 text-xs font-mono text-[#0b0b10] shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Live in Every Rivayat Suite</span>
-              </div>
             </div>
-
-            {/* Mini Quick-Select Thumbnails Bar (Right Side) */}
-            <div className="w-full bg-white/85 backdrop-blur-sm rounded-2xl p-3 border border-[#c8c1ee]/50 shadow-xs flex items-center justify-between gap-1.5">
-              {BRANDS.map((item, idx) => (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedIndex(idx)}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center p-2 transition-all duration-200 cursor-pointer ${
-                    selectedIndex === idx
-                      ? 'bg-[#0b0b10] shadow-md scale-110 ring-2 ring-[#D8B879]'
-                      : 'bg-[#FAF8FF] hover:bg-white border border-[#c8c1ee]/40 opacity-70 hover:opacity-100'
-                  }`}
-                  title={item.name}
-                >
-                  <img
-                    src={item.logo}
-                    alt={item.name}
-                    className={`w-5 h-5 object-contain ${
-                      selectedIndex === idx ? 'filter invert brightness-200' : 'filter grayscale'
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
-
           </div>
 
         </div>
