@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import HeroSection from './components/HeroSection';
 import CollectionsSection from './components/CollectionsSection';
 import FeaturedGallerySection from './components/FeaturedGallerySection';
-import InteractiveInvitationStudio from './components/InteractiveInvitationStudio';
 import HowItWorksSection from './components/HowItWorksSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
 import PricingSection from './components/PricingSection';
@@ -54,8 +53,8 @@ export default function App() {
 
   // When user selects a design from Gallery or Collections to customize
   const handleCustomizeDesign = (design) => {
-    setSelectedStudioDesign(design);
-    scrollToSection('interactive-preview');
+    setSelectedStudioDesign(design?.id || design);
+    setIsBookingModalOpen(true);
   };
 
   // When user explores a collection from the 12 Collections grid
@@ -111,12 +110,6 @@ export default function App() {
             onOpenEnquiry={(theme) => handleOpenEnquiry(theme)}
           />
 
-          {/* Interactive Invitation Preview Studio with live inputs & WhatsApp simulation */}
-          <InteractiveInvitationStudio
-            initialDesign={selectedStudioDesign}
-            onOpenEnquiryWithData={(data) => handleOpenEnquiry(data)}
-          />
-
           {/* How It Works (4 Steps with bespoke SVG illustrations) */}
           <HowItWorksSection onOpenEnquiry={() => setIsBookingModalOpen(true)} />
 
@@ -150,6 +143,7 @@ export default function App() {
       <BookingModal
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
+        initialDesignId={typeof selectedStudioDesign === 'string' ? selectedStudioDesign : selectedStudioDesign?.id}
       />
 
     </div>

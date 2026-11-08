@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X, Sparkles, Camera, Upload, Trash2, Plus, Check, MessageCircle, Heart, Star, Calendar } from './icons';
 import { BRAND_INFO } from '../data/weddingData';
 import { DecorativeCorner } from './svg/WeddingMotifs';
@@ -146,10 +146,10 @@ const SAMPLE_PHOTOS = [
   'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80'
 ];
 
-export default function BookingModal({ isOpen, onClose }) {
+export default function BookingModal({ isOpen, onClose, initialDesignId }) {
   const [groomName, setGroomName] = useState('');
   const [brideName, setBrideName] = useState('');
-  const [selectedDesign, setSelectedDesign] = useState(DESIGN_TYPES[0].id);
+  const [selectedDesign, setSelectedDesign] = useState(initialDesignId || DESIGN_TYPES[0].id);
   const [weddingDate, setWeddingDate] = useState('');
   const [venueCity, setVenueCity] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -158,6 +158,12 @@ export default function BookingModal({ isOpen, onClose }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    if (initialDesignId) {
+      setSelectedDesign(initialDesignId);
+    }
+  }, [initialDesignId]);
 
   if (!isOpen) return null;
 

@@ -95,7 +95,7 @@ export default function Footer({ onSelectCollection, onOpenEnquiry }) {
                 <a href="#collections" className="hover:text-white transition-colors">12 Collections</a>
               </li>
               <li>
-                <a href="#interactive-preview" className="hover:text-white transition-colors">Live Preview Studio</a>
+                <a href="#features" className="hover:text-white transition-colors">Suite Features</a>
               </li>
               <li>
                 <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
