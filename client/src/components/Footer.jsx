@@ -101,7 +101,7 @@ export default function Footer({ onSelectCollection, onOpenEnquiry }) {
                 <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-white transition-colors">Packages & Quotes</a>
+                <a href="#what-we-use" className="hover:text-white transition-colors">What We Use</a>
               </li>
               <li>
                 <a href="#why-choose-us" className="hover:text-white transition-colors">Why Choose Us</a>

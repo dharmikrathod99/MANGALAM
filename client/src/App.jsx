@@ -4,7 +4,7 @@ import CollectionsSection from './components/CollectionsSection';
 import FeaturedGallerySection from './components/FeaturedGallerySection';
 import HowItWorksSection from './components/HowItWorksSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
-import PricingSection from './components/PricingSection';
+import WhatWeUseSection from './components/WhatWeUseSection';
 import SuiteFeaturesSection from './components/SuiteFeaturesSection';
 import FaqSection from './components/FaqSection';
 import EnquirySection from './components/EnquirySection';
@@ -116,8 +116,8 @@ export default function App() {
           {/* Why Choose Us (8 USPs & Comparison) */}
           <WhyChooseUsSection />
 
-          {/* Pricing & Packages (Configurable prices, INR/USD toggle) */}
-          <PricingSection onSelectPackage={handleSelectPackage} />
+          {/* What We Use Section (Framer Brand Logos & Tech Stack) */}
+          <WhatWeUseSection onOpenBooking={() => setIsBookingModalOpen(true)} />
 
           {/* Interactive Suite Features & Inclusions */}
           <SuiteFeaturesSection onOpenBooking={() => setIsBookingModalOpen(true)} />
