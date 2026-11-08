@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import OptionWheel from './OptionWheel';
-import { Sparkles, CheckCircle2, ArrowRight } from './icons';
+import { Sparkles, CheckCircle2 } from './icons';
 import { DecorativeCorner } from './svg/WeddingMotifs';
 
 export const BRANDS = [
@@ -9,93 +9,85 @@ export const BRANDS = [
     index: '01 / 08',
     name: 'FRAMER',
     role: 'Interactive Motion & Spring Physics',
-    description: 'High-fidelity gesture physics, seamless reactive components, and editorial layout fluidity that make your invitation feel alive on touch.',
+    description: 'High-fidelity gesture physics, seamless reactive components, and editorial layout fluidity.',
     logo: 'https://framerusercontent.com/images/oxUWU2jLhf3X7vFMvvWQLrvtg.svg',
     tag: 'Motion Engine',
-    accentColor: '#0055FF',
-    highlights: ['60fps Touch Fluidity', 'Reactive Spring Physics', 'Smooth Page Folding']
+    accentColor: '#0055FF'
   },
   {
     id: 'google',
     index: '02 / 08',
     name: 'GOOGLE',
     role: 'Maps Navigation & Calendar Cloud',
-    description: '1-tap GPS directions directly to your banquet hall or palace gate, plus automatic Google Calendar event reminders for punctuality.',
+    description: '1-tap GPS directions directly to banquet hall gates and automatic Google Calendar event reminders.',
     logo: 'https://framerusercontent.com/images/GrUgwzE0FkyfEyoukD7rX6BYLI.svg',
     tag: 'Navigation & Sync',
-    accentColor: '#4285F4',
-    highlights: ['1-Tap Gate Directions', 'Google Calendar Sync', 'Zero Lost Guests']
+    accentColor: '#4285F4'
   },
   {
     id: 'meta',
     index: '03 / 08',
     name: 'META',
     role: 'WhatsApp & Instagram Broadcasting',
-    description: 'Instant WhatsApp concierge delivery, family group invitations, and high-res 9:16 vertical story formats for social announcements.',
+    description: 'Instant WhatsApp concierge delivery, family group invitations, and high-res vertical story formats.',
     logo: 'https://framerusercontent.com/images/FMtXuBx54vZkq98wFzLqOFvSv30.svg',
     tag: 'Broadcasting',
-    accentColor: '#0668E1',
-    highlights: ['1-Tap WhatsApp Forwarding', 'Instagram Story Cards', 'Family Group Broadcasts']
+    accentColor: '#0668E1'
   },
   {
     id: 'apple',
     index: '04 / 08',
     name: 'APPLE',
     role: 'Retina Typography & iOS Gestures',
-    description: 'Native Apple Calendar event integration, fluid iOS touch scrolling, and pixel-crisp display rendering on Super Retina screens.',
+    description: 'Native Apple Calendar event integration, fluid iOS touch scrolling, and pixel-crisp display rendering.',
     logo: 'https://framerusercontent.com/images/caZkXLl6Ju2aFJ52ZRqbel1eo.svg',
     tag: 'Display Standards',
-    accentColor: '#1A1819',
-    highlights: ['iOS Calendar Passes', 'Retina Vector Graphics', 'Haptic Touch Sensitivity']
+    accentColor: '#1A1819'
   },
   {
     id: 'openai',
     index: '05 / 08',
     name: 'OPENAI',
     role: 'AI Translation & Poetic Rhyming',
-    description: 'Assisted sacred Sanskrit shloka interpretations, personalized couple story verse, and editorial phrasing honoring elder traditions.',
+    description: 'Assisted sacred Sanskrit shloka interpretations, personalized couple story verse, and editorial phrasing.',
     logo: 'https://framerusercontent.com/images/zGn1XqlRekQQ1rqh6UQV3cp9rk.svg',
     tag: 'AI Artistry',
-    accentColor: '#10A37F',
-    highlights: ['Sanskrit Verse Meaning', 'Poetic Couple Rhymes', 'Cultural Phrasing']
+    accentColor: '#10A37F'
   },
   {
     id: 'tesla',
     index: '06 / 08',
     name: 'TESLA',
     role: 'Speed & Minimalist Architecture',
-    description: 'Obsessive performance optimization, zero bloat, and instantaneous mobile loading speeds worldwide across any cellular network.',
+    description: 'Obsessive performance optimization, zero bloat, and instantaneous mobile loading speeds worldwide.',
     logo: 'https://framerusercontent.com/images/tZ37dPy7lpmPnFVgpQdIUyc58k.svg',
     tag: 'Performance',
-    accentColor: '#E82127',
-    highlights: ['Sub-Second Loading', 'Zero Network Lag', 'Minimalist Clean Code']
+    accentColor: '#E82127'
   },
   {
     id: 'spotify',
     index: '07 / 08',
     name: 'SPOTIFY',
     role: 'Ceremony Audio & Music Scoring',
-    description: 'High-fidelity audio streaming integration for emotional bridal entries, sangeet tracks, and sacred shehnai tunes.',
+    description: 'High-fidelity audio streaming integration for emotional bridal entries, sangeet tracks, and shehnai tunes.',
     logo: 'https://framerusercontent.com/images/4T3OTh0OK3yNNFwdL6Y8DSk9e8.svg',
     tag: 'Audio Scoring',
-    accentColor: '#1ED760',
-    highlights: ['Seamless Background Music', 'Acoustic Soundscapes', 'Bridal Entry Themes']
+    accentColor: '#1ED760'
   },
   {
     id: 'nike',
     index: '08 / 08',
     name: 'NIKE',
     role: 'Aesthetic Identity & Craft Standards',
-    description: 'Iconic typography balance, bold visual clarity, and precision-crafted design principles that stand out from ordinary cards.',
+    description: 'Iconic typography balance, bold visual clarity, and precision-crafted design principles.',
     logo: 'https://framerusercontent.com/images/7JG0ZfLdH9nlPffFea6M6Ts0HrU.svg',
     tag: 'Design Standards',
-    accentColor: '#111111',
-    highlights: ['Editorial Font Hierarchy', 'Bold Visual Presence', 'Iconic Luxury Feel']
+    accentColor: '#111111'
   }
 ];
 
 export default function WhatWeUseSection({ onOpenBooking }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(4); // Default to OpenAI as seen in user screenshot
   const activeBrand = BRANDS[selectedIndex] || BRANDS[0];
 
   const brandNames = BRANDS.map((b) => b.name);
@@ -124,107 +116,77 @@ export default function WhatWeUseSection({ onOpenBooking }) {
             Crafted with World-Class Tools & Platforms
           </h2>
           <p className="font-sans text-base sm:text-lg text-[#0b0b10]/70 font-light leading-relaxed">
-            Drag or scroll the interactive wheel on the left to explore the innovative engines and platforms powering every wedding invitation suite.
+            Drag or scroll the wheel on the left to explore the innovative engines and platforms powering your wedding invitation suite.
           </p>
           <div className="w-24 h-[1.5px] bg-[#D8B879] mx-auto mt-4" />
         </div>
 
-        {/* 2-Column Split: Text & OptionWheel on Left, Large Icon on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        {/* 2-Column Split: Wheel takes the whole left side, Icon showcase on the right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           
-          {/* Left Column: All Text & Interactive <OptionWheel /> */}
-          <div className="lg:col-span-7 space-y-6 flex flex-col justify-center">
-            
-            {/* The React Bits <OptionWheel /> Component */}
-            <div className="relative w-full h-[260px] sm:h-[300px] bg-white/70 backdrop-blur-md rounded-3xl border border-[#c8c1ee]/60 shadow-md p-4 overflow-hidden">
-              {/* Subtle Helper Header */}
-              <div className="absolute top-4 left-6 z-20 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#0b0b10]/50 select-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D8B879] animate-ping" />
-                <span>Drag or Scroll to Select Platform:</span>
+          {/* Left Column: Dedicated entirely to the OptionWheel taking the whole left part */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="relative w-full h-[480px] sm:h-[520px] md:h-[550px] bg-white/80 backdrop-blur-md rounded-3xl border border-[#c8c1ee]/70 shadow-xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between">
+              
+              {/* Ornate Stationery Corners */}
+              <DecorativeCorner className="absolute top-3 left-3 w-5 h-5 text-gold/40 pointer-events-none" />
+              <div className="absolute top-3 right-3 scale-x-[-1] pointer-events-none">
+                <DecorativeCorner className="w-5 h-5 text-gold/40" />
+              </div>
+              <div className="absolute bottom-3 left-3 scale-y-[-1] pointer-events-none">
+                <DecorativeCorner className="w-5 h-5 text-gold/40" />
+              </div>
+              <div className="absolute bottom-3 right-3 scale-[-1] pointer-events-none">
+                <DecorativeCorner className="w-5 h-5 text-gold/40" />
               </div>
 
-              {/* The Wheel */}
-              <OptionWheel
-                items={brandNames}
-                defaultSelected={selectedIndex}
-                onChange={handleWheelChange}
-                textColor="#8c86a8"
-                activeColor="#0b0b10"
-                side="left"
-                fontSize={2.3}
-                spacing={1.4}
-                curve={1}
-                tilt={6}
-                blur={1.8}
-                fade={0.28}
-                smoothing={180}
-                inset={24}
-                loop={true}
-                draggable={true}
-                className="w-full h-full pt-6"
-              />
-            </div>
-
-            {/* Live Editorial Details for the Selected Brand (Left Side) */}
-            <div className="bg-white/90 backdrop-blur-md rounded-3xl p-7 sm:p-8 border border-[#c8c1ee]/60 shadow-lg space-y-4 transition-all duration-300">
-              {/* Index & Tag */}
-              <div className="flex items-center justify-between">
-                <div className="inline-flex items-center gap-2">
-                  <span className="font-mono text-sm font-bold text-[#0b0b10] tracking-wider">
-                    {activeBrand.index}
-                  </span>
-                  <span className="h-3 w-[1px] bg-[#c8c1ee]" />
-                  <span className="font-mono text-sm font-semibold tracking-widest text-[#5a3346]">
-                    {activeBrand.name}
-                  </span>
+              {/* Top Instruction Header */}
+              <div className="relative z-20 flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#0b0b10]/60 select-none">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#D8B879] animate-ping" />
+                  <span>Drag or scroll to select platform:</span>
                 </div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-blush-700 bg-pink-100/70 px-3 py-1 rounded-full border border-pink-200">
-                  {activeBrand.tag}
+                <span className="text-[11px] text-[#5a3346] font-semibold bg-[#FAF8FF] px-2.5 py-0.5 rounded-full border border-[#c8c1ee]/50">
+                  {activeBrand.index}
                 </span>
               </div>
 
-              {/* Role Title */}
-              <h3 className="font-serif text-2xl sm:text-3xl text-[#0b0b10] font-normal tracking-wide">
-                {activeBrand.role}
-              </h3>
-
-              {/* Detailed Description */}
-              <p className="text-sm text-[#0b0b10]/75 font-light leading-relaxed">
-                {activeBrand.description}
-              </p>
-
-              {/* Feature Highlights Pills */}
-              <div className="pt-2 flex flex-wrap gap-2">
-                {activeBrand.highlights.map((highlight, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/60 shadow-2xs font-medium"
-                  >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>{highlight}</span>
-                  </span>
-                ))}
+              {/* The OptionWheel taking the whole card */}
+              <div className="flex-1 w-full relative my-2 overflow-hidden">
+                <OptionWheel
+                  items={brandNames}
+                  defaultSelected={selectedIndex}
+                  onChange={handleWheelChange}
+                  textColor="#8c86a8"
+                  activeColor="#0b0b10"
+                  side="left"
+                  fontSize={3.2}
+                  spacing={1.4}
+                  curve={1.1}
+                  tilt={6}
+                  blur={1.8}
+                  fade={0.25}
+                  smoothing={180}
+                  inset={32}
+                  loop={true}
+                  draggable={true}
+                  className="w-full h-full"
+                />
               </div>
 
-              {/* CTA Action on Left */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center gap-3">
-                <button
-                  onClick={() => onOpenBooking && onOpenBooking()}
-                  className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md hover:scale-105 active:scale-95 cursor-pointer inline-flex items-center justify-center gap-2"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-gold" />
-                  <span>Commission Your Suite</span>
-                </button>
+              {/* Bottom Subtle Tagline */}
+              <div className="relative z-20 pt-2 border-t border-[#c8c1ee]/30 flex items-center justify-between text-[11px] font-mono text-[#0b0b10]/50 select-none">
+                <span>✦ React Bits • OptionWheel</span>
+                <span>Active: {activeBrand.name}</span>
               </div>
             </div>
-
           </div>
 
           {/* Right Column: Icon & Brand Visual Showcase (Right Side) */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-6">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             
             {/* Main Interactive Icon Card */}
-            <div className="relative w-full max-w-[380px] sm:max-w-[420px] bg-white/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/70 shadow-2xl flex flex-col items-center justify-center text-center group hover:border-[#D8B879] transition-all duration-500">
+            <div className="relative w-full h-[410px] sm:h-[440px] md:h-[465px] bg-white/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/70 shadow-2xl flex flex-col items-center justify-center text-center group hover:border-[#D8B879] transition-all duration-500">
               
               {/* Ornate Stationery Corners */}
               <DecorativeCorner className="absolute top-3 left-3 w-5 h-5 text-gold/60" />
@@ -245,34 +207,37 @@ export default function WhatWeUseSection({ onOpenBooking }) {
               />
 
               {/* High-Resolution Brand Icon Display Box */}
-              <div className="relative z-10 w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-gradient-to-b from-[#FAF8FF] to-[#F3F0FF] border border-[#c8c1ee]/70 flex items-center justify-center p-6 shadow-inner mb-6 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative z-10 w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-b from-[#FAF8FF] to-[#F3F0FF] border border-[#c8c1ee]/70 flex items-center justify-center p-6 shadow-inner mb-5 group-hover:scale-105 transition-transform duration-300">
                 <img
                   src={activeBrand.logo}
                   alt={`${activeBrand.name} logo`}
-                  className="w-20 h-20 sm:w-24 sm:h-24 object-contain filter drop-shadow-sm transition-all duration-300"
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain filter drop-shadow-sm transition-all duration-300"
                   loading="lazy"
                 />
               </div>
 
-              {/* Brand Name Headline */}
+              {/* Brand Name Headline & Role */}
               <div className="relative z-10 space-y-1">
                 <span className="font-mono text-xs text-[#0b0b10]/60 uppercase tracking-[0.25em] block">
-                  Technology Partner
+                  {activeBrand.tag}
                 </span>
                 <h4 className="font-serif text-3xl sm:text-4xl text-[#0b0b10] font-normal tracking-wider">
                   {activeBrand.name}
                 </h4>
+                <p className="text-xs text-[#0b0b10]/70 font-light max-w-xs mx-auto line-clamp-2 pt-1">
+                  {activeBrand.role}
+                </p>
               </div>
 
               {/* Status Badge */}
-              <div className="mt-5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF8FF] border border-[#c8c1ee]/60 text-xs font-mono text-[#0b0b10] shadow-2xs">
+              <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF8FF] border border-[#c8c1ee]/60 text-xs font-mono text-[#0b0b10] shadow-2xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Live in Every Rivayat Suite</span>
               </div>
             </div>
 
             {/* Mini Quick-Select Thumbnails Bar (Right Side) */}
-            <div className="w-full max-w-[380px] sm:max-w-[420px] bg-white/80 backdrop-blur-sm rounded-2xl p-3 border border-[#c8c1ee]/50 shadow-xs flex items-center justify-between gap-1.5">
+            <div className="w-full bg-white/85 backdrop-blur-sm rounded-2xl p-3 border border-[#c8c1ee]/50 shadow-xs flex items-center justify-between gap-1.5">
               {BRANDS.map((item, idx) => (
                 <button
                   key={item.id}
