@@ -1,0 +1,34 @@
+# OctoWeds — Bespoke Digital Wedding Invitations & Heirloom E-Stationery
+
+> OctoWeds (https://octoweds.com) is a luxury digital wedding stationery atelier blending royal Indian heritage aesthetics with cutting-edge 3D WebGL motion and smartphone-first interactive stationery. We craft interactive, music-scored e-wedding invitations that guests unbox like sacred physical keepsakes on WhatsApp and mobile screens.
+
+## Core Services & Products
+- **Interactive E-Wedding Cards**: 9:16 vertical smartphone invitation suites featuring interactive wax seal unboxing, ceremonial page flips, and acoustic sitar music scoring.
+- **Instant WhatsApp & Multi-Platform Broadcasting**: Deliverable as a bespoke interactive link, high-resolution vector print PDF, and vertical 9:16 video proof.
+- **Smart RSVP & Guest Attendance**: Built-in digital RSVP manager with guest count, meal/dietary preferences, and real-time host notifications.
+- **Interactive Google Maps & Calendar Sync**: One-tap venue navigation with direct GPS coordinates and Apple/Google calendar event reminders.
+- **Dress Code & Event Moodboards**: Dedicated visual inspiration cards for Haldi, Mehendi, Sangeet, Phere, and Reception.
+
+## Signature Collections
+1. **Royal Rajputana Palace**: Gold foil filigree, archway silhouettes, and jewel tones inspired by Udaipur & Jaipur palaces.
+2. **Vedic Heritage & Sacred Shlokas**: Pure traditional aesthetics with Sanskrit mantras, marigold motifs, and auspicious dates.
+3. **Pastel French Florals & English Garden**: Soft blush, sage green, and delicate watercolor botanical blooms.
+4. **Minimalist Modern Editorial**: Clean serif typography, monochromatic ink, and subtle gold hairline dividers.
+5. **Haldi & Sangeet Festive Glow**: Vibrant turmeric yellow, marigold garlands, and lively rhythmic accents.
+6. **Destination Gala & Coastal Romance**: Azure waves, sunset gradients, and tropical floral borders for beachside weddings.
+
+## Unique Technology & Craftsmanship
+- **WebGL2 Real-Time 3D Physics**: Scroll-driven celestial floating creatures, interactive water refractions, and responsive canvas lighting.
+- **Interactive OptionWheel & TechText**: Kinetic typography powered by React Bits, allowing guests to interact with vector outlines, specks, and spring bounce physics.
+- **Web Audio API Harmonic Synthesizer**: Custom acoustic sitar chimes that play on user gesture without heavy audio file downloads.
+- **Cross-Platform Responsive Engine**: Pixel-perfect rendering across iPhone, Android, iPad, and desktop viewports.
+
+## Bespoke Commissioning & Concierge
+- **Website**: https://octoweds.com
+- **Concierge WhatsApp**: +91 98765 43210 (Direct proposal and customized draft within 24 hours)
+- **Email**: concierge@octoweds.com
+- **Locations**: Civil Lines & Bandra West, Mumbai & New Delhi (Servicing couples globally across India, USA, UK, UAE, and Canada)
+
+## Extended Documentation & Suite Specifications
+- Full detailed specifications: https://octoweds.com/llms-full.txt
+- XML Sitemap: https://octoweds.com/sitemap.xml

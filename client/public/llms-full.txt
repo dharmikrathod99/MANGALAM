@@ -1,0 +1,53 @@
+# OctoWeds Atelier — Full System Documentation & Technical Specification
+
+URL: https://octoweds.com
+Brand: OctoWeds
+Tagline: Bespoke Digital Wedding Invitations & Heirloom E-Stationery
+Target Audience: Discerning modern couples celebrating Indian, Multicultural, and Global weddings seeking luxury digital invitations.
+
+## 1. Atelier Vision & Philosophy
+OctoWeds replaces static PDF screenshots and low-resolution video cards with bespoke interactive web invitations that feel like holding an heirloom luxury card. Guests receive a personalized link via WhatsApp, SMS, or email. Tapping the link reveals an elegant wax seal that breaks open with custom acoustic sitar harmonics, unfolding ceremonies, dates, Google Maps directions, RSVP forms, and attire guides.
+
+## 2. Full Suite Inclusions & Features
+- **Interactive Wax Seal Unboxing**: Virtual wax seal with customizable monogram and physics-based opening animation.
+- **Acoustic Sitar Chimes & Audio Scoring**: Web Audio API synthesizer generating delicate sitar harmonics upon unboxing.
+- **Ultra-HD 9:16 Vertical Screen Format**: Handcrafted for modern mobile screens, preventing awkward black bars or horizontal scrolling.
+- **Multi-Event Ceremonial Timeline**: Dedicated tabs for Shubh Vivah, Sangeet & Cocktails, Haldi, Mehendi, and Reception.
+- **Smart RSVP Guest Management**: Interactive form capturing guest count, ceremony attendance, and dietary preferences.
+- **One-Tap Venue GPS Navigation**: Direct deep link to Google Maps and Apple Maps with exact palace/resort entrance pins.
+- **Add to Calendar Sync**: Instant one-click Google Calendar and Apple Calendar event integration with reminder alarms.
+- **WhatsApp Guest Simulator**: Live preview tool letting couples test the guest unboxing experience before dispatch.
+- **High-Resolution Vector PDF**: Print-ready 300 DPI vector proof for keepsake printing and elderly family members.
+- **Vertical 9:16 Story Video**: Optimized MP4 video draft for Instagram broadcasting and WhatsApp stories.
+
+## 3. The 12 Signature Collections
+1. **The Royal Rajputana Palace**: Archways, filigree, and warm gold foil reminiscent of City Palace Udaipur and Rambagh Palace Jaipur.
+2. **Sacred Vedic Mandap**: Ancient mantras, holy fire (havan), lotus florals, and authentic Sanskrit shlokas.
+3. **English Garden Pastel**: Gentle peach, blush rose, lavender, and botanical watercolors.
+4. **Minimalist Vogue Editorial**: Modern serif typography, clean whitespace, and gold foil hairline accents.
+5. **Jodhpur Blue & Ivory**: Indigo heritage tile patterns, peacock motifs, and marble palace backdrops.
+6. **Goa Coastal Serenade**: Ocean sunset hues, tropical foliage, and relaxed destination luxury.
+7. **Benares Silk & Brocade**: Rich crimson, zardozi embroidery textures, and auspicious temple motifs.
+8. **Haldi Turmeric Splendor**: Sunlit marigolds, festive earthen hues, and playful celebratory motion.
+9. **Nocturne Sangeet & Cocktails**: Deep plum, starry night sky, champagne gold, and celebratory sparkle.
+10. **Kashmir Chinar Leaf**: Autumn maple tones, royal walnut wood textures, and delicate paisley pashmina motifs.
+11. **Modern Monogram Luxe**: Contemporary geometric monograms, black tie aesthetics, and minimalist layouts.
+12. **Mughal Miniature Garden**: Hand-painted floral borders, cypress trees, and classical court artistry.
+
+## 4. Commissioning Process (4-Step Workflow)
+- **Step 1 — Curate Your Aesthetic**: Browse twelve signature aesthetics and test personalized names, dates, and venues in the live studio.
+- **Step 2 — Submit Your Brief**: Fill the concierge questionnaire or connect directly via WhatsApp with ceremonies, venues, and shloka preferences.
+- **Step 3 — Bespoke Crafting & Proofing**: Our design atelier crafts a custom draft within 24 to 48 hours with unlimited typography and color adjustments.
+- **Step 4 — Unbox & Broadcast Worldwide**: Receive the private interactive link, 300 DPI printable PDF, and 9:16 video ready for instant WhatsApp broadcasting.
+
+## 5. Frequently Asked Questions (FAQ)
+- **How do guests view the invitation?** Guests simply tap the link on WhatsApp or iMessage. It opens instantly in mobile browsers without downloading any app.
+- **Can we include multiple ceremonies?** Yes, suites include multi-day timeline tabs (Haldi, Mehendi, Sangeet, Pheras, Reception) with individual venue navigation.
+- **Can we include sacred shlokas or bilingual text?** Yes, we support Sanskrit, Hindi, Gujarati, Punjabi, Bengali, Tamil, Telugu, and English.
+- **How fast is delivery?** First customized digital draft is delivered within 24 to 48 hours. Urgent 24-hour turnaround is available.
+
+## 6. Official Contact & Atelier Details
+- **Official Website**: https://octoweds.com
+- **Concierge WhatsApp**: +91 98765 43210
+- **Email**: concierge@octoweds.com
+- **Studio Studios**: Civil Lines & Bandra West, Mumbai & New Delhi, India.

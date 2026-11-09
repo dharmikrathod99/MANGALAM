@@ -1,0 +1,38 @@
+# Robots.txt for OctoWeds Atelier (https://octoweds.com)
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Specific search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI Assistants and LLM search agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemaps & Machine-Readable Knowledge Files
+Sitemap: https://octoweds.com/sitemap.xml
+# LLM Knowledge context: https://octoweds.com/llms.txt

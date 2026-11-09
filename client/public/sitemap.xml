@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- 1. Homepage & Primary Atelier Gateway -->
+  <url>
+    <loc>https://octoweds.com/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_045249_4f7fe287-c84b-479f-a953-04990fe1a3ac.png&amp;w=1080&amp;q=85</image:loc>
+      <image:title>OctoWeds - Bespoke Digital Wedding Invitations &amp; Heirloom E-Stationery</image:title>
+      <image:caption>Interactive 3D digital wedding invitations with wax seal unboxing, music scoring, and WhatsApp broadcasting.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 2. Interactive Live Invitation Studio -->
+  <url>
+    <loc>https://octoweds.com/#wedding-studio</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 3. Curated Stationery Suites & Collections -->
+  <url>
+    <loc>https://octoweds.com/#collections</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. Artisan Portfolio & Filterable Gallery -->
+  <url>
+    <loc>https://octoweds.com/#gallery</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 5. Concierge Consultation & Bespoke Commissioning -->
+  <url>
+    <loc>https://octoweds.com/#contact</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 6. Suite Features & Modern Inclusions -->
+  <url>
+    <loc>https://octoweds.com/#features</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 7. Effortless 4-Step Process -->
+  <url>
+    <loc>https://octoweds.com/#how-it-works</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 8. Why Discerning Couples Choose OctoWeds -->
+  <url>
+    <loc>https://octoweds.com/#why-choose-us</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 9. Frequently Asked Questions (FAQ) -->
+  <url>
+    <loc>https://octoweds.com/#faq</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 10. Creative Motion Stack & Platforms -->
+  <url>
+    <loc>https://octoweds.com/#what-we-use</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 11. 3D Celestial Scroll-Driven Experience -->
+  <url>
+    <loc>https://octoweds.com/#driftlab-hero</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
