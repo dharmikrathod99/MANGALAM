@@ -63,7 +63,7 @@ export default function Navbar({ onOpenEnquiry, isVisible = true }) {
               className="group flex flex-col items-start focus:outline-none"
             >
               <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] text-charcoal font-semibold uppercase group-hover:text-blush-700 transition-colors">
-                Rivayat <span className="font-script text-3xl sm:text-4xl normal-case text-gold tracking-normal">&</span> Co.
+                OctoWeds
               </span>
               <span className="text-[9px] sm:text-[10px] tracking-[0.35em] text-charcoal-muted uppercase font-sans -mt-1 group-hover:tracking-[0.4em] transition-all">
                 Luxury E-Wedding Studio

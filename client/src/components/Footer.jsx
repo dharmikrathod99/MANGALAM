@@ -215,7 +215,7 @@ export function FooterCard({ onSelectCollection, onOpenEnquiry }) {
               <div className="flex items-center gap-2.5">
                 <LogoIcon />
                 <span className="text-[26px] font-bold tracking-tight text-[#0F172A]">
-                  vize <span className="text-xs uppercase tracking-[0.2em] font-medium text-[#94A3B8] ml-1.5 font-sans">× Rivayat</span>
+                  vize <span className="text-xs uppercase tracking-[0.2em] font-medium text-[#94A3B8] ml-1.5 font-sans">× OctoWeds</span>
                 </span>
               </div>
 
@@ -363,7 +363,7 @@ export function GlassText() {
     <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center select-none pt-4 pb-6 px-4 overflow-hidden">
       <div className="w-full h-[180px] sm:h-[220px] md:h-[260px] relative">
         <TechText
-          text="RIVAYAT"
+          text="OCTOWEDS"
           fontFamily="'Anton', 'Outfit', sans-serif"
           fontWeight={700}
           fontSize={180}

@@ -1,12 +1,12 @@
 export const BRAND_INFO = {
-  name: "Rivayat & Co.",
+  name: "OctoWeds",
   tagline: "Bespoke Digital Wedding Invitations & E-Stationery",
   contact: {
     whatsapp: "+91 98765 43210",
     whatsappClean: "919876543210",
-    email: "concierge@rivayatinvitations.com",
-    instagram: "@rivayat.weddings",
-    pinterest: "rivayat_invitations",
+    email: "concierge@octoweds.com",
+    instagram: "@octoweds",
+    pinterest: "octoweds_invitations",
     studio: "Civil Lines & Bandra West, Mumbai & New Delhi",
     hours: "Mon – Sat: 10:00 AM – 7:30 PM IST"
   }

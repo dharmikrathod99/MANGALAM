@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BookingModal from './BookingModal';
+import TechText from './TechText';
 
 const SKY = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_045255_3cb4b3c2-3cb5-4af9-93b4-bd88f2f883c3.png&w=1920&q=80';
 const STILL = 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_045249_4f7fe287-c84b-479f-a953-04990fe1a3ac.png&w=1080&q=85';
@@ -12,6 +13,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
   const canvasRef = useRef(null);
   const [soundOn, setSoundOn] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const audioStateRef = useRef({ ctx: null, gain: null });
   const heroControlRef = useRef(null);
 
@@ -476,7 +478,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     Promise.all([
       loadImg(SKY),
       loadImg(STILL),
-      document.fonts.load(`${EM}px Anton`, 'DRIFTLAB'),
+      document.fonts.load(`${EM}px Anton`, 'OCTOWEDS'),
     ]).then(([sky, still]) => {
       drawAtlas();
       gl.activeTexture(gl.TEXTURE0);
@@ -500,10 +502,19 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
       size();
       read();
       now = target;
+      // Draw first frame immediately so canvas has image buffer ready before revealing
+      draw(now, 0);
+      setIsLoaded(true);
       animId = requestAnimationFrame(loop);
     });
 
+    // Safety fallback: if texture network is delayed, never keep user blocked
+    const safetyTimer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 4500);
+
     return () => {
+      clearTimeout(safetyTimer);
       window.removeEventListener('resize', size);
       window.removeEventListener('scroll', read);
       window.removeEventListener('pointermove', handlePointerMove);
@@ -589,42 +600,152 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
         className="drift-view sticky top-0 h-screen overflow-hidden"
         style={{ height: '100svh', background: '#dcd8f4' }}
       >
+        {/* Celestial Octopus Preloader Screen (Eliminates Initial Black Void) */}
+        <div
+          className={`absolute inset-0 z-50 flex flex-col items-center justify-center select-none transition-all duration-700 ease-out ${
+            isLoaded ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100 scale-100'
+          }`}
+          style={{ background: 'radial-gradient(circle at center, #ede9fe 0%, #dcd8f4 80%)' }}
+        >
+          {/* Subtle Ambient Background Petal Glow */}
+          <div className="absolute w-[440px] h-[440px] rounded-full bg-pink-300/25 blur-3xl pointer-events-none -z-0 animate-pulse" />
+
+          {/* Central Animated Loading Circle & Octopus Creature */}
+          <div className="relative flex items-center justify-center w-64 h-64 sm:w-80 sm:h-80">
+            {/* Outer Rotating Dashed Ring */}
+            <div className="absolute inset-0 rounded-full border border-dashed border-[#D8B879]/50 animate-spin-slow pointer-events-none" />
+
+            {/* Inner Counter-Rotating Gradient Ring */}
+            <svg
+              className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] animate-spin pointer-events-none"
+              style={{ animationDuration: '6s' }}
+              viewBox="0 0 100 100"
+            >
+              <circle
+                cx="50"
+                cy="50"
+                r="46"
+                fill="none"
+                stroke="url(#octoLoaderGrad)"
+                strokeWidth="2.5"
+                strokeDasharray="60 140"
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="octoLoaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D8B879" />
+                  <stop offset="50%" stopColor="#ec4899" />
+                  <stop offset="100%" stopColor="#8b5cf6" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Pulsing Ripple Wave */}
+            <div
+              className="absolute inset-4 rounded-full border border-pink-400/35 animate-ping pointer-events-none"
+              style={{ animationDuration: '2.8s' }}
+            />
+
+            {/* Ambient Bioluminescent Core Glow */}
+            <div className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-tr from-pink-400/35 via-purple-400/25 to-amber-200/30 blur-2xl animate-pulse" />
+
+            {/* The 3D Bioluminescent Octopus Creature from the Hero Section */}
+            <img
+              src={STILL}
+              alt="OctoWeds Celestial Octopus"
+              className="relative z-10 w-36 h-36 sm:w-44 sm:h-44 object-contain drop-shadow-[0_12px_32px_rgba(236,72,153,0.45)] animate-float-slow select-none pointer-events-none"
+            />
+          </div>
+
+          {/* Typography & Loading Progress */}
+          <div className="relative z-10 flex flex-col items-center mt-6 space-y-2.5">
+            <h2 className="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-[#0b0b10] uppercase font-semibold drop-shadow-xs">
+              OCTOWEDS
+            </h2>
+
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.28em] font-mono text-[#0b0b10]/70">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D8B879] animate-ping" />
+              <span>Unfolding Celestial Suite</span>
+              <span className="inline-flex gap-0.5 text-pink-500 font-bold">
+                <span className="animate-bounce" style={{ animationDelay: '0ms' }}>.</span>
+                <span className="animate-bounce" style={{ animationDelay: '150ms' }}>.</span>
+                <span className="animate-bounce" style={{ animationDelay: '300ms' }}>.</span>
+              </span>
+            </div>
+
+            {/* Elegant Loading Progress Bar */}
+            <div className="w-40 sm:w-48 h-1 rounded-full bg-black/10 overflow-hidden mt-2 p-[0.5px]">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-[#D8B879] via-pink-400 to-[#D8B879] animate-shimmer"
+                style={{ width: '100%', backgroundSize: '200% 100%' }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* WebGL2 Canvas - Kept at opacity 0 until textures are ready to prevent black flash */}
         <canvas
           ref={canvasRef}
-          aria-label="A pink jellyfish drifting in a lilac sky with giant words wrapping around it"
-          className="absolute inset-0 w-full h-full block"
+          aria-label="OctoWeds 3D Jellyfish Celestial Suite"
+          className="absolute inset-0 w-full h-full block transition-opacity duration-1000 ease-out"
+          style={{ opacity: isLoaded ? 1 : 0 }}
         />
 
-        <div className="drift-ui absolute inset-0 pointer-events-none">
-          {/* Logo */}
-          <a
-            href="#"
-            aria-label="Driftlab"
-            className="drift-logo pointer-events-auto absolute flex items-center"
+        <div
+          className={`drift-ui absolute inset-0 pointer-events-none transition-opacity duration-700 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          {/* Logo with TechText Kinetic Typography */}
+          <div
+            className="drift-logo pointer-events-auto absolute flex items-center gap-1.5 cursor-pointer select-none"
             style={{
-              left: 'calc(30 * var(--u))',
-              top: 'calc(20 * var(--u))',
-              gap: 'calc(14 * var(--u))',
-              font: '600 calc(25 * var(--u))/1 Outfit, sans-serif',
-              letterSpacing: '-.01em'
+              left: 'calc(26 * var(--u))',
+              top: 'calc(16 * var(--u))',
+              zIndex: 40
             }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            title="OctoWeds"
+            aria-label="OctoWeds"
           >
-            Driftlab
+            <div className="w-36 sm:w-44 md:w-48 h-9 sm:h-11 relative flex items-center">
+              <TechText
+                text="OCTOWEDS"
+                fontFamily="'Outfit', -apple-system, sans-serif"
+                fontWeight={700}
+                fontSize={28}
+                align="left"
+                color="#0b0b10"
+                accentColor="#D8B879"
+                reveal="letter"
+                dashLength={3}
+                dashGap={2}
+                strokeWidth={1.4}
+                specks={12}
+                clickKick={true}
+                draggable={true}
+                bounce={0.4}
+                guides={false}
+                sweep={true}
+                speed={0.8}
+              />
+            </div>
             <svg
               viewBox="0 0 50 30"
               aria-hidden="true"
               style={{
-                width: 'calc(50 * var(--u))',
-                height: 'calc(30 * var(--u))',
+                width: 'calc(38 * var(--u))',
+                height: 'calc(24 * var(--u))',
                 fill: 'none',
-                stroke: 'currentColor',
-                strokeWidth: '1.3',
+                stroke: '#D8B879',
+                strokeWidth: '1.4',
                 strokeLinecap: 'round'
               }}
+              className="opacity-80 hidden sm:block pointer-events-none"
             >
               <path d="M2 22C8 20 12 6 15 3c2-2-3 20-1 21 3 1 5-9 8-9-1 3-2 8 0 8 3 0 4-8 7-8s-1 8 2 8 5-6 8-6 2 4 9 2" />
             </svg>
-          </a>
+          </div>
 
           {/* Top Right: [Book Now] Action Button replacing [Wedding Studio ↓] */}
           <div
