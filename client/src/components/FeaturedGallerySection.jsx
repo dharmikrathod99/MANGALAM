@@ -4,6 +4,7 @@ import { FEATURED_DESIGNS } from '../data/weddingData';
 import InvitationDetailModal from './InvitationDetailModal';
 import { DecorativeCorner } from './svg/WeddingMotifs';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquiry }) {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -59,49 +60,51 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
           subtitle="Explore our artisan-crafted suites. Each design is fully customizable with your personal ceremony dates, sacred shlokas, and color themes."
         />
 
-        {/* Filter Tabs & Search Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#c8c1ee]/50">
-          {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none flex-grow">
-            <div className="flex items-center gap-1.5 text-xs text-charcoal-muted mr-2 flex-shrink-0">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-gold" />
-              <span>Filter:</span>
+        {/* Filter Tabs & Search Bar with Animated Entrance */}
+        <AnimatedContent distance={35} duration={0.65} threshold={0.1}>
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#c8c1ee]/50">
+            {/* Category Filter Tabs */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none flex-grow">
+              <div className="flex items-center gap-1.5 text-xs text-charcoal-muted mr-2 flex-shrink-0">
+                <SlidersHorizontal className="w-3.5 h-3.5 text-gold" />
+                <span>Filter:</span>
+              </div>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-all duration-300 ${
+                    activeCategory === cat
+                      ? 'bg-charcoal text-ivory-100 shadow-sm'
+                      : 'bg-ivory-50 text-charcoal-soft hover:bg-blush-100 border border-blush-200'
+                  }`}
+                >
+                  {cat} {cat === 'All' ? `(${FEATURED_DESIGNS.length})` : ''}
+                </button>
+              ))}
             </div>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-all duration-300 ${
-                  activeCategory === cat
-                    ? 'bg-charcoal text-ivory-100 shadow-sm'
-                    : 'bg-ivory-50 text-charcoal-soft hover:bg-blush-100 border border-blush-200'
-                }`}
-              >
-                {cat} {cat === 'All' ? `(${FEATURED_DESIGNS.length})` : ''}
-              </button>
-            ))}
-          </div>
 
-          {/* Search Input Field */}
-          <div className="relative w-full md:w-80 flex-shrink-0">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
-            <input
-              type="text"
-              placeholder="Search design, theme, or city..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-full bg-white border border-blush-300 text-charcoal text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 shadow-xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-charcoal-muted hover:text-charcoal"
-              >
-                ✕
-              </button>
-            )}
+            {/* Search Input Field */}
+            <div className="relative w-full md:w-80 flex-shrink-0">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
+              <input
+                type="text"
+                placeholder="Search design, theme, or city..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 rounded-full bg-white border border-blush-300 text-charcoal text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 shadow-xs"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-charcoal-muted hover:text-charcoal"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </AnimatedContent>
 
         {/* Gallery Grid */}
         {filteredDesigns.length === 0 ? (
@@ -121,7 +124,14 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+          <AnimatedContent
+            distance={50}
+            stagger={0.06}
+            duration={0.75}
+            ease="power3.out"
+            threshold={0.06}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7"
+          >
             {filteredDesigns.map((design) => {
               const isFav = savedFavorites.includes(design.id);
               return (
@@ -213,7 +223,7 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
                 </div>
               );
             })}
-          </div>
+          </AnimatedContent>
         )}
 
         {/* Custom Design CTA Banner */}

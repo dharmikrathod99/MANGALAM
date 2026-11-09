@@ -2,6 +2,7 @@ import React from 'react';
 import { Smartphone, Volume2, MapPin, Calendar, Share2, Sparkles, CheckCircle2, Heart } from './icons';
 import { DecorativeCorner } from './svg/WeddingMotifs';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function SuiteFeaturesSection({ onOpenBooking }) {
   const features = [
@@ -64,8 +65,15 @@ export default function SuiteFeaturesSection({ onOpenBooking }) {
           subtitle="Every digital suite is built from the ground up to give your guests an effortless, unforgettable luxury experience on their phones."
         />
 
-        {/* 6 Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* 6 Feature Cards Grid with Staggered Scroll Motion */}
+        <AnimatedContent
+          distance={55}
+          stagger={0.08}
+          duration={0.75}
+          ease="power3.out"
+          threshold={0.08}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
           {features.map((item) => (
             <div
               key={item.id}
@@ -99,45 +107,47 @@ export default function SuiteFeaturesSection({ onOpenBooking }) {
               </div>
             </div>
           ))}
-        </div>
+        </AnimatedContent>
 
         {/* Personalized Atelier Commitment Box */}
-        <div className="mt-16 bg-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/70 shadow-lg text-center max-w-4xl mx-auto space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ede9fe] text-[#2A1F5C] text-xs font-semibold uppercase tracking-wider">
-            <Heart className="w-3.5 h-3.5 text-blush-700 fill-blush-700" />
-            <span>Dedicated Artisan Commitment</span>
-          </div>
-          
-          <h3 className="font-serif text-2xl sm:text-3xl text-[#0b0b10] font-normal">
-            Personal Attention for Every Single Couple
-          </h3>
+        <AnimatedContent distance={35} duration={0.65} threshold={0.15}>
+          <div className="mt-16 bg-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/70 shadow-lg text-center max-w-4xl mx-auto space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ede9fe] text-[#2A1F5C] text-xs font-semibold uppercase tracking-wider">
+              <Heart className="w-3.5 h-3.5 text-blush-700 fill-blush-700" />
+              <span>Dedicated Artisan Commitment</span>
+            </div>
+            
+            <h3 className="font-serif text-2xl sm:text-3xl text-[#0b0b10] font-normal">
+              Personal Attention for Every Single Couple
+            </h3>
 
-          <p className="text-xs sm:text-sm text-[#0b0b10]/75 font-light leading-relaxed max-w-2xl mx-auto">
-            Because we are a dedicated bespoke studio, you work directly with our senior designer. We refine colors, fonts, venue details, and wording until your celebration suite is 100% perfect.
-          </p>
+            <p className="text-xs sm:text-sm text-[#0b0b10]/75 font-light leading-relaxed max-w-2xl mx-auto">
+              Because we are a dedicated bespoke studio, you work directly with our senior designer. We refine colors, fonts, venue details, and wording until your celebration suite is 100% perfect.
+            </p>
 
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> 100% Custom Tailoring
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Unlimited Proof Refinements
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Express 24-48h Drafts
-            </span>
-          </div>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> 100% Custom Tailoring
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Unlimited Proof Refinements
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs text-[#0b0b10] bg-[#FAF8FF] px-3 py-1 rounded-full border border-[#c8c1ee]/50">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Express 24-48h Drafts
+              </span>
+            </div>
 
-          <div className="pt-3">
-            <button
-              onClick={() => onOpenBooking && onOpenBooking()}
-              className="px-8 py-3.5 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md hover:scale-105 active:scale-95 cursor-pointer inline-flex items-center gap-2"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
-              <span>Book Your Custom Invitation Suite</span>
-            </button>
+            <div className="pt-3">
+              <button
+                onClick={() => onOpenBooking && onOpenBooking()}
+                className="px-8 py-3.5 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md hover:scale-105 active:scale-95 cursor-pointer inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-gold" />
+                <span>Book Your Custom Invitation Suite</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </AnimatedContent>
 
       </div>
     </section>

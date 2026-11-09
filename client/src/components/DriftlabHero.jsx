@@ -144,10 +144,18 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     };
 
     const tSky = tex(0, gl.LINEAR_MIPMAP_LINEAR);
+    // Pre-fill tSky with 1x1 lilac pixel matching #dcd8f4 so WebGL never renders a black void
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, tSky);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([220, 216, 244, 255]));
+
     const tWords = tex(1, gl.LINEAR_MIPMAP_LINEAR);
     const tJelly = tex(2, gl.LINEAR);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 255, 0, 255]));
     const aniso = gl.getExtension('EXT_texture_filter_anisotropic');
+
+    gl.clearColor(0.863, 0.847, 0.957, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     function loadImg(url) {
       return new Promise((r) => {
@@ -361,101 +369,14 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     const read = () => {
       if (!trackEl) return;
       const r = trackEl.getBoundingClientRect();
+      const m = r.height - window.innerHeight;
+      if (m > 0) {
+        target = clamp(-r.top / m, 0, 1);
+        heroProgress = target;
+      }
       isVisible = r.bottom > -250 && r.top < window.innerHeight + 250;
     };
     window.addEventListener('scroll', read, { passive: true });
-
-    // Wheel listener: locks website scroll at top until all 3 names scroll through!
-    const handleWheel = (e) => {
-      // If user is already scrolled down into the website, allow 100% normal scrolling
-      if (window.scrollY > 15) return;
-
-      if (e.deltaY > 0) {
-        // Scrolling DOWN
-        if (heroProgress < 0.99) {
-          // LOCK website scroll while the 3 names are scrolling!
-          e.preventDefault();
-          const delta = Math.max(-120, Math.min(120, e.deltaY));
-          heroProgress = clamp(heroProgress + delta / 540, 0, 1);
-          target = heroProgress;
-        } else {
-          // All 3 names have scrolled!
-          // Wait briefly until the 3rd name settles visually
-          if (now < 0.92) {
-            e.preventDefault();
-          } else {
-            // All 3 names have arrived and settled!
-            // NOW the website starts to scroll down:
-            if (!isTransitioningToStudio && onExploreStudio) {
-              isTransitioningToStudio = true;
-              onExploreStudio();
-              setTimeout(() => {
-                isTransitioningToStudio = false;
-              }, 700);
-            }
-          }
-        }
-      } else if (e.deltaY < 0) {
-        // Scrolling UP
-        if (window.scrollY <= 15) {
-          if (heroProgress > 0) {
-            e.preventDefault();
-            const delta = Math.max(-120, Math.min(120, e.deltaY));
-            heroProgress = clamp(heroProgress + delta / 540, 0, 1);
-            target = heroProgress;
-          }
-        }
-      }
-    };
-    window.addEventListener('wheel', handleWheel, { passive: false });
-
-    // Touch listener for mobile devices: locks touch scroll until all 3 names have scrolled
-    let touchStartY = 0;
-    let touchStartProgress = 0;
-
-    const handleTouchStart = (e) => {
-      if (e.touches && e.touches.length) {
-        touchStartY = e.touches[0].clientY;
-        touchStartProgress = heroProgress;
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      if (window.scrollY > 15) return;
-      if (!e.touches || !e.touches.length) return;
-
-      const currentY = e.touches[0].clientY;
-      const deltaY = touchStartY - currentY; // positive when swiping up to scroll down
-
-      if (deltaY > 0) {
-        if (heroProgress < 0.99) {
-          e.preventDefault();
-          const screenH = window.innerHeight || 700;
-          heroProgress = clamp(touchStartProgress + deltaY / (screenH * 0.70), 0, 1);
-          target = heroProgress;
-        } else {
-          if (now < 0.92) {
-            e.preventDefault();
-          } else if (!isTransitioningToStudio && onExploreStudio && deltaY > 30) {
-            isTransitioningToStudio = true;
-            onExploreStudio();
-            setTimeout(() => {
-              isTransitioningToStudio = false;
-            }, 700);
-          }
-        }
-      } else if (deltaY < 0 && window.scrollY <= 15) {
-        if (heroProgress > 0) {
-          e.preventDefault();
-          const screenH = window.innerHeight || 700;
-          heroProgress = clamp(touchStartProgress + deltaY / (screenH * 0.70), 0, 1);
-          target = heroProgress;
-        }
-      }
-    };
-
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     const handlePointerMove = (e) => {
       tmx = (e.clientX / window.innerWidth) * 2 - 1;
@@ -518,9 +439,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
       window.removeEventListener('resize', size);
       window.removeEventListener('scroll', read);
       window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
       cancelAnimationFrame(animId);
       video.pause();
       if (audioStateRef.current.ctx) {
@@ -579,9 +497,11 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
   };
 
   const scrollToStep = (stepIdx) => {
-    const val = stepIdx / 2;
-    if (heroControlRef.current) {
-      heroControlRef.current.setProgress(val);
+    if (containerRef.current) {
+      const r = containerRef.current.getBoundingClientRect();
+      const m = containerRef.current.offsetHeight - window.innerHeight;
+      const targetY = window.scrollY + r.top + (stepIdx / 2) * m;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
     }
   };
 
@@ -590,7 +510,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
       ref={containerRef}
       className="driftlab-container relative"
       style={{
-        height: '100vh',
+        height: '350vh',
         fontFamily: '"Space Mono", ui-monospace, monospace',
         color: '#0b0b10',
         background: '#dcd8f4'
@@ -837,8 +757,11 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               const rect = e.currentTarget.getBoundingClientRect();
               const clickY = e.clientY - rect.top;
               const ratio = Math.max(0, Math.min(1, clickY / rect.height));
-              if (heroControlRef.current) {
-                heroControlRef.current.setProgress(ratio);
+              if (containerRef.current) {
+                const r = containerRef.current.getBoundingClientRect();
+                const m = containerRef.current.offsetHeight - window.innerHeight;
+                const targetY = window.scrollY + r.top + ratio * m;
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
               }
             }}
             className="drift-bar pointer-events-auto cursor-pointer absolute"

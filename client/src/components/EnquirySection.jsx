@@ -3,6 +3,7 @@ import { Sparkles, Send, MessageCircle, Mail, Instagram, MapPin, Clock, Phone, C
 import { BRAND_INFO, COLLECTIONS, PRICING_PACKAGES } from '../data/weddingData';
 import { DecorativeCorner } from './svg/WeddingMotifs';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function EnquirySection({ prefillData, onClearPrefill }) {
   const [formData, setFormData] = useState({
@@ -97,8 +98,8 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
           subtitle="Fill the enquiry details below to receive a personalized digital proposal and draft within 24 hours, or connect directly on WhatsApp."
         />
 
-        {/* Form & Studio Contact Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Form & Studio Contact Grid with Smooth Upward Glide */}
+        <AnimatedContent distance={60} duration={0.8} threshold={0.1} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Comprehensive Enquiry Form */}
           <div className="lg:col-span-7 bg-white/95 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/60 shadow-xl relative">
@@ -442,7 +443,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
 
           </div>
 
-        </div>
+        </AnimatedContent>
 
       </div>
     </section>

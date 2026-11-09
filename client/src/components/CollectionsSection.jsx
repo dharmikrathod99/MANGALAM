@@ -3,6 +3,7 @@ import { ArrowUpRight, Sparkles } from './icons';
 import { COLLECTIONS } from '../data/weddingData';
 import { DecorativeCorner } from './svg/WeddingMotifs';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
@@ -16,8 +17,15 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
           subtitle="From traditional Vedic rituals to contemporary destination galas, explore twelve signature design aesthetics crafted for modern couples."
         />
 
-        {/* 12 Curated Collections Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        {/* 12 Curated Collections Grid with Staggered Scroll Animation */}
+        <AnimatedContent
+          distance={50}
+          stagger={0.06}
+          duration={0.75}
+          ease="power3.out"
+          threshold={0.06}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
+        >
           {COLLECTIONS.map((col, idx) => (
             <div
               key={col.id}
@@ -82,23 +90,25 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
               </div>
             </div>
           ))}
-        </div>
+        </AnimatedContent>
 
         {/* Bespoke Custom Invitation Callout */}
-        <div className="mt-16 bg-gradient-to-r from-blush-100/60 via-ivory-100 to-blush-100/60 rounded-2xl p-8 border border-gold/40 text-center max-w-4xl mx-auto shadow-sm">
-          <h3 className="font-serif text-2xl text-charcoal mb-2">
-            Have a Bespoke Vision in Mind?
-          </h3>
-          <p className="text-sm text-charcoal-muted max-w-xl mx-auto mb-5 font-light">
-            Our atelier crafts completely custom invitations tailored to your theme, destination venue sketches, cross-cultural heritage, and personal story.
-          </p>
-          <button
-            onClick={() => onOpenEnquiry('Bespoke Custom Theme')}
-            className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-blush-700 transition-colors shadow-sm"
-          >
-            Request Bespoke Consultation
-          </button>
-        </div>
+        <AnimatedContent distance={40} duration={0.7} threshold={0.15}>
+          <div className="mt-16 bg-gradient-to-r from-blush-100/60 via-ivory-100 to-blush-100/60 rounded-2xl p-8 border border-gold/40 text-center max-w-4xl mx-auto shadow-sm">
+            <h3 className="font-serif text-2xl text-charcoal mb-2">
+              Have a Bespoke Vision in Mind?
+            </h3>
+            <p className="text-sm text-charcoal-muted max-w-xl mx-auto mb-5 font-light">
+              Our atelier crafts completely custom invitations tailored to your theme, destination venue sketches, cross-cultural heritage, and personal story.
+            </p>
+            <button
+              onClick={() => onOpenEnquiry('Bespoke Custom Theme')}
+              className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-[0.2em] uppercase font-semibold hover:bg-blush-700 transition-colors shadow-sm"
+            >
+              Request Bespoke Consultation
+            </button>
+          </div>
+        </AnimatedContent>
 
       </div>
     </section>

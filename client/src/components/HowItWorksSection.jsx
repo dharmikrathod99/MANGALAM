@@ -8,6 +8,7 @@ import {
   StepIllustrationFour
 } from './svg/StepIllustrations';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function HowItWorksSection({ onOpenEnquiry }) {
   const stepIllustrations = [
@@ -28,8 +29,15 @@ export default function HowItWorksSection({ onOpenEnquiry }) {
           subtitle="From the initial design selection to the joyous moment your guests open their WhatsApp invites, we handle every nuance with bespoke care."
         />
 
-        {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+        {/* 4 Steps Grid with Staggered Motion */}
+        <AnimatedContent
+          distance={60}
+          stagger={0.12}
+          duration={0.8}
+          ease="power3.out"
+          threshold={0.1}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
+        >
           
           {/* Connector Line behind steps on desktop */}
           <div className="hidden lg:block absolute top-24 left-[12%] right-[12%] h-[1px] border-t border-dashed border-gold/50 -z-0" />
@@ -72,19 +80,20 @@ export default function HowItWorksSection({ onOpenEnquiry }) {
               </div>
             </div>
           ))}
-
-        </div>
+        </AnimatedContent>
 
         {/* Start Your Order CTA banner */}
-        <div className="mt-16 text-center">
-          <button
-            onClick={() => onOpenEnquiry()}
-            className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-charcoal text-ivory-100 text-xs sm:text-sm uppercase tracking-widest font-semibold hover:bg-blush-700 transition-all duration-300 shadow-md hover:shadow-xl group"
-          >
-            <span>Begin Step 1: Choose or Design</span>
-            <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
+        <AnimatedContent distance={30} duration={0.6} threshold={0.15}>
+          <div className="mt-16 text-center">
+            <button
+              onClick={() => onOpenEnquiry()}
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-charcoal text-ivory-100 text-xs sm:text-sm uppercase tracking-widest font-semibold hover:bg-blush-700 transition-all duration-300 shadow-md hover:shadow-xl group"
+            >
+              <span>Begin Step 1: Choose or Design</span>
+              <ArrowRight className="w-4 h-4 text-gold group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </AnimatedContent>
 
       </div>
     </section>

@@ -3,6 +3,7 @@ import { Sparkles, Palette, Crown, Clock, Smartphone, Gem, Layers, Share2, Check
 import { WHY_CHOOSE_US } from '../data/weddingData';
 import { DecorativeCorner, WeddingBells } from './svg/WeddingMotifs';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function WhyChooseUsSection() {
   const iconMap = {
@@ -27,8 +28,15 @@ export default function WhyChooseUsSection() {
           subtitle="We blend royal Indian heritage aesthetic sensibilities with modern digital design, delivering an heirloom-grade experience on every screen."
         />
 
-        {/* 8 Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {/* 8 Feature Cards Grid with Staggered Scroll Motion */}
+        <AnimatedContent
+          distance={50}
+          stagger={0.07}
+          duration={0.75}
+          ease="power3.out"
+          threshold={0.08}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+        >
           {WHY_CHOOSE_US.map((item, idx) => (
             <div
               key={item.id}
@@ -63,10 +71,11 @@ export default function WhyChooseUsSection() {
               </div>
             </div>
           ))}
-        </div>
+        </AnimatedContent>
 
-        {/* Feature Comparison Box: Traditional Printed vs Rivayat Digital */}
-        <div className="mt-20 bg-ivory-50 rounded-2xl border border-gold/40 p-8 sm:p-10 shadow-sm max-w-4xl mx-auto">
+        {/* Feature Comparison Box: Traditional Printed vs OctoWeds Digital */}
+        <AnimatedContent distance={40} duration={0.75} threshold={0.12}>
+          <div className="mt-20 bg-ivory-50 rounded-2xl border border-gold/40 p-8 sm:p-10 shadow-sm max-w-4xl mx-auto">
           <div className="text-center mb-8">
             <h3 className="font-serif text-2xl sm:text-3xl text-charcoal">
               Modern Elegance Meets Eco-Conscious Joy
@@ -102,7 +111,8 @@ export default function WhyChooseUsSection() {
               </ul>
             </div>
           </div>
-        </div>
+          </div>
+        </AnimatedContent>
 
       </div>
     </section>

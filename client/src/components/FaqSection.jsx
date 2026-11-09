@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Minus, Sparkles, HelpCircle } from './icons';
 import { FAQS } from '../data/weddingData';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function FaqSection({ onOpenEnquiry }) {
   const [openIndex, setOpenIndex] = useState(0); // First item open by default
@@ -21,8 +22,15 @@ export default function FaqSection({ onOpenEnquiry }) {
           subtitle="Everything you need to know about commissioning, customizing, and broadcasting your bespoke e-wedding invitations."
         />
 
-        {/* Accordion List */}
-        <div className="space-y-4">
+        {/* Accordion List with Staggered Motion */}
+        <AnimatedContent
+          distance={40}
+          stagger={0.06}
+          duration={0.7}
+          ease="power3.out"
+          threshold={0.08}
+          className="space-y-4"
+        >
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
 
@@ -64,26 +72,28 @@ export default function FaqSection({ onOpenEnquiry }) {
               </div>
             );
           })}
-        </div>
+        </AnimatedContent>
 
         {/* Still Have Questions CTA */}
-        <div className="mt-14 p-6 sm:p-8 bg-ivory-50 rounded-2xl border border-blush-300 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-center sm:text-left">
-            <h4 className="font-serif text-xl text-charcoal">
-              Have a question not listed here?
-            </h4>
-            <p className="text-xs text-charcoal-muted">
-              Our wedding stationery concierges are available via WhatsApp to answer anytime.
-            </p>
-          </div>
+        <AnimatedContent distance={30} duration={0.65} threshold={0.15}>
+          <div className="mt-14 p-6 sm:p-8 bg-ivory-50 rounded-2xl border border-blush-300 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <h4 className="font-serif text-xl text-charcoal">
+                Have a question not listed here?
+              </h4>
+              <p className="text-xs text-charcoal-muted">
+                Our wedding stationery concierges are available via WhatsApp to answer anytime.
+              </p>
+            </div>
 
-          <button
-            onClick={() => onOpenEnquiry('Direct FAQ Inquiry')}
-            className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-wider uppercase font-semibold hover:bg-blush-700 transition-colors shadow-xs whitespace-nowrap"
-          >
-            Ask a Concierge
-          </button>
-        </div>
+            <button
+              onClick={() => onOpenEnquiry('Direct FAQ Inquiry')}
+              className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-wider uppercase font-semibold hover:bg-blush-700 transition-colors shadow-xs whitespace-nowrap"
+            >
+              Ask a Concierge
+            </button>
+          </div>
+        </AnimatedContent>
 
       </div>
     </section>
