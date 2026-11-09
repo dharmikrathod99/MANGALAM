@@ -1,6 +1,7 @@
 import React from 'react';
 import { Smartphone, Volume2, MapPin, Calendar, Share2, Sparkles, CheckCircle2, Heart } from './icons';
 import { DecorativeCorner } from './svg/WeddingMotifs';
+import SectionHeader from './SectionHeader';
 
 export default function SuiteFeaturesSection({ onOpenBooking }) {
   const features = [
@@ -57,19 +58,11 @@ export default function SuiteFeaturesSection({ onOpenBooking }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Editorial Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-semibold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            Every Detail Included
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#0b0b10] font-normal tracking-tight">
-            Interactive Features Built for Modern Celebrations
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-[#0b0b10]/70 font-light leading-relaxed">
-            Every digital suite is built from the ground up to give your guests an effortless, unforgettable luxury experience on their phones.
-          </p>
-          <div className="w-24 h-[1.5px] bg-[#D8B879] mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="Every Detail Included"
+          title="Interactive Features Built for Celebrations"
+          subtitle="Every digital suite is built from the ground up to give your guests an effortless, unforgettable luxury experience on their phones."
+        />
 
         {/* 6 Feature Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">

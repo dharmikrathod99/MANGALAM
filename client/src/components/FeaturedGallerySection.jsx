@@ -3,6 +3,7 @@ import { Search, Eye, Sparkles, SlidersHorizontal, ArrowRight, Heart } from './i
 import { FEATURED_DESIGNS } from '../data/weddingData';
 import InvitationDetailModal from './InvitationDetailModal';
 import { DecorativeCorner } from './svg/WeddingMotifs';
+import SectionHeader from './SectionHeader';
 
 export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquiry }) {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -52,29 +53,44 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
-              Atelier Portfolio
+        <SectionHeader
+          badge="Atelier Portfolio"
+          title="Featured Invitation Designs"
+          subtitle="Explore our artisan-crafted suites. Each design is fully customizable with your personal ceremony dates, sacred shlokas, and color themes."
+        />
+
+        {/* Filter Tabs & Search Bar */}
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#c8c1ee]/50">
+          {/* Category Filter Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none flex-grow">
+            <div className="flex items-center gap-1.5 text-xs text-charcoal-muted mr-2 flex-shrink-0">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-gold" />
+              <span>Filter:</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal">
-              Featured Invitation Designs
-            </h2>
-            <p className="font-sans text-sm sm:text-base text-charcoal-muted font-light leading-relaxed">
-              Explore our artisan-crafted suites. Each design is fully customizable with your personal ceremony dates, sacred shlokas, and color themes.
-            </p>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-all duration-300 ${
+                  activeCategory === cat
+                    ? 'bg-charcoal text-ivory-100 shadow-sm'
+                    : 'bg-ivory-50 text-charcoal-soft hover:bg-blush-100 border border-blush-200'
+                }`}
+              >
+                {cat} {cat === 'All' ? `(${FEATURED_DESIGNS.length})` : ''}
+              </button>
+            ))}
           </div>
 
           {/* Search Input Field */}
-          <div className="relative w-full md:w-80">
+          <div className="relative w-full md:w-80 flex-shrink-0">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-muted" />
             <input
               type="text"
               placeholder="Search design, theme, or city..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-blush-300 text-charcoal text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 shadow-xs"
+              className="w-full pl-10 pr-4 py-2 rounded-full bg-white border border-blush-300 text-charcoal text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-gold/50 shadow-xs"
             />
             {searchQuery && (
               <button
@@ -85,27 +101,6 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
               </button>
             )}
           </div>
-        </div>
-
-        {/* Category Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none mb-10 border-b border-blush-200">
-          <div className="flex items-center gap-1.5 text-xs text-charcoal-muted mr-2 flex-shrink-0">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-gold" />
-            <span>Filter:</span>
-          </div>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-all duration-300 ${
-                activeCategory === cat
-                  ? 'bg-charcoal text-ivory-100 shadow-sm'
-                  : 'bg-ivory-50 text-charcoal-soft hover:bg-blush-100 border border-blush-200'
-              }`}
-            >
-              {cat} {cat === 'All' ? `(${FEATURED_DESIGNS.length})` : ''}
-            </button>
-          ))}
         </div>
 
         {/* Gallery Grid */}

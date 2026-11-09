@@ -7,6 +7,7 @@ import { BRAND_INFO } from '../data/weddingData';
 import WhatsAppGuestSimulator from './WhatsAppGuestSimulator';
 import GuestRsvpDemoModal from './GuestRsvpDemoModal';
 import DressCodeMoodboardModal from './DressCodeMoodboardModal';
+import SectionHeader from './SectionHeader';
 
 export default function InteractiveInvitationStudio({ initialDesign, onOpenEnquiryWithData }) {
   // Live Editable Invitation State
@@ -353,18 +354,11 @@ export default function InteractiveInvitationStudio({ initialDesign, onOpenEnqui
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blush-100/90 border border-gold/40 text-charcoal text-xs tracking-[0.2em] uppercase font-medium shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-gold animate-pulse" />
-            Live Invitation Studio
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
-            Experience Your Unfolding Love Story
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
-            Personalize names, dates, and wedding venues below. Click the wax seal to experience the real unboxing magic your guests will feel on their smartphones.
-          </p>
-        </div>
+        <SectionHeader
+          badge="Live Invitation Studio"
+          title="Experience Your Unfolding Love Story"
+          subtitle="Personalize names, dates, and wedding venues below. Click the wax seal to experience the real unboxing magic your guests will feel on their smartphones."
+        />
 
         {/* 2-Column Studio Interface: Customizer Controls + Live Interactive Mockup */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

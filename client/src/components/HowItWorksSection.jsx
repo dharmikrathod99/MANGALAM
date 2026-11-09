@@ -7,6 +7,7 @@ import {
   StepIllustrationThree,
   StepIllustrationFour
 } from './svg/StepIllustrations';
+import SectionHeader from './SectionHeader';
 
 export default function HowItWorksSection({ onOpenEnquiry }) {
   const stepIllustrations = [
@@ -21,19 +22,11 @@ export default function HowItWorksSection({ onOpenEnquiry }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            Effortless 4-Step Process
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
-            How Your Digital Invitation Comes to Life
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
-            From the initial design selection to the joyous moment your guests open their WhatsApp invites, we handle every nuance with bespoke care.
-          </p>
-          <div className="w-24 h-[1px] bg-gold mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="Effortless 4-Step Process"
+          title="How Your Digital Invitation Comes to Life"
+          subtitle="From the initial design selection to the joyous moment your guests open their WhatsApp invites, we handle every nuance with bespoke care."
+        />
 
         {/* 4 Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">

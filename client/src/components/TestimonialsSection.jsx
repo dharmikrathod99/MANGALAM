@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, Sparkles, Quote, MapPin, CheckCircle2 } from './icons';
 import { TESTIMONIALS } from '../data/weddingData';
 import { DecorativeCorner } from './svg/WeddingMotifs';
+import SectionHeader from './SectionHeader';
 
 export default function TestimonialsSection() {
   return (
@@ -9,19 +10,11 @@ export default function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            Love Notes & Celebrations
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
-            Cherished by Couples Worldwide
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
-            Read how our bespoke digital invitations brought joy, elegance, and effortless coordination to real celebrations across India, the UK, the US, and Dubai.
-          </p>
-          <div className="w-24 h-[1px] bg-gold mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="Love Notes & Celebrations"
+          title="Cherished by Couples Worldwide"
+          subtitle="Read how our bespoke digital invitations brought joy, elegance, and effortless coordination to real celebrations across India, the UK, the US, and Dubai."
+        />
 
         {/* Testimonials Editorial Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import OptionWheel from './OptionWheel';
 import TechText from './TechText';
+import SectionHeader from './SectionHeader';
 import { Sparkles } from './icons';
 
 export const BRANDS = [
@@ -107,19 +108,11 @@ export default function WhatWeUseSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 backdrop-blur-xs border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-semibold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            What We Use • Modern Tech Stack
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#0b0b10] font-normal tracking-tight">
-            Crafted with World-Class Tools & Platforms
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-[#0b0b10]/70 font-light leading-relaxed">
-            Drag or scroll the wheel on the left to explore the innovative engines and platforms powering your wedding invitation suite.
-          </p>
-          <div className="w-24 h-[1.5px] bg-[#D8B879] mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="What We Use • Modern Tech Stack"
+          title="Crafted with World-Class Tools & Platforms"
+          subtitle="Drag or scroll the wheel on the left to explore the innovative engines and platforms powering your wedding invitation suite."
+        />
 
         {/* 2-Column Split: Transparent OptionWheel on Left, Transparent Icon Display on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">

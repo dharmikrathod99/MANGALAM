@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Sparkles } from './icons';
 import { COLLECTIONS } from '../data/weddingData';
 import { DecorativeCorner } from './svg/WeddingMotifs';
+import SectionHeader from './SectionHeader';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
@@ -9,19 +10,11 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            Curated Stationery Suites
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
-            Find the Perfect Invitation for Your Celebration
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
-            From traditional Vedic rituals to contemporary destination galas, explore twelve signature design aesthetics crafted for modern couples.
-          </p>
-          <div className="w-24 h-[1px] bg-gold mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="Curated Stationery Suites"
+          title="Find the Perfect Invitation for Your Celebration"
+          subtitle="From traditional Vedic rituals to contemporary destination galas, explore twelve signature design aesthetics crafted for modern couples."
+        />
 
         {/* 12 Curated Collections Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">

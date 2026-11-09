@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Palette, Crown, Clock, Smartphone, Gem, Layers, Share2, CheckCircle2 } from './icons';
 import { WHY_CHOOSE_US } from '../data/weddingData';
 import { DecorativeCorner, WeddingBells } from './svg/WeddingMotifs';
+import SectionHeader from './SectionHeader';
 
 export default function WhyChooseUsSection() {
   const iconMap = {
@@ -20,19 +21,11 @@ export default function WhyChooseUsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 border border-[#c8c1ee] text-[#0b0b10] text-xs tracking-[0.2em] uppercase font-medium">
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            The Rivayat Difference
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal font-normal tracking-tight">
-            Why Discerning Couples Choose Our Atelier
-          </h2>
-          <p className="font-sans text-base sm:text-lg text-charcoal-muted font-light leading-relaxed">
-            We blend royal Indian heritage aesthetic sensibilities with modern digital design, delivering an heirloom-grade experience on every screen.
-          </p>
-          <div className="w-24 h-[1px] bg-gold mx-auto mt-4" />
-        </div>
+        <SectionHeader
+          badge="The Rivayat Difference"
+          title="Why Discerning Couples Choose Our Atelier"
+          subtitle="We blend royal Indian heritage aesthetic sensibilities with modern digital design, delivering an heirloom-grade experience on every screen."
+        />
 
         {/* 8 Feature Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
