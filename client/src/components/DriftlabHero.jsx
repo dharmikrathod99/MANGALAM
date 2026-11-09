@@ -239,9 +239,15 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
       }
 
       const idx = Math.min(2, Math.max(0, Math.round(k)));
-      if (marks.length && idx !== lastIdx && marks[idx]) {
-        if (marks[lastIdx]) marks[lastIdx].classList.remove('on');
-        marks[idx].classList.add('on');
+      if (marks.length && idx !== lastIdx) {
+        if (marks[lastIdx]) {
+          marks[lastIdx].classList.remove('on');
+          marks[lastIdx].style.opacity = '0.45';
+        }
+        if (marks[idx]) {
+          marks[idx].classList.add('on');
+          marks[idx].style.opacity = '1';
+        }
         lastIdx = idx;
       }
       if (thumbEl) {
@@ -339,123 +345,28 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     }
 
     let isVisible = true;
-    let currentStep = 0;
-    const targets = [0.0, 0.5, 1.0];
-    let lastScrollAction = 0;
 
     const read = () => {
       if (!trackEl) return;
       const r = trackEl.getBoundingClientRect();
+      const m = r.height - window.innerHeight;
+      if (m > 0) {
+        target = clamp(-r.top / m, 0, 1);
+      }
       isVisible = r.bottom > -250 && r.top < window.innerHeight + 250;
     };
     window.addEventListener('scroll', read, { passive: true });
-
-    // Wheel listener: locks website scrolling in hero section until all 3 names have scrolled!
-    const handleWheel = (e) => {
-      // If user is scrolled down into wedding studio, allow normal page scrolling
-      if (window.scrollY > 25) return;
-
-      const nowTime = Date.now();
-      const isCooldowned = nowTime - lastScrollAction > 360;
-
-      if (e.deltaY > 0) {
-        // Scrolling DOWN
-        if (currentStep < 2) {
-          // STOP website scrolling until all names will scroll!
-          e.preventDefault();
-          if (isCooldowned) {
-            currentStep += 1;
-            target = targets[currentStep];
-            lastScrollAction = nowTime;
-          }
-        } else {
-          // All 3 names have arrived!
-          if (now < 0.90) {
-            e.preventDefault();
-          } else {
-            // All names have finished scrolling! Now website starts scrolling:
-            if (isCooldowned && onExploreStudio) {
-              onExploreStudio();
-              lastScrollAction = nowTime;
-            }
-          }
-        }
-      } else if (e.deltaY < 0) {
-        // Scrolling UP
-        if (window.scrollY <= 15) {
-          if (currentStep > 0) {
-            e.preventDefault();
-            if (isCooldowned) {
-              currentStep -= 1;
-              target = targets[currentStep];
-              lastScrollAction = nowTime;
-            }
-          }
-        }
-      }
-    };
-    window.addEventListener('wheel', handleWheel, { passive: false });
-
-    // Touch listener for mobile devices: locks page scroll until all 3 names have scrolled
-    let touchStartY = 0;
-    const handleTouchStart = (e) => {
-      if (e.touches && e.touches.length) {
-        touchStartY = e.touches[0].clientY;
-      }
-    };
-
-    const handleTouchMove = (e) => {
-      if (window.scrollY > 25) return;
-      if (!e.touches || !e.touches.length) return;
-
-      const currentY = e.touches[0].clientY;
-      const deltaY = touchStartY - currentY;
-      const nowTime = Date.now();
-      const isCooldowned = nowTime - lastScrollAction > 360;
-
-      if (deltaY > 30) {
-        // Swiping up to scroll down
-        if (currentStep < 2) {
-          e.preventDefault();
-          if (isCooldowned) {
-            currentStep += 1;
-            target = targets[currentStep];
-            lastScrollAction = nowTime;
-            touchStartY = currentY;
-          }
-        } else {
-          if (now < 0.90) {
-            e.preventDefault();
-          } else if (isCooldowned && onExploreStudio) {
-            onExploreStudio();
-            lastScrollAction = nowTime;
-          }
-        }
-      } else if (deltaY < -30 && window.scrollY <= 15) {
-        // Swiping down to scroll up
-        if (currentStep > 0) {
-          e.preventDefault();
-          if (isCooldowned) {
-            currentStep -= 1;
-            target = targets[currentStep];
-            lastScrollAction = nowTime;
-            touchStartY = currentY;
-          }
-        }
-      }
-    };
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     const handlePointerMove = (e) => {
       tmx = (e.clientX / window.innerWidth) * 2 - 1;
       tmy = 1 - (e.clientY / window.innerHeight) * 2;
     };
-    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
     let animId;
     function loop(t) {
-      now += (target - now) * (calm ? 1 : 0.1);
+      read();
+      now += (target - now) * (calm ? 1 : 0.12);
       mx += (tmx - mx) * 0.05;
       my += (tmy - my) * 0.05;
       // Always draw while visible or easing, maintaining live drifting tentacles and glow
@@ -499,9 +410,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
       window.removeEventListener('resize', size);
       window.removeEventListener('scroll', read);
       window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
       cancelAnimationFrame(animId);
       video.pause();
       if (audioStateRef.current.ctx) {
@@ -559,12 +467,21 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToStep = (stepIdx) => {
+    if (!containerRef.current) return;
+    const r = containerRef.current.getBoundingClientRect();
+    const trackTop = window.scrollY + r.top;
+    const m = containerRef.current.offsetHeight - window.innerHeight;
+    const dest = trackTop + (stepIdx / 2) * m;
+    window.scrollTo({ top: dest, behavior: 'smooth' });
+  };
+
   return (
     <div
       ref={containerRef}
       className="driftlab-container relative"
       style={{
-        height: '100vh',
+        height: '320vh',
         fontFamily: '"Space Mono", ui-monospace, monospace',
         color: '#0b0b10',
         background: '#dcd8f4'
@@ -650,43 +567,78 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
 
           {/* Index Indicators (01, 02, 03 for the 3 scroll changes) */}
           <div
-            className="drift-index absolute flex flex-col items-center"
+            className="drift-index pointer-events-auto absolute flex flex-col items-center"
             style={{
               left: 'calc(19 * var(--u))',
               top: '50%',
               transform: 'translateY(-50%)',
               gap: 'calc(9 * var(--u))',
-              fontSize: 'calc(11 * var(--u))'
+              fontSize: 'calc(11 * var(--u))',
+              zIndex: 35
             }}
-            aria-hidden="true"
+            aria-label="Hero navigation steps"
           >
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
-            <b className="on font-normal transition-opacity duration-300" style={{ opacity: 1 }}>01</b>
+            <b
+              onClick={() => scrollToStep(0)}
+              className="on font-normal transition-all duration-300 cursor-pointer hover:scale-125 select-none"
+              style={{ opacity: 1 }}
+              title="Phase 1: Wedding Invitations"
+            >
+              01
+            </b>
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
-            <b className="font-normal transition-opacity duration-300" style={{ opacity: 0.45 }}>02</b>
+            <b
+              onClick={() => scrollToStep(1)}
+              className="font-normal transition-all duration-300 cursor-pointer hover:scale-125 select-none"
+              style={{ opacity: 0.45 }}
+              title="Phase 2: Celebrating Love"
+            >
+              02
+            </b>
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
-            <b className="font-normal transition-opacity duration-300" style={{ opacity: 0.45 }}>03</b>
+            <b
+              onClick={() => scrollToStep(2)}
+              className="font-normal transition-all duration-300 cursor-pointer hover:scale-125 select-none"
+              style={{ opacity: 0.45 }}
+              title="Phase 3: Your Invitation"
+            >
+              03
+            </b>
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
           </div>
 
           {/* Right Scroll Rail */}
           <div
-            className="drift-bar absolute"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const clickY = e.clientY - rect.top;
+              const ratio = Math.max(0, Math.min(1, clickY / rect.height));
+              if (containerRef.current) {
+                const trackRect = containerRef.current.getBoundingClientRect();
+                const trackTop = window.scrollY + trackRect.top;
+                const m = containerRef.current.offsetHeight - window.innerHeight;
+                window.scrollTo({ top: trackTop + ratio * m, behavior: 'smooth' });
+              }
+            }}
+            className="drift-bar pointer-events-auto cursor-pointer absolute"
             style={{
               right: 'calc(10 * var(--u))',
               top: '22%',
               bottom: '22%',
-              width: '1px',
-              background: 'rgba(11,11,16,.2)'
+              width: '5px',
+              padding: '0 2px',
+              background: 'rgba(11,11,16,.2)',
+              zIndex: 35
             }}
-            aria-hidden="true"
+            aria-label="Scroll rail - click to seek"
           >
             <i
-              className="drift-thumb absolute"
+              className="drift-thumb absolute pointer-events-none"
               style={{
                 left: '-1px',
                 top: 0,
@@ -780,6 +732,25 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
                 Rivayat & Co. • Artisan Digital Wedding Atelier
               </p>
               <span className="text-[#D8B879]" style={{ fontSize: 'calc(10 * var(--u))' }}>✦</span>
+            </div>
+
+            {/* Interactive Scroll Prompt */}
+            <div className="mt-2.5">
+              <button
+                type="button"
+                onClick={() => {
+                  if (onExploreStudio) {
+                    onExploreStudio();
+                  } else {
+                    scrollToStep(2);
+                  }
+                }}
+                className="pointer-events-auto inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/75 hover:bg-white text-[11px] font-mono uppercase tracking-wider text-[#0b0b10] border border-[#c8c1ee]/60 transition-all duration-300 hover:scale-105 shadow-2xs cursor-pointer select-none"
+                aria-label="Scroll to explore wedding atelier"
+              >
+                <span className="text-gold animate-bounce">↓</span>
+                <span>Scroll to Unfold Suite</span>
+              </button>
             </div>
           </div>
 
