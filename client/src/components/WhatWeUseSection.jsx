@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import OptionWheel from './OptionWheel';
+import TechText from './TechText';
 import { Sparkles } from './icons';
 
 export const BRANDS = [
@@ -173,9 +174,27 @@ export default function WhatWeUseSection() {
                 <span className="font-mono text-xs text-[#0b0b10]/60 uppercase tracking-[0.3em] block">
                   {activeBrand.tag}
                 </span>
-                <h3 className="font-serif text-4xl sm:text-5xl text-[#0b0b10] font-normal tracking-wider">
-                  {activeBrand.name}
-                </h3>
+                <div className="w-full h-14 sm:h-16 relative flex items-center justify-center">
+                  <TechText
+                    key={activeBrand.id}
+                    text={activeBrand.name}
+                    fontFamily="'Outfit', 'Anton', sans-serif"
+                    fontWeight={700}
+                    fontSize={44}
+                    color="#0b0b10"
+                    accentColor={activeBrand.accentColor || '#D8B879'}
+                    reveal="letter"
+                    dashLength={3}
+                    dashGap={2}
+                    specks={12}
+                    clickKick={true}
+                    draggable={true}
+                    bounce={0.4}
+                    guides={false}
+                    sweep={true}
+                    speed={1}
+                  />
+                </div>
                 <p className="text-sm text-[#0b0b10]/75 font-light max-w-xs mx-auto leading-relaxed pt-1">
                   {activeBrand.role}
                 </p>

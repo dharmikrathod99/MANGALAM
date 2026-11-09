@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, ArrowUpRight, Heart } from 'lucide-react';
+import TechText from './TechText';
 
 /* =========================================================================
    Component 1: LogoIcon
@@ -354,55 +355,39 @@ export function FooterCard({ onSelectCollection, onOpenEnquiry }) {
 }
 
 /* =========================================================================
-   Component 3: GlassText
-   Handcrafted SVG filter paired with Framer Motion for massive blended text.
+   Component 3: Master Brand TechText Signature
+   React Bits interactive kinetic wordmark with vector outlines and specks.
    ========================================================================= */
 export function GlassText() {
   return (
-    <div className="relative w-full flex items-center justify-center select-none pt-0 overflow-hidden">
-      
-      {/* Invisible SVG defining the handcrafted glass filter */}
-      <svg className="absolute w-0 h-0" aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#000000" floodOpacity="0.25" result="outer-shadow" />
-            <feComponentTransfer in="SourceAlpha" result="alpha">
-              <feFuncA type="linear" slope="1" />
-            </feComponentTransfer>
-            <feOffset in="alpha" dx="0" dy="4" result="offset-white" />
-            <feGaussianBlur in="offset-white" stdDeviation="4" result="blur-white" />
-            <feComposite in="alpha" in2="blur-white" operator="out" result="inner-white-mask" />
-            <feFlood floodColor="#ffffff" floodOpacity="0.25" result="white-fill" />
-            <feComposite in="white-fill" in2="inner-white-mask" operator="in" result="inner-white-final" />
-            <feGaussianBlur in="alpha" stdDeviation="6" result="blur-black" />
-            <feComposite in="alpha" in2="blur-black" operator="out" result="inner-black-mask" />
-            <feFlood floodColor="#000000" floodOpacity="0.25" result="black-fill" />
-            <feComposite in="black-fill" in2="inner-black-mask" operator="in" result="inner-black-final" />
-            <feMerge>
-              <feMergeNode in="outer-shadow" />
-              <feMergeNode in="SourceGraphic" />
-              <feMergeNode in="inner-white-final" />
-              <feMergeNode in="inner-black-final" />
-            </feMerge>
-          </filter>
-        </defs>
-      </svg>
-
-      {/* Motion element with subtle scale and fade in */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative flex items-center justify-center w-full"
-      >
-        <h1
-          className="text-[min(25vw,400px)] font-bold tracking-normal leading-none select-none text-white px-4 -mt-4 sm:-mt-8 md:-mt-12 pointer-events-none"
-          style={{ filter: 'url(#glass-effect)' }}
-        >
-          vize
-        </h1>
-      </motion.div>
-
+    <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center select-none pt-4 pb-6 px-4 overflow-hidden">
+      <div className="w-full h-[180px] sm:h-[220px] md:h-[260px] relative">
+        <TechText
+          text="RIVAYAT"
+          fontFamily="'Anton', 'Outfit', sans-serif"
+          fontWeight={700}
+          fontSize={180}
+          letterSpacing={-0.03}
+          color="#0b0b10"
+          accentColor="#D8B879"
+          reveal="letter"
+          reach={180}
+          dashLength={4}
+          dashGap={2}
+          specks={18}
+          intro="none"
+          introDuration={2}
+          clickKick={true}
+          draggable={true}
+          bounce={0.4}
+          guides={false}
+          sweep={true}
+          speed={1}
+        />
+      </div>
+      <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#0b0b10]/40 -mt-2">
+        ✦ Interactive Atelier Wordmark • Drag or Click Letters ✦
+      </p>
     </div>
   );
 }
