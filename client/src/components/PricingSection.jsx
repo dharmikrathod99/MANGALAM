@@ -8,7 +8,7 @@ export default function PricingSection({ onSelectPackage }) {
   const [currency, setCurrency] = useState('INR'); // 'INR' or 'USD'
 
   return (
-    <section id="pricing" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
+    <section id="pricing" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -21,7 +21,7 @@ export default function PricingSection({ onSelectPackage }) {
 
         <div className="text-center -mt-8 mb-16">
           {/* Currency Toggle */}
-          <div className="inline-flex items-center p-1 rounded-full bg-white/90 border border-[#c8c1ee] mt-4">
+          <div className="inline-flex items-center p-1 rounded-full bg-white/90 border border-[#D8B879]/50 mt-4">
             <button
               onClick={() => setCurrency('INR')}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all ${

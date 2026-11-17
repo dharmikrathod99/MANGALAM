@@ -49,7 +49,7 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
   };
 
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
+    <section id="gallery" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -60,7 +60,7 @@ export default function FeaturedGallerySection({ onCustomizeDesign, onOpenEnquir
         />
 
         {/* Filter Tabs & Search Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#c8c1ee]/50">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#D8B879]/50">
           {/* Category Filter Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none flex-grow">
             <div className="flex items-center gap-1.5 text-xs text-charcoal-muted mr-2 flex-shrink-0">

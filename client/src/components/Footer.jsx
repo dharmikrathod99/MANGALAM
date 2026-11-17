@@ -63,7 +63,7 @@ export function MiniJellyfishOctopus({ className = "w-20 h-28" }) {
     >
       {/* Bioluminescent Ambient Glow */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-b from-pink-400/35 via-purple-400/25 to-blue-400/20 blur-xl -z-10 animate-pulse" />
-      
+
       <svg
         viewBox="0 0 100 140"
         fill="none"
@@ -189,34 +189,35 @@ export function FooterCard({ onSelectCollection, onOpenEnquiry }) {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-      
-      {/* Outer Gray / Lilac Body */}
-      <div className="bg-[#E9EBEE] rounded-[48px] border border-slate-200/80 shadow-sm overflow-hidden relative transition-all duration-300">
-        
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+
+      {/* Outer Luxury Gold Card Body */}
+      <div className="bg-[#F2E5C9] rounded-[48px] border border-[#D8B879]/50 shadow-sm overflow-hidden relative transition-all duration-300">
+
         {/* Inner White Box */}
         <div className="bg-white rounded-[40px] m-2 shadow-sm relative overflow-hidden">
-          
+
           {/* Subtle Ambient Radial Highlight */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#f3f0ff]/70 blur-3xl pointer-events-none -z-0" />
-          
+          <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-[#FAF0DB]/80 blur-3xl pointer-events-none -z-0" />
+
           {/* Floating Hero Jellyfish / "Octopus" Companion Inside Card */}
-          <div className="absolute -top-3 right-6 sm:right-10 hidden sm:flex items-center gap-3 z-20 pointer-events-auto">
+          {/* <div className="absolute -top-3 right-6 sm:right-10 hidden sm:flex items-center gap-3 z-20 pointer-events-auto">
             <MiniJellyfishOctopus className="w-16 h-24 sm:w-20 sm:h-28" />
-          </div>
+          </div> */}
 
           {/* Content Grid Space */}
           <div className="p-8 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
-            
+
             {/* Brand Info Column */}
             <div className="lg:col-span-2 space-y-8">
-              
+
               {/* Logo & Name Row */}
               <div className="flex items-center gap-2.5">
-                <LogoIcon />
-                <span className="text-[26px] font-bold tracking-tight text-[#0F172A]">
-                  vize <span className="text-xs uppercase tracking-[0.2em] font-medium text-[#94A3B8] ml-1.5 font-sans">× OctoWeds</span>
-                </span>
+                <img
+                  src="/nimantran-logo.png"
+                  alt="Nimantran Studio"
+                  className="h-auto w-[150px] object-contain"
+                />
               </div>
 
               {/* Description */}
@@ -329,10 +330,10 @@ export function FooterCard({ onSelectCollection, onOpenEnquiry }) {
 
         {/* Bottom Legal Bar (Inside Gray Outer Wrap, OUTSIDE of White Box) */}
         <div className="px-6 sm:px-12 md:px-16 lg:px-20 py-5 flex flex-col md:flex-row justify-between items-center gap-6 text-[15px]">
-          
+
           {/* Left Side */}
           <p className="text-[#64748B] font-medium">
-            © 2025 Vize. All rights reserved.
+            © 2026 Nimantran Studio. All rights reserved.
           </p>
 
           {/* Right Side */}
@@ -360,10 +361,10 @@ export function FooterCard({ onSelectCollection, onOpenEnquiry }) {
    ========================================================================= */
 export function GlassText() {
   return (
-    <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center select-none pt-4 pb-6 px-4 overflow-hidden">
+    <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center select-none pt-4 pb-6 px-4 overflow-hidden hidden">
       <div className="w-full h-[180px] sm:h-[220px] md:h-[260px] relative">
         <TechText
-          text="OCTOWEDS"
+          text="NIMANTRAN"
           fontFamily="'Anton', 'Outfit', sans-serif"
           fontWeight={700}
           fontSize={180}
@@ -397,11 +398,11 @@ export function GlassText() {
    ========================================================================= */
 export default function Footer({ onSelectCollection, onOpenEnquiry }) {
   return (
-    <footer className="w-full flex flex-col items-center gap-0 pt-16 pb-8 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#e4e0f5] relative overflow-hidden">
-      
-      {/* Background Glow Blobs Matching Website Lilac Theme */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-pink-300/15 blur-[120px] pointer-events-none -z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-[#c8c1ee]/25 blur-[100px] pointer-events-none -z-0" />
+    <footer className="w-full flex flex-col items-center gap-0 pt-12 pb-12 bg-gradient-to-b from-[#F4E5C8] via-[#EDE0C4] to-[#E5D2AD] relative overflow-hidden">
+
+      {/* Background Glow Blobs Matching Golden Luxury Theme */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-300/20 blur-[120px] pointer-events-none -z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-[#D8B879]/30 blur-[100px] pointer-events-none -z-0" />
 
       {/* Layered Card Container */}
       <FooterCard onSelectCollection={onSelectCollection} onOpenEnquiry={onOpenEnquiry} />

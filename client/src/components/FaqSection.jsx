@@ -11,9 +11,9 @@ export default function FaqSection({ onOpenEnquiry }) {
   };
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
+    <section id="faq" className="pt-12 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <SectionHeader
           badge="Curated Answers"
@@ -29,11 +29,10 @@ export default function FaqSection({ onOpenEnquiry }) {
             return (
               <div
                 key={idx}
-                className={`rounded-2xl transition-all duration-300 border ${
-                  isOpen
-                    ? 'bg-white border-gold/60 shadow-md ring-1 ring-gold/20'
-                    : 'bg-white/70 hover:bg-white border-blush-200 shadow-xs'
-                }`}
+                className={`rounded-2xl transition-all duration-300 border ${isOpen
+                  ? 'bg-white border-gold/60 shadow-md ring-1 ring-gold/20'
+                  : 'bg-white/70 hover:bg-white border-gold/60 shadow-xs'
+                  }`}
               >
                 <button
                   onClick={() => toggleFaq(idx)}
@@ -44,11 +43,10 @@ export default function FaqSection({ onOpenEnquiry }) {
                     {faq.q}
                   </span>
                   <div
-                    className={`p-2 rounded-full transition-transform duration-300 flex-shrink-0 ${
-                      isOpen
-                        ? 'bg-charcoal text-ivory-100 rotate-180'
-                        : 'bg-blush-100 text-charcoal hover:bg-blush-200'
-                    }`}
+                    className={`p-2 rounded-full transition-transform duration-300 flex-shrink-0 ${isOpen
+                      ? 'bg-charcoal text-ivory-100 rotate-180'
+                      : 'border border-gold text-charcoal'
+                      }`}
                   >
                     {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4 text-gold-deep" />}
                   </div>
@@ -67,7 +65,7 @@ export default function FaqSection({ onOpenEnquiry }) {
         </div>
 
         {/* Still Have Questions CTA */}
-        <div className="mt-14 p-6 sm:p-8 bg-ivory-50 rounded-2xl border border-blush-300 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 p-6 sm:p-8 bg-ivory-50 rounded-2xl border border-gold text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-center sm:text-left">
             <h4 className="font-serif text-xl text-charcoal">
               Have a question not listed here?
@@ -79,7 +77,7 @@ export default function FaqSection({ onOpenEnquiry }) {
 
           <button
             onClick={() => onOpenEnquiry('Direct FAQ Inquiry')}
-            className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-wider uppercase font-semibold hover:bg-blush-700 transition-colors shadow-xs whitespace-nowrap"
+            className="px-6 py-2.5 rounded-full bg-charcoal text-ivory-100 text-xs tracking-wider uppercase font-semibold hover:bg-[#f4e6c9] hover:text-charcoal transition-colors shadow-xs whitespace-nowrap"
           >
             Ask a Concierge
           </button>

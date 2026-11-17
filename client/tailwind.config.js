@@ -31,12 +31,12 @@ export default {
           800: '#643949',
           900: '#43212E',
         },
-        // Re-mapped ivory to soft glowing lilac-ivory
+        // Warm glowing golden-ivory
         ivory: {
-          50: '#FAF8FF',
-          100: '#F3F0FF', // Soft lilac white
-          200: '#EAE6FC', // Lavender mist
-          300: '#DCD8F4', // Hero sky
+          50: '#FDFBF7',
+          100: '#FAF5EA', // Soft warm ivory
+          200: '#F6EBD6', // Champagne mist
+          300: '#F4E5C8', // Luxury golden base
         },
         lemon: {
           DEFAULT: '#F7E99A', // Lemon Gold
@@ -73,6 +73,8 @@ export default {
       },
       backgroundImage: {
         'gold-shimmer': 'linear-gradient(135deg, #D8B879 0%, #FFF4D0 50%, #C8A252 100%)',
+        'gold-luxury-gradient': 'linear-gradient(180deg, #F4E5C8 0%, #FAF0DB 50%, #FDF8EE 100%)',
+        'gold-section-gradient': 'linear-gradient(180deg, #FDF8EE 0%, #F6EBD6 50%, #FDF8EE 100%)',
         'blush-glow': 'radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.4) 0%, rgba(220, 216, 244, 0) 70%)',
         'lilac-hero-gradient': 'linear-gradient(180deg, #dcd8f4 0%, #eae6fc 50%, #f3f0ff 100%)',
       },

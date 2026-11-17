@@ -100,10 +100,10 @@ export default function WhatWeUseSection() {
   };
 
   return (
-    <section id="what-we-use" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative overflow-hidden">
-      {/* Dreamy Ambient Jellyfish Glow */}
-      <div className="absolute top-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-pink-300/15 blur-[120px] pointer-events-none -z-0" />
-      <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#c8c1ee]/30 blur-[100px] pointer-events-none -z-0" />
+    <section id="what-we-use" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative overflow-hidden">
+      {/* Dreamy Ambient Golden Luxury Glow */}
+      <div className="absolute top-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-amber-300/20 blur-[120px] pointer-events-none -z-0" />
+      <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#D8B879]/30 blur-[100px] pointer-events-none -z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -192,7 +192,7 @@ export default function WhatWeUseSection() {
                   {activeBrand.role}
                 </p>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[#5a3346] tracking-wider uppercase bg-white/60 backdrop-blur-xs px-3 py-1 rounded-full border border-[#c8c1ee]/40 shadow-2xs">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[#5a3346] tracking-wider uppercase bg-white/60 backdrop-blur-xs px-3 py-1 rounded-full border border-[#D8B879]/40 shadow-2xs">
                     ✦ {activeBrand.index} Platform
                   </span>
                 </div>

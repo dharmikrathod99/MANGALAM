@@ -1,12 +1,12 @@
 export const BRAND_INFO = {
-  name: "OctoWeds",
+  name: "Nimantran Studio",
   tagline: "Bespoke Digital Wedding Invitations & E-Stationery",
   contact: {
     whatsapp: "+91 98765 43210",
     whatsappClean: "919876543210",
-    email: "concierge@octoweds.com",
-    instagram: "@octoweds",
-    pinterest: "octoweds_invitations",
+    email: "concierge@nimantran.com",
+    instagram: "@nimantranstudio",
+    pinterest: "nimantran_invitations",
     studio: "Civil Lines & Bandra West, Mumbai & New Delhi",
     hours: "Mon – Sat: 10:00 AM – 7:30 PM IST"
   }

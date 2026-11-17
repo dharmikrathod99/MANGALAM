@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import CollectionsSection from './components/CollectionsSection';
 import FeaturedGallerySection from './components/FeaturedGallerySection';
 import HowItWorksSection from './components/HowItWorksSection';
 import WhyChooseUsSection from './components/WhyChooseUsSection';
-import WhatWeUseSection from './components/WhatWeUseSection';
+// import WhatWeUseSection from './components/WhatWeUseSection';
 import SuiteFeaturesSection from './components/SuiteFeaturesSection';
 import FaqSection from './components/FaqSection';
+import InvitationCtaSection from './components/InvitationCtaSection';
 import EnquirySection from './components/EnquirySection';
 import Footer from './components/Footer';
 import FloatingPetalsCanvas from './components/svg/FloatingPetalsCanvas';
@@ -75,18 +77,21 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#dcd8f4] text-[#0b0b10] font-sans selection:bg-[#fbcfe8] selection:text-[#0b0b10] overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#F4E5C8] text-[#0b0b10] font-sans selection:bg-[#EBD7AF] selection:text-[#1C1917] overflow-x-hidden">
 
       {/* 1. Driftlab WebGL2 Jellyfish Scroll-Driven Hero */}
-      <section id="driftlab-hero" className="relative">
+      {/* <section id="driftlab-hero" className="relative">
         <DriftlabHero
           onExploreStudio={() => scrollToSection('wedding-studio')}
           onOpenBooking={() => setIsBookingModalOpen(true)}
         />
-      </section>
+      </section> */}
 
       {/* 2. The Complete Luxury E-Wedding Atelier (Seamless Flow from Lilac Sky) */}
       <div className="relative">
+        {/* Navigation Header */}
+        <Header onOpenEnquiry={() => setIsBookingModalOpen(true)} />
+
         {/* Floating Flower Petals (gentle drifting blossoms) */}
         <FloatingPetalsCanvas isVisible={true} />
 
@@ -117,7 +122,7 @@ export default function App() {
           <WhyChooseUsSection />
 
           {/* What We Use Section (Framer Brand Logos & Tech Stack) */}
-          <WhatWeUseSection onOpenBooking={() => setIsBookingModalOpen(true)} />
+          {/* <WhatWeUseSection onOpenBooking={() => setIsBookingModalOpen(true)} /> */}
 
           {/* Interactive Suite Features & Inclusions */}
           <SuiteFeaturesSection onOpenBooking={() => setIsBookingModalOpen(true)} />
@@ -125,11 +130,17 @@ export default function App() {
           {/* FAQ Section (8 Accordion Questions) */}
           <FaqSection onOpenEnquiry={(topic) => handleOpenEnquiry(topic)} />
 
+          {/* Luxury Envelope CTA Section (Your story deserves a beautiful beginning) */}
+          <InvitationCtaSection
+            onOpenBooking={() => setIsBookingModalOpen(true)}
+            onOpenEnquiry={(topic) => handleOpenEnquiry(topic)}
+          />
+
           {/* Contact & Order Enquiry Form */}
-          <EnquirySection
+          {/* <EnquirySection
             prefillData={enquiryPrefill}
             onClearPrefill={() => setEnquiryPrefill(null)}
-          />
+          /> */}
         </main>
 
         {/* Footer */}

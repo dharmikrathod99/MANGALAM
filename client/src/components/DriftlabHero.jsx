@@ -13,7 +13,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
   const canvasRef = useRef(null);
   const [soundOn, setSoundOn] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const audioStateRef = useRef({ ctx: null, gain: null });
   const heroControlRef = useRef(null);
 
@@ -498,7 +498,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
         gl.bindTexture(gl.TEXTURE_2D, tJelly);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, still);
       }
-      if (!calm) video.play().catch(() => {});
+      if (!calm) video.play().catch(() => { });
       size();
       read();
       now = target;
@@ -593,29 +593,23 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
         height: '100vh',
         fontFamily: '"Space Mono", ui-monospace, monospace',
         color: '#0b0b10',
-        background: '#dcd8f4'
+        background: '#F4E5C8'
       }}
     >
       <div
-        className="drift-view sticky top-0 h-screen overflow-hidden"
-        style={{ height: '100svh', background: '#dcd8f4' }}
+        className="drift-view sticky top-0 overflow-hidden"
       >
         {/* Celestial Octopus Preloader Screen (Eliminates Initial Black Void) */}
-        <div
-          className={`absolute inset-0 z-50 flex flex-col items-center justify-center select-none transition-all duration-700 ease-out ${
-            isLoaded ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100 scale-100'
-          }`}
-          style={{ background: 'radial-gradient(circle at center, #ede9fe 0%, #dcd8f4 80%)' }}
+        {/* <div
+          className={`absolute inset-0 z-50 flex flex-col items-center justify-center select-none transition-all duration-700 ease-out ${isLoaded ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100 scale-100'
+            }`}
+          style={{ background: 'radial-gradient(circle at center, #FFF9ED 0%, #F4E5C8 80%)' }}
         >
-          {/* Subtle Ambient Background Petal Glow */}
-          <div className="absolute w-[440px] h-[440px] rounded-full bg-pink-300/25 blur-3xl pointer-events-none -z-0 animate-pulse" />
+          <div className="absolute w-[440px] h-[440px] rounded-full bg-amber-300/25 blur-3xl pointer-events-none -z-0 animate-pulse" />
 
-          {/* Central Animated Loading Circle & Octopus Creature */}
           <div className="relative flex items-center justify-center w-64 h-64 sm:w-80 sm:h-80">
-            {/* Outer Rotating Dashed Ring */}
             <div className="absolute inset-0 rounded-full border border-dashed border-[#D8B879]/50 animate-spin-slow pointer-events-none" />
 
-            {/* Inner Counter-Rotating Gradient Ring */}
             <svg
               className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] animate-spin pointer-events-none"
               style={{ animationDuration: '6s' }}
@@ -640,16 +634,13 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               </defs>
             </svg>
 
-            {/* Pulsing Ripple Wave */}
             <div
               className="absolute inset-4 rounded-full border border-pink-400/35 animate-ping pointer-events-none"
               style={{ animationDuration: '2.8s' }}
             />
 
-            {/* Ambient Bioluminescent Core Glow */}
             <div className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-tr from-pink-400/35 via-purple-400/25 to-amber-200/30 blur-2xl animate-pulse" />
 
-            {/* The 3D Bioluminescent Octopus Creature from the Hero Section */}
             <img
               src={STILL}
               alt="OctoWeds Celestial Octopus"
@@ -657,7 +648,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
             />
           </div>
 
-          {/* Typography & Loading Progress */}
           <div className="relative z-10 flex flex-col items-center mt-6 space-y-2.5">
             <h2 className="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-[#0b0b10] uppercase font-semibold drop-shadow-xs">
               OCTOWEDS
@@ -673,7 +663,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               </span>
             </div>
 
-            {/* Elegant Loading Progress Bar */}
             <div className="w-40 sm:w-48 h-1 rounded-full bg-black/10 overflow-hidden mt-2 p-[0.5px]">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-[#D8B879] via-pink-400 to-[#D8B879] animate-shimmer"
@@ -681,74 +670,33 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               />
             </div>
           </div>
-        </div>
-
-        {/* WebGL2 Canvas - Kept at opacity 0 until textures are ready to prevent black flash */}
-        <canvas
-          ref={canvasRef}
-          aria-label="OctoWeds 3D Jellyfish Celestial Suite"
-          className="absolute inset-0 w-full h-full block transition-opacity duration-1000 ease-out"
-          style={{ opacity: isLoaded ? 1 : 0 }}
-        />
+        </div> */}
 
         <div
-          className={`drift-ui absolute inset-0 pointer-events-none transition-opacity duration-700 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`drift-ui absolute inset-0 pointer-events-none transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
         >
-          {/* Logo with TechText Kinetic Typography */}
           <div
-            className="drift-logo pointer-events-auto absolute flex items-center gap-1.5 cursor-pointer select-none"
+            className="drift-logo pointer-events-auto absolute flex items-center gap-1.5 cursor-pointer select-none w-full"
             style={{
               left: 'calc(26 * var(--u))',
-              top: 'calc(16 * var(--u))',
+              top: 'calc(14 * var(--u))',
               zIndex: 40
             }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            title="OctoWeds"
-            aria-label="OctoWeds"
+            title="Nimantran Studio"
+            aria-label="Nimantran Studio"
           >
-            <div className="w-36 sm:w-44 md:w-48 h-9 sm:h-11 relative flex items-center">
-              <TechText
-                text="OCTOWEDS"
-                fontFamily="'Outfit', -apple-system, sans-serif"
-                fontWeight={700}
-                fontSize={28}
-                align="left"
-                color="#0b0b10"
-                accentColor="#D8B879"
-                reveal="letter"
-                dashLength={3}
-                dashGap={2}
-                strokeWidth={1.4}
-                specks={12}
-                clickKick={true}
-                draggable={true}
-                bounce={0.4}
-                guides={false}
-                sweep={true}
-                speed={0.8}
+            <div className='flex justify-center w-full pt-6'>
+              <img
+                src="/nimantran-logo.png"
+                alt="Nimantran Studio"
+                className="h-auto w-[160px] object-contain drop-shadow-md hover:scale-105 transition-transform"
               />
             </div>
-            <svg
-              viewBox="0 0 50 30"
-              aria-hidden="true"
-              style={{
-                width: 'calc(38 * var(--u))',
-                height: 'calc(24 * var(--u))',
-                fill: 'none',
-                stroke: '#D8B879',
-                strokeWidth: '1.4',
-                strokeLinecap: 'round'
-              }}
-              className="opacity-80 hidden sm:block pointer-events-none"
-            >
-              <path d="M2 22C8 20 12 6 15 3c2-2-3 20-1 21 3 1 5-9 8-9-1 3-2 8 0 8 3 0 4-8 7-8s-1 8 2 8 5-6 8-6 2 4 9 2" />
-            </svg>
           </div>
 
-          {/* Top Right: [Book Now] Action Button replacing [Wedding Studio ↓] */}
-          <div
+          {/* <div
             className="drift-book-btn pointer-events-auto absolute flex items-center"
             style={{
               right: 'calc(30 * var(--u))',
@@ -782,10 +730,9 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               <span className="text-[#D8B879]" style={{ fontSize: 'calc(11 * var(--u))' }}>✦</span>
               <span>[Book Now]</span>
             </button>
-          </div>
+          </div> */}
 
-          {/* Index Indicators (01, 02, 03 for the 3 scroll changes) */}
-          <div
+          {/* <div
             className="drift-index pointer-events-auto absolute flex flex-col items-center"
             style={{
               left: 'calc(19 * var(--u))',
@@ -829,10 +776,10 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               03
             </b>
             <i style={{ width: 'calc(3*var(--u))', height: 'calc(3*var(--u))', borderRadius: '50%', background: 'currentColor', opacity: 0.75 }} />
-          </div>
+          </div> */}
 
           {/* Right Scroll Rail */}
-          <div
+          {/* <div
             onClick={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               const clickY = e.clientY - rect.top;
@@ -864,10 +811,9 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
                 willChange: 'transform'
               }}
             />
-          </div>
+          </div> */}
 
-          {/* Integrated Responsive Hero Headline & Atelier Tagline */}
-          <div
+          {/* <div
             className="drift-main-editorial absolute inset-x-0 pointer-events-none flex flex-col items-center justify-center text-center px-4 select-none z-30"
             style={{
               bottom: 'calc(20 * var(--u))',
@@ -876,12 +822,10 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               transform: 'translateX(-50%)'
             }}
           >
-            {/* Rotating 3 Signature Lines in Stable Responsive Flex Box */}
             <div
               className="relative w-full flex items-center justify-center text-center"
               style={{ minHeight: 'calc(68 * var(--u))' }}
             >
-              {/* 1. Beautiful Digital Wedding Invitations, Made Just for Your Big Day. */}
               <div
                 className="drift-hero-line-1 transition-all duration-500 w-full"
                 style={{ opacity: 1, willChange: 'opacity, transform' }}
@@ -898,7 +842,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
                 </h2>
               </div>
 
-              {/* 2. Love Deserves a Beautiful Invitation. */}
               <div
                 className="drift-hero-line-2 transition-all duration-500 absolute inset-0 flex items-center justify-center w-full"
                 style={{ opacity: 0, willChange: 'opacity, transform' }}
@@ -914,7 +857,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
                 </h2>
               </div>
 
-              {/* 3. Your Day. Your Story. Your Invitation. */}
               <div
                 className="drift-hero-line-3 transition-all duration-500 absolute inset-0 flex items-center justify-center w-full"
                 style={{ opacity: 0, willChange: 'opacity, transform' }}
@@ -932,7 +874,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               </div>
             </div>
 
-            {/* Atelier Tagline with Gold Diamonds */}
             <div
               className="flex items-center justify-center gap-2 mt-2 select-none"
               style={{ opacity: 0.85 }}
@@ -950,7 +891,6 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
               <span className="text-[#D8B879]" style={{ fontSize: 'calc(10 * var(--u))' }}>✦</span>
             </div>
 
-            {/* Interactive Scroll Prompt */}
             <div className="mt-2.5">
               <button
                 type="button"
@@ -961,22 +901,22 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
                     scrollToStep(2);
                   }
                 }}
-                className="pointer-events-auto inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/75 hover:bg-white text-[11px] font-mono uppercase tracking-wider text-[#0b0b10] border border-[#c8c1ee]/60 transition-all duration-300 hover:scale-105 shadow-2xs cursor-pointer select-none"
+                className="pointer-events-auto inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/75 hover:bg-white text-[11px] font-mono uppercase tracking-wider text-[#0b0b10] border border-[#D8B879]/60 transition-all duration-300 hover:scale-105 shadow-2xs cursor-pointer select-none"
                 aria-label="Scroll to explore wedding atelier"
               >
                 <span className="text-gold animate-bounce">↓</span>
                 <span>Scroll to Unfold Suite</span>
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Ethereal Seamless Bottom Atmosphere Feather into Atelier */}
-          <div
+          {/* <div
             className="absolute bottom-0 inset-x-0 h-28 sm:h-40 pointer-events-none z-10"
             style={{
-              background: 'linear-gradient(to bottom, rgba(220, 216, 244, 0) 0%, rgba(220, 216, 244, 0.45) 45%, rgba(220, 216, 244, 0.92) 80%, #dcd8f4 100%)'
+              background: 'linear-gradient(to bottom, rgba(244, 229, 200, 0) 0%, rgba(244, 229, 200, 0.45) 45%, rgba(244, 229, 200, 0.92) 80%, #F4E5C8 100%)'
             }}
-          />
+          /> */}
 
           {/* Sound Pill */}
           <button
