@@ -73,7 +73,7 @@ export default function WhyChooseUsSection() {
           ))}
         </AnimatedContent>
 
-        {/* Feature Comparison Box: Traditional Printed vs OctoWeds Digital */}
+        {/* Feature Comparison Box: Traditional Printed vs Nimantran Digital */}
         <AnimatedContent distance={40} duration={0.75} threshold={0.12}>
           <div className="mt-20 bg-ivory-50 rounded-2xl border border-gold/40 p-8 sm:p-10 shadow-sm max-w-4xl mx-auto">
           <div className="text-center mb-8">

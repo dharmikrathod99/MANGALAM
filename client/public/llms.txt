@@ -1,6 +1,6 @@
-# OctoWeds — Bespoke Digital Wedding Invitations & Heirloom E-Stationery
+# Nimantran Studio — Bespoke Digital Wedding Invitations & Heirloom E-Stationery
 
-> OctoWeds (https://octoweds.com) is a luxury digital wedding stationery atelier blending royal Indian heritage aesthetics with cutting-edge 3D WebGL motion and smartphone-first interactive stationery. We craft interactive, music-scored e-wedding invitations that guests unbox like sacred physical keepsakes on WhatsApp and mobile screens.
+> Nimantran Studio (https://octoweds.com) is a luxury digital wedding stationery atelier blending royal Indian heritage aesthetics with cutting-edge 3D WebGL motion and smartphone-first interactive stationery. We craft interactive, music-scored e-wedding invitations that guests unbox like sacred physical keepsakes on WhatsApp and mobile screens.
 
 ## Core Services & Products
 - **Interactive E-Wedding Cards**: 9:16 vertical smartphone invitation suites featuring interactive wax seal unboxing, ceremonial page flips, and acoustic sitar music scoring.

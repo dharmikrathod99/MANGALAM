@@ -1,12 +1,12 @@
-# OctoWeds Atelier — Full System Documentation & Technical Specification
+# Nimantran Studio — Full System Documentation & Technical Specification
 
 URL: https://octoweds.com
-Brand: OctoWeds
+Brand: Nimantran Studio
 Tagline: Bespoke Digital Wedding Invitations & Heirloom E-Stationery
 Target Audience: Discerning modern couples celebrating Indian, Multicultural, and Global weddings seeking luxury digital invitations.
 
 ## 1. Atelier Vision & Philosophy
-OctoWeds replaces static PDF screenshots and low-resolution video cards with bespoke interactive web invitations that feel like holding an heirloom luxury card. Guests receive a personalized link via WhatsApp, SMS, or email. Tapping the link reveals an elegant wax seal that breaks open with custom acoustic sitar harmonics, unfolding ceremonies, dates, Google Maps directions, RSVP forms, and attire guides.
+Nimantran Studio replaces static PDF screenshots and low-resolution video cards with bespoke interactive web invitations that feel like holding an heirloom luxury card. Guests receive a personalized link via WhatsApp, SMS, or email. Tapping the link reveals an elegant wax seal that breaks open with custom acoustic sitar harmonics, unfolding ceremonies, dates, Google Maps directions, RSVP forms, and attire guides.
 
 ## 2. Full Suite Inclusions & Features
 - **Interactive Wax Seal Unboxing**: Virtual wax seal with customizable monogram and physics-based opening animation.

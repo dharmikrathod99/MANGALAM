@@ -108,7 +108,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
               {/* Interactive TechText Brand Wordmark */}
               <div className="w-full h-16 sm:h-20 md:h-24 xl:h-28 relative flex items-center justify-center lg:justify-start -mb-2">
                 <TechText
-                  text="OCTOWEDS"
+                  text="NIMANTRAN"
                   fontFamily="'Cinzel Decorative', 'Playfair Display', Georgia, serif"
                   fontWeight={700}
                   fontSize={88}

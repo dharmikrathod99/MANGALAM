@@ -399,7 +399,7 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
     Promise.all([
       loadImg(SKY),
       loadImg(STILL),
-      document.fonts.load(`${EM}px Anton`, 'OCTOWEDS'),
+      document.fonts.load(`${EM}px Anton`, 'NIMANTRAN'),
     ]).then(([sky, still]) => {
       drawAtlas();
       gl.activeTexture(gl.TEXTURE0);
@@ -563,14 +563,14 @@ export default function DriftlabHero({ onExploreStudio, onOpenBooking }) {
 
             <img
               src={STILL}
-              alt="OctoWeds Celestial Octopus"
+              alt="Nimantran Celestial Mascot"
               className="relative z-10 w-36 h-36 sm:w-44 sm:h-44 object-contain drop-shadow-[0_12px_32px_rgba(236,72,153,0.45)] animate-float-slow select-none pointer-events-none"
             />
           </div>
 
           <div className="relative z-10 flex flex-col items-center mt-6 space-y-2.5">
             <h2 className="font-serif text-2xl sm:text-3xl tracking-[0.25em] text-[#0b0b10] uppercase font-semibold drop-shadow-xs">
-              OCTOWEDS
+              NIMANTRAN
             </h2>
 
             <div className="flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.28em] font-mono text-[#0b0b10]/70">
