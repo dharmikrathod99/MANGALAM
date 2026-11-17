@@ -15,7 +15,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
-      
+
       const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 harmonized chime
       freqs.forEach((freq, index) => {
         const osc = ctx.createOscillator();
@@ -46,16 +46,22 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
   return (
     <section
       id={id}
-      className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden bg-gradient-to-b from-[#dcd8f4] via-[#eae6fc] to-[#f3f0ff]"
+      className="relative pt-28 pb-16 sm:pt-36 md:pt-40 md:pb-24 overflow-hidden bg-gradient-to-b from-[#F4E5C8] via-[#FAF0DB] to-[#FDF8EE] min-h-[100svh] flex items-center"
+      style={{
+        backgroundImage: "url('/hero-bg.svg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'bottom'
+      }}
     >
-      {/* Dreamy Celestial Jellyfish & Lilac Sky Glow Blobs */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-pink-400/15 blur-[120px] pointer-events-none -z-0" />
-      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] rounded-full bg-[#c8c1ee]/35 blur-[100px] pointer-events-none -z-0" />
+      {/* Dreamy Celestial Ambient Golden Luxury Glow Blobs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-400/20 blur-[120px] pointer-events-none -z-0" />
+      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] rounded-full bg-[#D8B879]/30 blur-[100px] pointer-events-none -z-0" />
 
       {/* Subtle Ornamental Background Elements */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-30">
+      {/* <div className="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-30">
         <FloralVines />
-      </div>
+      </div> */}
 
       <div className="absolute top-16 left-4 md:left-12 pointer-events-none opacity-15 animate-spin-slow">
         <MandalaPattern className="w-48 h-48 md:w-72 md:h-72 text-gold" />
@@ -73,13 +79,13 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
         <Butterfly className="w-6 h-6 text-blush-400" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
+
           {/* Left Column: Editorial Headline & Copy */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-7">
             {/* Studio Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#c8c1ee] shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#D8B879]/50 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
               <span className="text-xs uppercase tracking-[0.22em] text-[#0b0b10] font-semibold">
                 ✦ Bespoke Wedding Atelier • Interactive Suite
@@ -103,15 +109,15 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
 
             {/* Feature Pills */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#D8B879]/50 shadow-2xs">
                 <span className="text-gold">👑</span>
                 <span>Royal & Contemporary Suites</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#D8B879]/50 shadow-2xs">
                 <span className="text-blush-700">💌</span>
                 <span>Interactive Wax Seal Unboxing</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#c8c1ee]/60 shadow-2xs">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-xs text-xs font-medium text-[#0b0b10] border border-[#D8B879]/50 shadow-2xs">
                 <span className="text-emerald-700">📲</span>
                 <span>1-Tap WhatsApp Broadcasting</span>
               </div>
@@ -129,7 +135,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
 
               <button
                 onClick={() => onExplore()}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 hover:bg-white text-[#0b0b10] text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold border border-[#c8c1ee] hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 hover:bg-white text-[#0b0b10] text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold border border-[#D8B879]/60 hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer"
               >
                 <span>Explore 12 Collections</span>
                 <ArrowRight className="w-4 h-4 text-[#0b0b10]/60 group-hover:translate-x-1 group-hover:text-gold transition-all" />
@@ -137,7 +143,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
             </div>
 
             {/* Trust Markers / Highlights */}
-            <div className="pt-6 border-t border-[#c8c1ee]/50 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+            <div className="pt-6 border-t border-[#D8B879]/40 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
               <div>
                 <div className="flex items-center gap-1 text-[#0b0b10] text-sm font-semibold">
                   <Sparkles className="w-4 h-4 text-gold" />
@@ -165,33 +171,42 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
 
           {/* Right Column: Layered Invitation & Envelope Interactive Visual */}
           <div className="lg:col-span-5 relative flex justify-center">
-            
+
             {/* Decorative Ornamental Ring Behind Envelope */}
             <div className="absolute -top-10 -right-8 w-64 h-64 md:w-80 md:h-80 pointer-events-none rounded-full border border-dashed border-gold/30 -z-10 animate-spin-slow" />
             <div className="absolute -bottom-10 -left-6 w-48 h-48 pointer-events-none rounded-full bg-blush-200/50 blur-2xl -z-10" />
 
             {/* The Layered Interactive Envelope Container */}
             <div className="relative w-full max-w-[340px] sm:max-w-[380px] perspective-1000">
-              
+
               {/* Floating Helper Pill */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 text-[#0b0b10] text-[11px] font-medium shadow-md border border-[#c8c1ee]">
+              {/* <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 text-[#0b0b10] text-[11px] font-medium shadow-md border border-[#D8B879]/50">
                   <Sparkles className="w-3 h-3 text-gold" />
                   {isEnvelopeOpen ? '✦ Click seal to close' : '✦ Click wax seal to open'}
                 </span>
-              </div>
+              </div> */}
 
               {/* Envelope Body */}
               <div
                 onClick={handleEnvelopeToggle}
-                className="relative cursor-pointer select-none transition-all duration-700 bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-[#c8c1ee]/60 shadow-2xl overflow-visible hover:shadow-purple-300/30"
+                className="relative cursor-pointer select-none transition-all duration-700 bg-white/90 backdrop-blur-md rounded-2xl p-4 border border-[#D8B879]/50 shadow-2xl overflow-visible hover:shadow-amber-200/40"
               >
-                
+
                 {/* Envelope Outer Pocket Sleeve */}
-                <div className="relative bg-gradient-to-b from-[#FAF8FF] to-[#F3F0FF] rounded-xl border border-gold/40 p-3 pt-6 min-h-[460px] flex flex-col justify-between overflow-hidden">
-                  
+                <div className="relative bg-gradient-to-b from-[#FFFDF8] to-[#F6EBD6] rounded-xl border border-gold/40 aspect-[9/16] flex flex-col justify-between overflow-hidden">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src="/video/reels-1.mp4" type="video/mp4" />
+                  </video>
+
                   {/* Ornate Stationery Corners */}
-                  <DecorativeCorner className="absolute top-2 left-2 w-6 h-6 text-gold/60" />
+                  {/* <DecorativeCorner className="absolute top-2 left-2 w-6 h-6 text-gold/60" />
                   <div className="absolute top-2 right-2 scale-x-[-1]">
                     <DecorativeCorner className="w-6 h-6 text-gold/60" />
                   </div>
@@ -200,17 +215,15 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                   </div>
                   <div className="absolute bottom-2 right-2 scale-[-1]">
                     <DecorativeCorner className="w-6 h-6 text-gold/60" />
-                  </div>
+                  </div> */}
 
                   {/* Inner Sliding Invitation Card */}
-                  <div
-                    className={`relative z-10 bg-white rounded-lg border border-gold/50 p-5 text-center transition-all duration-700 ease-out shadow-lg ${
-                      isEnvelopeOpen
-                        ? '-translate-y-20 scale-102 ring-2 ring-gold/40 shadow-2xl'
-                        : 'translate-y-0 scale-98 opacity-95'
-                    }`}
+                  {/* <div
+                    className={`relative z-10 bg-white rounded-lg border border-gold/50 p-5 text-center transition-all duration-700 ease-out shadow-lg ${isEnvelopeOpen
+                      ? '-translate-y-20 scale-102 ring-2 ring-gold/40 shadow-2xl'
+                      : 'translate-y-0 scale-98 opacity-95'
+                      }`}
                   >
-                    {/* Auspicious Shubh Vivah Symbol */}
                     <div className="flex items-center justify-center space-x-2 mb-2">
                       <span className="h-[1px] w-8 bg-gold/50" />
                       <span className="text-[11px] font-serif tracking-[0.2em] text-gold-deep uppercase">
@@ -223,7 +236,6 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                       Together with their families
                     </p>
 
-                    {/* Couple Names */}
                     <div className="my-3 py-2 border-y border-blush-200">
                       <h2 className="font-serif text-3xl text-blush-700 tracking-wide font-normal">
                         Ananya
@@ -238,20 +250,17 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                       Invite you to celebrate their union of love & rituals
                     </p>
 
-                    {/* Wedding Date Pill */}
                     <div className="inline-block bg-blush-100/70 border border-blush-300 rounded-full px-3 py-1 mb-3">
                       <span className="text-[11px] font-medium tracking-wider text-blush-900 uppercase">
                         Sunday • 14 December 2026
                       </span>
                     </div>
 
-                    {/* Location */}
                     <div className="text-[11px] text-charcoal-muted space-y-0.5">
                       <p className="font-medium text-charcoal">The Oberoi Udaivilas</p>
                       <p>Lake Pichola, Udaipur, Rajasthan</p>
                     </div>
 
-                    {/* Card Footer Badge */}
                     <div className="mt-4 pt-3 border-t border-dashed border-blush-200 flex items-center justify-between text-[10px] text-charcoal-muted">
                       <span className="flex items-center gap-1">
                         <Heart className="w-3 h-3 text-blush-500 fill-blush-500" />
@@ -259,12 +268,10 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                       </span>
                       <span className="text-gold font-medium">Scan for Maps & RSVP</span>
                     </div>
-                  </div>
+                  </div> */}
 
-                  {/* Envelope Flap with Wax Seal */}
-                  <div className="relative z-20 mt-4 flex flex-col items-center">
-                    
-                    {/* Wax Seal placed over flap */}
+                  {/* <div className="relative z-20 mt-4 flex flex-col items-center">
+
                     <div className="relative -mt-6">
                       <WaxSeal monogram="AK" color="#865365" size={68} />
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -275,14 +282,15 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                     <p className="text-[11px] text-charcoal-muted mt-2 tracking-wider font-serif italic">
                       {isEnvelopeOpen ? 'Tap seal to tuck in' : 'Tap to reveal card'}
                     </p>
-                  </div>
+                  </div> */}
+
                 </div>
 
                 {/* Subtle Floating decorative elements on card edges */}
-                <div className="absolute -bottom-3 -right-3 bg-white p-2 rounded-full shadow-lg border border-gold/30 hidden sm:flex items-center gap-1 text-[11px] text-charcoal font-medium">
+                {/* <div className="absolute -bottom-3 -right-3 bg-white p-2 rounded-full shadow-lg border border-gold/30 hidden sm:flex items-center gap-1 text-[11px] text-charcoal font-medium">
                   <Sparkles className="w-3.5 h-3.5 text-gold" />
                   <span>Interactive Audio Preview</span>
-                </div>
+                </div> */}
               </div>
             </div>
 

@@ -19,7 +19,7 @@ export default function HowItWorksSection({ onOpenEnquiry }) {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
+    <section id="how-it-works" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

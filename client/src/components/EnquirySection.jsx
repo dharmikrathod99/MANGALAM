@@ -88,7 +88,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#dcd8f4] relative overflow-hidden">
+    <section id="contact" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#F4E5C8] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         {/* Section Header */}
@@ -102,7 +102,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
         <AnimatedContent distance={60} duration={0.8} threshold={0.1} className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Comprehensive Enquiry Form */}
-          <div className="lg:col-span-7 bg-white/95 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-[#c8c1ee]/60 shadow-xl relative">
+          <div className="lg:col-span-7 bg-white/95 backdrop-blur-sm rounded-3xl p-8 sm:p-10 border border-[#D8B879]/50 shadow-xl relative">
             <DecorativeCorner className="absolute top-4 left-4 w-6 h-6 text-gold/50" />
             <div className="absolute top-4 right-4 scale-x-[-1]">
               <DecorativeCorner className="w-6 h-6 text-gold/50" />
@@ -350,7 +350,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Direct Channels Card */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-7 sm:p-8 border border-[#c8c1ee]/60 space-y-6 shadow-sm">
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-7 sm:p-8 border border-[#D8B879]/50 space-y-6 shadow-sm">
               <h3 className="font-serif text-2xl text-[#0b0b10] font-normal">
                 Rivayat Design Atelier
               </h3>
@@ -358,7 +358,7 @@ export default function EnquirySection({ prefillData, onClearPrefill }) {
                 We work directly with couples, wedding planners, and families across timezones. Every consultation is personal, responsive, and attentive.
               </p>
 
-              <div className="space-y-4 pt-2 border-t border-[#c8c1ee]/40">
+              <div className="space-y-4 pt-2 border-t border-[#D8B879]/40">
                 {/* WhatsApp */}
                 <a
                   href={`https://wa.me/${BRAND_INFO.contact.whatsappClean}?text=Hello%20Rivayat%20Studio!%20I'd%20love%20to%20discuss%20an%20e-wedding%20card.`}

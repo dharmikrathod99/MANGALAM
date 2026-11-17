@@ -7,7 +7,7 @@ import AnimatedContent from './AnimatedContent';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
-    <section id="collections" className="py-24 bg-gradient-to-b from-[#f3f0ff] via-[#eae6fc] to-[#f3f0ff] relative">
+    <section id="collections" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Section Header */}
@@ -29,7 +29,7 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
           {COLLECTIONS.map((col, idx) => (
             <div
               key={col.id}
-              className="group relative bg-white/95 rounded-2xl border border-[#c8c1ee]/70 overflow-hidden shadow-xs hover:shadow-xl hover:border-gold transition-all duration-500 flex flex-col justify-between"
+              className="group relative bg-white/95 rounded-2xl border border-[#D8B879]/50 overflow-hidden shadow-xs hover:shadow-xl hover:border-gold transition-all duration-500 flex flex-col justify-between"
             >
               {/* Image & Preview Container */}
               <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-blush-100/40">

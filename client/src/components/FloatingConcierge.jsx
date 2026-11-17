@@ -11,8 +11,8 @@ export default function FloatingConcierge({ onOpenEnquiry, isVisible = true }) {
     <aside aria-label="Quick Concierge Actions" className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 transition-all duration-500 animate-fadeIn">
       {/* Friendly Tooltip Pill */}
       {showTooltip && (
-        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-[#c8c1ee] max-w-xs animate-fadeIn flex items-start gap-2.5">
-          <div className="p-1.5 rounded-full bg-[#ede9fe] text-gold-deep flex-shrink-0">
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-[#D8B879]/50 max-w-xs animate-fadeIn flex items-start gap-2.5">
+          <div className="p-1.5 rounded-full bg-[#FAF0DB] text-gold-deep flex-shrink-0">
             <Sparkles className="w-4 h-4 text-[#D8B879]" />
           </div>
           <div className="text-xs">
