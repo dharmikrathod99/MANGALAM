@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import TechText from './TechText';
 import { Sparkles, ArrowRight, Heart, Star, CheckCircle2, Volume2, VolumeX } from './icons';
 import FloralVines from './svg/FloralVines';
 import MandalaPattern from './svg/MandalaPattern';
@@ -9,16 +8,6 @@ import { WeddingRings, Butterfly, DecorativeCorner } from './svg/WeddingMotifs';
 export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onExplore }) {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    const updateMedia = () => {
-      setIsDesktop(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
-    };
-    updateMedia();
-    window.addEventListener('resize', updateMedia);
-    return () => window.removeEventListener('resize', updateMedia);
-  }, []);
 
   // Gentle acoustic sitar/chime Web Audio synthesis
   const playGentleChime = () => {
@@ -103,36 +92,8 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
               </span>
             </div>
 
-            {/* Main Heading with Interactive TechText Kinetic Wordmark */}
+            {/* Main Heading */}
             <div className="space-y-3">
-              {/* Interactive TechText Brand Wordmark */}
-              <div className="w-full h-16 sm:h-20 md:h-24 xl:h-28 relative flex items-center justify-center lg:justify-start -mb-2">
-                <TechText
-                  text="OCTOWEDS"
-                  fontFamily="'Cinzel Decorative', 'Playfair Display', Georgia, serif"
-                  fontWeight={700}
-                  fontSize={88}
-                  letterSpacing={0.06}
-                  align={isDesktop ? 'left' : 'center'}
-                  color="#0b0b10"
-                  accentColor="#D8B879"
-                  reveal="letter"
-                  dashLength={4}
-                  dashGap={2}
-                  strokeWidth={1.5}
-                  specks={16}
-                  intro="none"
-                  introDuration={2}
-                  clickKick={true}
-                  draggable={true}
-                  bounce={0.4}
-                  sweep={true}
-                  speed={0.8}
-                  guides={false}
-                  className="w-full h-full"
-                />
-              </div>
-
               <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl xl:text-7xl font-normal tracking-tight text-[#0b0b10] leading-[1.12]">
                 Heirloom Digital Invitations, <br />
                 <span className="italic font-display block mt-1.5 text-blush-700 animate-fadeIn">
