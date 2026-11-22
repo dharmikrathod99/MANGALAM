@@ -7,11 +7,11 @@ const DEFAULT_ITEMS = [
   'FRAMER',
   'GOOGLE',
   'META',
-  'APPLE',
+  'ANIMATION UI',
   'OPENAI',
-  'TESLA',
+  'BLENDER',
   'SPOTIFY',
-  'NIKE'
+  'ADOBE PHOTOSHOP'
 ];
 
 const OptionWheel = ({

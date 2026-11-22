@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import OptionWheel from './OptionWheel';
 import TechText from './TechText';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 import { Sparkles } from './icons';
 
 export const BRANDS = [
@@ -115,7 +116,13 @@ export default function WhatWeUseSection() {
         />
 
         {/* 2-Column Split: Transparent OptionWheel on Left, Transparent Icon Display on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <AnimatedContent
+          distance={50}
+          duration={0.8}
+          ease="power3.out"
+          threshold={0.08}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+        >
           
           {/* Left Column: Pure Transparent Background with ONLY Text Wheel */}
           <div className="lg:col-span-7 flex flex-col justify-center bg-transparent">
@@ -163,7 +170,7 @@ export default function WhatWeUseSection() {
               </div>
 
               {/* Brand Name Headline & Role */}
-              <div className="relative z-10 space-y-2 mt-1">
+              <div className="relative z-10 space-y-2 mt-1 w-full">
                 <span className="font-mono text-xs text-[#0b0b10]/60 uppercase tracking-[0.3em] block">
                   {activeBrand.tag}
                 </span>
@@ -196,12 +203,43 @@ export default function WhatWeUseSection() {
                     ✦ {activeBrand.index} Platform
                   </span>
                 </div>
+
+                {/* Transparent Brand Icon Bar (Replaces Nike, Tesla, Apple with Animation UI, Blender, Photoshop) */}
+                <div className="mt-6 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap p-2 rounded-2xl bg-white/30 backdrop-blur-md border border-[#c8c1ee]/50 shadow-xs">
+                  {BRANDS.map((b, idx) => {
+                    const isSelected = idx === selectedIndex;
+                    return (
+                      <button
+                        key={b.id}
+                        type="button"
+                        onClick={() => handleWheelChange(idx)}
+                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center p-1.5 transition-all duration-300 cursor-pointer ${
+                          isSelected
+                            ? 'bg-[#0b0b10] border-2 border-[#D8B879] shadow-md scale-110'
+                            : 'bg-white/40 hover:bg-white/80 border border-[#c8c1ee]/40 hover:scale-105'
+                        }`}
+                        title={`${b.name} - ${b.role}`}
+                        aria-label={b.name}
+                      >
+                        <img
+                          src={b.logo}
+                          alt={b.name}
+                          className={`w-4 h-4 sm:w-5 sm:h-5 object-contain transition-all duration-200 ${
+                            isSelected && b.id !== 'blender' && b.id !== 'photoshop' && b.id !== 'animation-ui'
+                              ? 'filter invert brightness-200'
+                              : ''
+                          }`}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
             </div>
           </div>
 
-        </div>
+        </AnimatedContent>
 
       </div>
     </section>

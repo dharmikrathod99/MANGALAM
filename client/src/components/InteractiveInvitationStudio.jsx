@@ -8,6 +8,7 @@ import WhatsAppGuestSimulator from './WhatsAppGuestSimulator';
 import GuestRsvpDemoModal from './GuestRsvpDemoModal';
 import DressCodeMoodboardModal from './DressCodeMoodboardModal';
 import SectionHeader from './SectionHeader';
+import AnimatedContent from './AnimatedContent';
 
 export default function InteractiveInvitationStudio({ initialDesign, onOpenEnquiryWithData }) {
   // Live Editable Invitation State
@@ -361,7 +362,13 @@ export default function InteractiveInvitationStudio({ initialDesign, onOpenEnqui
         />
 
         {/* 2-Column Studio Interface: Customizer Controls + Live Interactive Mockup */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <AnimatedContent
+          distance={50}
+          duration={0.8}
+          ease="power3.out"
+          threshold={0.08}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+        >
           
           {/* Left Column: Live Customization Form Controls */}
           <div className="lg:col-span-5 bg-white/95 rounded-2xl p-6 sm:p-8 border border-blush-200 shadow-xl space-y-6">
@@ -768,7 +775,7 @@ export default function InteractiveInvitationStudio({ initialDesign, onOpenEnqui
 
           </div>
 
-        </div>
+        </AnimatedContent>
 
       </div>
 
