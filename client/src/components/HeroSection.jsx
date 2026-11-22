@@ -88,7 +88,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#D8B879]/50 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
               <span className="text-xs uppercase tracking-[0.22em] text-[#0b0b10] font-semibold">
-                ✦ Bespoke Wedding Atelier • Interactive Suite
+                ✦ Wedding invitation websites
               </span>
             </div>
 
