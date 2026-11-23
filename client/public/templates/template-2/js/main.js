@@ -1,0 +1,2 @@
+(function(){(function(){'use strict';window['Effects']['start'](),window['ScrollFx']['start'](),window['Gallery']['init'](),window['Wishes']['init'](),window['Rsvp']['init'](),window['Countdown']['start'](document['getElementById']('countdown')),window['Reveal']['watch'](),window['Reveal']['toggle']('.event','is-open',{'threshold':0.28,'rootMargin':'0px\x200px\x20-8%\x200px'}),window['Music']['init'](),window['Envelope']['start']();}());
+})();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, Sparkles, MessageCircle, Heart, Share2, Calendar, MapPin, Clock, ArrowRight } from './icons';
+import { X, Check, Sparkles, MessageCircle, Heart, Share2, Calendar, MapPin, Clock, ArrowRight, ExternalLink, Smartphone } from './icons';
 import { BRAND_INFO } from '../data/weddingData';
 import WaxSeal from './svg/WaxSeal';
 import { DecorativeCorner } from './svg/WeddingMotifs';
@@ -7,6 +7,7 @@ import { DecorativeCorner } from './svg/WeddingMotifs';
 export default function InvitationDetailModal({ design, onClose, onCustomize }) {
   const [selectedColor, setSelectedColor] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
+  const [previewMode, setPreviewMode] = useState(design?.previewUrl ? 'live' : 'card');
 
   if (!design) return null;
 
@@ -47,56 +48,109 @@ export default function InvitationDetailModal({ design, onClose, onCustomize }) 
           {/* Left Column: Visual Card Mockup & Showcase */}
           <div className="md:col-span-6 bg-gradient-to-b from-[#FDF8F3] to-[#F8EFF3] p-6 sm:p-8 flex flex-col justify-between border-b md:border-b-0 md:border-r border-blush-200 relative">
             
-            {/* Top Badges */}
-            <div className="flex items-center justify-between mb-4">
+            {/* Top Badges & Mode Switcher */}
+            <div className="flex items-center justify-between mb-4 gap-2">
               <span className="px-3 py-1 rounded-full text-[11px] uppercase tracking-wider font-semibold bg-white/90 text-charcoal border border-blush-200 shadow-xs">
                 {design.badge}
               </span>
-              <span className="text-xs font-serif italic text-charcoal-muted">
-                {design.category} Collection
-              </span>
+
+              {design.previewUrl && (
+                <div className="flex items-center p-0.5 rounded-full bg-charcoal/10 border border-charcoal/20">
+                  <button
+                    onClick={() => setPreviewMode('live')}
+                    className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium transition-all ${
+                      previewMode === 'live'
+                        ? 'bg-charcoal text-white shadow-xs'
+                        : 'text-charcoal hover:text-black'
+                    }`}
+                  >
+                    Live Demo
+                  </button>
+                  <button
+                    onClick={() => setPreviewMode('card')}
+                    className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-medium transition-all ${
+                      previewMode === 'card'
+                        ? 'bg-charcoal text-white shadow-xs'
+                        : 'text-charcoal hover:text-black'
+                    }`}
+                  >
+                    Stationery
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* Realistic Card Preview Frame */}
-            <div className="relative mx-auto my-4 max-w-[280px] sm:max-w-[310px] bg-ivory-50 rounded-xl p-5 border border-gold/50 shadow-xl text-center">
-              <DecorativeCorner className="absolute top-2 left-2 w-5 h-5 text-gold/60" />
-              <div className="absolute top-2 right-2 scale-x-[-1]">
-                <DecorativeCorner className="w-5 h-5 text-gold/60" />
+            {/* Interactive Live Website Demo Mode */}
+            {previewMode === 'live' && design.previewUrl ? (
+              <div className="my-2 flex flex-col items-center">
+                <div className="relative w-[280px] sm:w-[310px] h-[480px] bg-[#1a1a1a] rounded-[38px] p-2.5 shadow-2xl border-4 border-charcoal/90 overflow-hidden ring-1 ring-gold/40">
+                  {/* Speaker Notch */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-4 bg-charcoal rounded-full z-20 flex items-center justify-center">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#111] mr-2" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#333]" />
+                  </div>
+                  {/* Live Template Iframe */}
+                  <iframe
+                    src={design.previewUrl}
+                    title={design.title}
+                    className="w-full h-full rounded-[28px] bg-white border-0 shadow-inner"
+                  />
+                </div>
+
+                <div className="mt-3 flex items-center gap-3">
+                  <a
+                    href={design.previewUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold/15 hover:bg-gold hover:text-white text-charcoal border border-gold/40 text-xs font-semibold tracking-wider uppercase transition-all shadow-xs"
+                  >
+                    <span>Full Screen Preview</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-gold" />
+                  </a>
+                </div>
               </div>
+            ) : (
+              /* Realistic Card Preview Frame */
+              <div className="relative mx-auto my-4 max-w-[280px] sm:max-w-[310px] bg-ivory-50 rounded-xl p-5 border border-gold/50 shadow-xl text-center">
+                <DecorativeCorner className="absolute top-2 left-2 w-5 h-5 text-gold/60" />
+                <div className="absolute top-2 right-2 scale-x-[-1]">
+                  <DecorativeCorner className="w-5 h-5 text-gold/60" />
+                </div>
 
-              {/* Shubh Vivah Verse */}
-              <p className="text-[10px] font-serif tracking-[0.25em] text-gold uppercase mb-2">
-                ॥ ॐ श्री गणेशाय नमः ॥
-              </p>
-
-              {/* Couple Name Sample */}
-              <div className="my-3 py-2 border-y border-blush-200">
-                <h4 className="font-serif text-2xl text-charcoal font-normal">
-                  {design.coupleSample.split('&')[0]}
-                </h4>
-                <span className="font-script text-2xl text-gold block -my-1">&</span>
-                <h4 className="font-serif text-2xl text-blush-700 font-normal">
-                  {design.coupleSample.split('&')[1]}
-                </h4>
-              </div>
-
-              {/* Event Sample Details */}
-              <div className="space-y-1 text-xs text-charcoal-muted my-3">
-                <p className="font-medium text-charcoal flex items-center justify-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-gold" />
-                  {design.dateSample}
+                {/* Shubh Vivah Verse */}
+                <p className="text-[10px] font-serif tracking-[0.25em] text-gold uppercase mb-2">
+                  ॥ ॐ श्री गणेशाय नमः ॥
                 </p>
-                <p className="flex items-center justify-center gap-1 text-[11px]">
-                  <MapPin className="w-3.5 h-3.5 text-blush-500" />
-                  {design.venueSample}
-                </p>
-              </div>
 
-              {/* Wax Seal Stamp */}
-              <div className="mt-4 flex justify-center">
-                <WaxSeal monogram="V" color="#865365" size={54} />
+                {/* Couple Name Sample */}
+                <div className="my-3 py-2 border-y border-blush-200">
+                  <h4 className="font-serif text-2xl text-charcoal font-normal">
+                    {design.coupleSample.split('&')[0]}
+                  </h4>
+                  <span className="font-script text-2xl text-gold block -my-1">&</span>
+                  <h4 className="font-serif text-2xl text-blush-700 font-normal">
+                    {design.coupleSample.split('&')[1]}
+                  </h4>
+                </div>
+
+                {/* Event Sample Details */}
+                <div className="space-y-1 text-xs text-charcoal-muted my-3">
+                  <p className="font-medium text-charcoal flex items-center justify-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-gold" />
+                    {design.dateSample}
+                  </p>
+                  <p className="flex items-center justify-center gap-1 text-[11px]">
+                    <MapPin className="w-3.5 h-3.5 text-blush-500" />
+                    {design.venueSample}
+                  </p>
+                </div>
+
+                {/* Wax Seal Stamp */}
+                <div className="mt-4 flex justify-center">
+                  <WaxSeal monogram="V" color="#865365" size={54} />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Color Palette Swatches */}
             <div className="pt-4 border-t border-blush-200/80 flex items-center justify-between">

@@ -5,8 +5,8 @@ import { BRAND_INFO } from '../data/weddingData';
 export default function InvitationCtaSection({
   onOpenBooking,
   onOpenEnquiry,
-  instagramHandle = "@shubhweds",
-  email = "contact@shubhweds.in",
+  instagramHandle = "@nimantranstudio",
+  email = "contact@nimantranstudio.in",
   offerPrice = "₹1,799",
   originalPrice = "₹2,499"
 }) {

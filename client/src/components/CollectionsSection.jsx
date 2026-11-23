@@ -7,9 +7,9 @@ import AnimatedContent from './AnimatedContent';
 
 export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }) {
   return (
-    <section id="collections" className="py-24 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
+    <section id="collections" className="py-12 bg-gradient-to-b from-[#FDF8EE] via-[#F6EBD6] to-[#FDF8EE] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Editorial Section Header */}
         <SectionHeader
           badge="Curated Stationery Suites"
@@ -24,7 +24,7 @@ export default function CollectionsSection({ onSelectCollection, onOpenEnquiry }
           duration={0.75}
           ease="power3.out"
           threshold={0.06}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {COLLECTIONS.map((col, idx) => (
             <div

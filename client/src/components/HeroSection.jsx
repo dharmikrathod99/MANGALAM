@@ -4,6 +4,7 @@ import FloralVines from './svg/FloralVines';
 import MandalaPattern from './svg/MandalaPattern';
 import WaxSeal from './svg/WaxSeal';
 import { WeddingRings, Butterfly, DecorativeCorner } from './svg/WeddingMotifs';
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onExplore }) {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
@@ -88,7 +89,7 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#D8B879]/50 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-gold animate-ping" />
               <span className="text-xs uppercase tracking-[0.22em] text-[#0b0b10] font-semibold">
-                ✦ Wedding invitation websites
+                Wedding invitation websites
               </span>
             </div>
 
@@ -126,24 +127,22 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <button
-                onClick={() => onOpenEnquiry()}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-3 group cursor-pointer"
-              >
-                <span>Book Your Invitation</span>
-                <Sparkles className="w-4 h-4 text-gold group-hover:rotate-12 transition-transform" />
-              </button>
-
-              <button
                 onClick={() => onExplore()}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 hover:bg-white text-[#0b0b10] text-xs sm:text-sm tracking-[0.18em] uppercase font-semibold border border-[#D8B879]/60 hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#0b0b10] hover:bg-[#2c293e] text-white text-xs sm:text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-xl flex items-center justify-center gap-3 group cursor-pointer"
               >
-                <span>Explore 12 Collections</span>
-                <ArrowRight className="w-4 h-4 text-[#0b0b10]/60 group-hover:translate-x-1 group-hover:text-gold transition-all" />
+                <span>Find Your Design</span>
+                <ArrowRight className="w-4 h-4 text-gold group-hover:rotate-12 transition-transform" />
+              </button>
+              <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/80 hover:bg-white text-emerald-700 text-xs sm:text-sm font-semibold border border-[#D8B879]/60 hover:border-gold transition-all duration-300 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer">
+                <FaWhatsapp className="w-4 h-4 text-emerald-700 group-hover:rotate-12 transition-transform" />
+                <span>Chat With Us</span>
               </button>
             </div>
 
+            <div className='flex items-center pt-6 border-t border-[#D8B879]/40'><Sparkles className="w-3.5 h-3.5 mr-1.5 sm:mr-2 text-black group-hover:rotate-12 transition-transform duration-300" /> Personalised for you · Ready in 3–5 days</div>
+
             {/* Trust Markers / Highlights */}
-            <div className="pt-6 border-t border-[#D8B879]/40 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
+            {/* <div className="pt-6 border-t border-[#D8B879]/40 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
               <div>
                 <div className="flex items-center gap-1 text-[#0b0b10] text-sm font-semibold">
                   <Sparkles className="w-4 h-4 text-gold" />
@@ -166,7 +165,8 @@ export default function HeroSection({ id = "wedding-studio", onOpenEnquiry, onEx
                 </div>
                 <p className="text-xs text-[#0b0b10]/60 mt-0.5">1-Tap Sharing</p>
               </div>
-            </div>
+            </div> */}
+
           </div>
 
           {/* Right Column: Layered Invitation & Envelope Interactive Visual */}

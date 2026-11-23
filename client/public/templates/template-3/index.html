@@ -1,0 +1,652 @@
+<!DOCTYPE html><!-- `is-locked` is on both the root and the body deliberately: see the note by
+     the rule in assets/css/style.css. assets/js/hero.js clears both. --><html lang="en-IN" class="is-locked"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Aayush &amp; Nikita — Sample Wedding Invitation | ShubhWeds</title>
+    <meta name="author" content="ShubhWeds">
+    <meta name="description" content="A sample wedding invitation website by ShubhWeds — a full-screen opening film, a scratch-to-reveal date, countdown, photo carousel, two-city event timeline and RSVP in action.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://shubhweds.in/demo/template-3/">
+    <meta name="theme-color" content="#6e1f2f">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shubhweds.in/demo/template-3/">
+    <meta property="og:site_name" content="ShubhWeds">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:title" content="Aayush &amp; Nikita — Sample Wedding Invitation | ShubhWeds">
+    <meta property="og:description" content="A sample wedding invitation website by ShubhWeds — a full-screen opening film, a scratch-to-reveal date, countdown, photo carousel, two-city event timeline and RSVP in action.">
+    <meta property="og:image" content="images/monogram.webp">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+    <!-- Every visit opens on the cover, so a reload starts at the top. Left to
+         itself the browser puts the guest back where they were — far below a
+         cover they cannot see, on a page that is locked until they tap it —
+         and the page looks frozen. Run inline in <head> so it is in place
+         before the browser gets a chance to restore anything. -->
+    <script>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
+
+    <!-- The first two things a guest sees: the monogram on the preloader, then
+         the still behind the cover. Deliberately not marked fetchpriority=high:
+         on a slow connection that hands them the scripts' share of the line,
+         and the cover cannot be tapped until the scripts have arrived. -->
+    <link rel="preload" as="image" href="images/monogram.webp">
+    <link rel="preload" as="image" href="images/hero-poster.webp">
+
+    <!-- Cinzel sets the preloader's line and "Tap to Begin". Fetched now rather
+         than once fonts.css has been read, so on a slow connection that line
+         does not appear in a fallback face and then jump. -->
+    <link rel="preload" as="font" type="font/woff2" href="fonts/cinzel-400-700var-latin.woff2" crossorigin="">
+
+    <!-- The event films are streamed from here; opening the connection early
+         saves a DNS lookup and TLS handshake by the time a guest scrolls there.
+         No `crossorigin`: the <video> elements fetch without CORS, and a
+         connection opened in CORS mode is one they cannot reuse. -->
+    <link rel="preconnect" href="https://media.shubhweds.in">
+    <link rel="dns-prefetch" href="https://media.shubhweds.in">
+
+    <!-- Cinzel, Cormorant Garamond, Great Vibes, Parisienne and Mussica Swash,
+       all self-hosted. -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+  <body class="is-locked">
+    <!-- The heart the scratch card is clipped to. Declared once here, in fractions
+     of the card's own box, so it fits the heart at any size. -->
+    <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+      <defs>
+        <clipPath id="heart-clip" clipPathUnits="objectBoundingBox">
+          <path d="M 0.5 0.889 C 0.256 0.692, 0.05 0.475, 0.05 0.282 C 0.05 0.136, 0.156 0.05, 0.29 0.05 C 0.378 0.05, 0.454 0.10, 0.5 0.172 C 0.546 0.10, 0.622 0.05, 0.71 0.05 C 0.844 0.05, 0.95 0.136, 0.95 0.282 C 0.95 0.475, 0.744 0.692, 0.5 0.889 Z"></path>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <!-- ==========================================================================
+     1. Preloader. Holds until the hero video has a frame to show.
+     ========================================================================== -->
+    <div class="preloader" id="preloader">
+      <div class="motes" id="motes" aria-hidden="true"></div>
+      <img class="preloader__logo" src="images/monogram.webp" alt="Aayush and Nikita monogram" width="100" height="100">
+      <p class="preloader__text">
+        ✨ A Beautiful Love Story Awaits ✨
+      </p>
+      <div class="preloader__bar"></div>
+    </div>
+
+    <!-- ==========================================================================
+     2. Background music. Starts on the tap that opens the invitation, which
+        is the gesture browsers require before any sound plays.
+     ========================================================================== -->
+    <audio id="music" src="media/music.mp3" preload="none" loop=""></audio>
+
+    <button class="music" type="button" id="music-toggle" aria-label="Play background music">
+      <img class="music__record" src="images/music-record.png" alt="" width="74" height="74" decoding="async">
+    </button>
+
+    <main>
+      <!-- ==========================================================================
+     3. Hero. The opening film behind the couple's names. Tapping the cover
+        starts it and deals the names in; the page is held still until the
+        film has finished playing, then the scroll hint appears.
+     ========================================================================== -->
+      <section class="hero" id="hero">
+        <!-- Plays once and holds on its last frame, which is the backdrop the names
+       sit on for the rest of the page. -->
+        <video class="hero__video" id="hero-video" src="media/hero.mp4" muted="" playsinline="" preload="auto"></video>
+
+        <!-- Sits over the video until the video has a frame of its own. -->
+        <img class="hero__poster" id="hero-poster" src="images/hero-poster.webp" alt="">
+
+        <div class="hero__cover" id="hero-cover">
+          <div class="hero__tap">
+            <span class="hero__tap-text">Tap to Begin</span>
+            <img class="hero__tap-logo" src="images/monogram.webp" alt="" width="110" height="110">
+          </div>
+        </div>
+
+        <!-- Offered once the film is under way. Top right, because the music
+             button already holds the bottom-right corner. -->
+        <button class="hero__skip" id="hero-skip" type="button" hidden="">
+          Skip ›
+        </button>
+
+        <div class="hero__names" id="hero-names">
+          <h2 class="hero__name">Aayush</h2>
+          <span class="hero__weds">Weds</span>
+          <h2 class="hero__name">Nikita</h2>
+        </div>
+
+        <div class="hero__scroll" id="hero-scroll">
+          <div class="hero__scroll-inner">
+            <span class="hero__scroll-text">Scroll Down</span>
+            <span class="hero__scroll-arrow">↓</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     4. The invitation.
+     ========================================================================== -->
+      <section class="section">
+        <div class="card invite__card">
+          <div class="invite__onkar" data-reveal="up" lang="pa">ॐ</div>
+
+          <p class="invite__shabad" data-reveal="up" lang="hi" style="transition-delay: 0.15s">
+            वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>
+            निर्विघ्नं कुरु मे देव शुभ कार्येषु सर्वदा॥
+          </p>
+
+          <h2 class="invite__heading" data-reveal="up" style="transition-delay: 0.3s">
+            We Cordially Invite You
+          </h2>
+
+          <p class="invite__lead" data-reveal="up" style="transition-delay: 0.45s">
+            Together with our beloved families,<br>
+            we request the honour of your gracious<br>
+            presence to celebrate the wedding of
+          </p>
+
+          <div data-reveal="up" style="transition-delay: 0.6s">
+            <h1 class="invite__name">Aayush</h1>
+            <p class="invite__relation">Son of</p>
+            <p class="invite__parents">
+              Smt. Hetal Mehta &amp; Shri Rajesh Mehta
+            </p>
+          </div>
+
+          <div class="invite__with" data-reveal="up" style="transition-delay: 0.75s">
+            With
+          </div>
+
+          <div data-reveal="up" style="transition-delay: 0.9s">
+            <h1 class="invite__name">Nikita</h1>
+            <p class="invite__relation">Daughter of</p>
+            <p class="invite__parents">
+              Smt. Bhavna Patel &amp; Shri Mahesh Patel
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     5. Scratch the heart to uncover the date.
+     ========================================================================== -->
+      <section class="section scratch">
+        <!-- Gold flecks drifting through the section; built by assets/js/effects.js -->
+        <div class="sparks" id="sparks" aria-hidden="true"></div>
+
+        <div class="scratch__head" data-reveal="up">
+          <h4 class="scratch__eyebrow">A Special Surprise</h4>
+          <h2 class="scratch__title">
+            Scratch the heart to reveal our wedding date
+          </h2>
+        </div>
+
+        <div class="scratch__stage" data-reveal="zoom" style="transition-delay: 0.2s">
+          <div class="scratch__card">
+            <!-- White paper behind the foil, so a scratched patch shows card stock
+           rather than the page. -->
+            <svg class="scratch__heart-bg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M 50 88.9 C 25.6 69.2, 5 47.5, 5 28.2 C 5 13.6, 15.6 5, 29 5 C 37.8 5, 45.4 10, 50 17.2 C 54.6 10, 62.2 5, 71 5 C 84.4 5, 95 13.6, 95 28.2 C 95 47.5, 74.4 69.2, 50 88.9 Z" fill="#ffffff"></path>
+            </svg>
+
+            <p class="scratch__date" id="scratch-date">
+              14<br>February<br>2027
+            </p>
+
+            <div class="scratch__foil-wrap">
+              <canvas class="scratch__foil" id="scratch-foil"></canvas>
+              <!-- One sweep of light, shown once enough foil is gone. -->
+              <div class="scratch__shimmer" id="scratch-shimmer" hidden=""></div>
+            </div>
+
+            <svg class="scratch__heart-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M 50 88.9 C 25.6 69.2, 5 47.5, 5 28.2 C 5 13.6, 15.6 5, 29 5 C 37.8 5, 45.4 10, 50 17.2 C 54.6 10, 62.2 5, 71 5 C 84.4 5, 95 13.6, 95 28.2 C 95 47.5, 74.4 69.2, 50 88.9 Z" fill="none" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+
+            <canvas class="scratch__confetti" id="scratch-confetti" aria-hidden="true"></canvas>
+          </div>
+
+          <div class="scratch__hint" id="scratch-hint">
+            <h3 class="scratch__hint-text">Scratch to reveal! ✨</h3>
+            <svg class="scratch__hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5"></path>
+              <path d="M11 11.5v-2a1.5 1.5 0 0 1 3 0v2.5"></path>
+              <path d="M14 10.5v-1.5a1.5 1.5 0 0 1 3 0v2.5"></path>
+              <path d="M17 11.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47"></path>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     6. Countdown. `data-countdown` is what it counts down to.
+     ========================================================================== -->
+      <section class="section">
+        <h2 class="section__title" data-reveal="up">The Big Day Approaches</h2>
+
+        <div class="countdown__grid" id="countdown" data-countdown="2027-02-14T19:00:00" data-reveal="zoom">
+          <div class="countdown__cell">
+            <div class="countdown__box">
+              <span class="countdown__value">00</span>
+            </div>
+            <span class="countdown__label">Days</span>
+          </div>
+          <div class="countdown__cell">
+            <div class="countdown__box">
+              <span class="countdown__value">00</span>
+            </div>
+            <span class="countdown__label">Hours</span>
+          </div>
+          <div class="countdown__cell">
+            <div class="countdown__box">
+              <span class="countdown__value">00</span>
+            </div>
+            <span class="countdown__label">Minutes</span>
+          </div>
+          <div class="countdown__cell">
+            <div class="countdown__box">
+              <span class="countdown__value">00</span>
+            </div>
+            <span class="countdown__label">Seconds</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     7. Our story. The carousel advances on its own and can be dragged.
+     ========================================================================== -->
+      <section class="section">
+        <div class="story__grid">
+          <div class="story__col">
+            <div class="carousel" id="carousel" data-reveal="left">
+              <div class="carousel__slide">
+                <img src="images/story-1.webp" alt="Aayush and Nikita" loading="lazy" decoding="async" draggable="false">
+              </div>
+              <div class="carousel__slide">
+                <img src="images/story-2.webp" alt="Aayush and Nikita" loading="lazy" decoding="async" draggable="false">
+              </div>
+              <div class="carousel__slide">
+                <img src="images/story-3.webp" alt="Aayush and Nikita" loading="lazy" decoding="async" draggable="false">
+              </div>
+            </div>
+          </div>
+
+          <div class="story__col story__text">
+            <h2 class="story__title" data-reveal="up">Our Story</h2>
+
+            <p data-reveal="up" style="transition-delay: 0.2s">
+              Our story did not begin with years of knowing each other. It began
+              with two Punjabis finding each other in Vancouver at exactly the
+              right time.
+            </p>
+            <p data-reveal="up" style="transition-delay: 0.4s">
+              From the very beginning, we found comfort in the quiet moments,
+              joy in the unexpected ones, and a shared love for both mountains
+              and beaches. Yes, it can be both when you simply love being
+              surrounded by nature.
+            </p>
+            <p data-reveal="up" style="transition-delay: 0.6s">
+              Nikita is a dentist, and Aayush soon discovered that falling in love
+              with one comes with many benefits: a beautiful smile, a caring
+              heart, and absolutely no chance of ever getting away with
+              forgetting to floss.
+            </p>
+            <p data-reveal="up" style="transition-delay: 0.8s">
+              As we begin this new chapter, we feel incredibly grateful to have
+              found in each other a partner, a best friend, and an adventure
+              companion. We cannot wait to celebrate the beginning of our
+              forever with the people who mean the most to us!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     8. Wedding events. Mehndi, Sangeet and Haldi in Ahmedabad, then the flight,
+        then the wedding in Udaipur.
+     ========================================================================== -->
+      <section class="section events">
+        <h2 class="section__title" data-reveal="up">Wedding Events</h2>
+
+        <div class="events__list">
+          <article class="event" data-reveal="up">
+            <header>
+              <h3 class="event__name">Mehndi</h3>
+              <p class="event__date">12<sup>th</sup> February 2027</p>
+              <p class="event__time">Friday • 12 PM Onwards</p>
+            </header>
+            <video class="event__video" data-src="https://media.shubhweds.in/videos/mehendi.mp4" aria-label="Mehndi" muted="" loop="" playsinline="" preload="none"></video>
+            <footer class="event__venue">
+              <p class="event__venue-label">Venue</p>
+              <p class="event__venue-name">The House of MG</p>
+              <p class="event__street">Opp. Sidi Saiyed Mosque, Lal Darwaja, Ahmedabad</p>
+              <p class="event__country">Gujarat, India</p>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=The%20House%20of%20MG%2C%20Lal%20Darwaja%2C%20Ahmedabad%2C%20Gujarat" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+                View on Maps
+              </a>
+            </footer>
+          </article>
+
+          <article class="event" data-reveal="up">
+            <header>
+              <h3 class="event__name">Sangeet &amp; Cocktail Party</h3>
+              <p class="event__date">13<sup>th</sup> February 2027</p>
+              <p class="event__time">Saturday • 7 PM Onwards</p>
+            </header>
+            <video class="event__video" data-src="https://media.shubhweds.in/videos/sangeet.mp4" aria-label="Sangeet and cocktail party" muted="" loop="" playsinline="" preload="none"></video>
+            <footer class="event__venue">
+              <p class="event__venue-label">Venue</p>
+              <p class="event__venue-name">ITC Narmada</p>
+              <p class="event__street">Judges Bungalow Road, Vastrapur, Ahmedabad</p>
+              <p class="event__country">Gujarat, India</p>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=ITC%20Narmada%2C%20Vastrapur%2C%20Ahmedabad%2C%20Gujarat" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+                View on Maps
+              </a>
+            </footer>
+          </article>
+
+          <article class="event" data-reveal="up">
+            <header>
+              <h3 class="event__name">Haldi</h3>
+              <p class="event__date">13<sup>th</sup> February 2027</p>
+              <p class="event__time">Saturday • 10 AM Onwards</p>
+            </header>
+            <video class="event__video" data-src="https://media.shubhweds.in/videos/haldi.mp4" aria-label="Haldi" muted="" loop="" playsinline="" preload="none"></video>
+            <footer class="event__venue">
+              <p class="event__venue-label">Venue</p>
+              <p class="event__venue-name">Hyatt Regency Ahmedabad</p>
+              <p class="event__street">Ashram Road, Usmanpura, Ahmedabad</p>
+              <p class="event__country">Gujarat, India</p>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Hyatt%20Regency%20Ahmedabad%2C%20Ashram%20Road%2C%20Ahmedabad%2C%20Gujarat" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+                View on Maps
+              </a>
+            </footer>
+          </article>
+
+          <!-- The celebration moves cities. The plane flies down the dashed line
+         as this section is scrolled — see assets/js/journey.js. -->
+          <div class="journey">
+            <div class="journey__stop" data-reveal="fade">
+              <img src="images/journey-1.webp" alt="Ahmedabad — Atal Bridge over the Sabarmati Riverfront" loading="lazy" decoding="async" width="300" height="200">
+              <p class="journey__place">Ahmedabad</p>
+            </div>
+
+            <div class="journey__track" id="journey-track">
+              <div class="journey__line"></div>
+              <div class="journey__plane" id="journey-plane">
+                <span class="journey__plane-shadow" aria-hidden="true"></span>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="journey__stop" data-reveal="fade">
+              <img class="journey__img--trim" src="images/journey-2.webp" alt="Udaipur — the Lake Palace on Lake Pichola, below the City Palace" loading="lazy" decoding="async" width="300" height="220">
+              <p class="journey__place">Udaipur</p>
+            </div>
+          </div>
+
+          <article class="event" data-reveal="up">
+            <header>
+              <h3 class="event__name">Wedding</h3>
+              <p class="event__date">14<sup>th</sup> February 2027</p>
+              <p class="event__time">Sunday • 7 PM Onwards</p>
+            </header>
+            <video class="event__video" data-src="https://media.shubhweds.in/videos/wedding.mp4" aria-label="Wedding" muted="" loop="" playsinline="" preload="none"></video>
+            <footer class="event__venue">
+              <p class="event__venue-label">Venue</p>
+              <p class="event__venue-name">The Leela Palace Udaipur</p>
+              <p class="event__street">Lake Pichola, Udaipur</p>
+              <p class="event__country">Rajasthan, India</p>
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Leela%20Palace%20Udaipur%2C%20Lake%20Pichola%2C%20Udaipur%2C%20Rajasthan" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>
+                View on Maps
+              </a>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     9. With blessings from.
+     ========================================================================== -->
+      <section class="section">
+        <h2 class="section__title" data-reveal="up">With Blessings From</h2>
+
+        <div class="card family__card" data-reveal="up" style="transition-delay: 0.2s">
+          <div class="family__group">
+            <h4>Grand Parents</h4>
+            <p>Smt. Kantaben Mehta &amp; Shri Jayantilal Mehta</p>
+          </div>
+          <div class="family__group">
+            <h4>Bhabhi &amp; Brother</h4>
+            <p>Nisha Mehta &amp; Kunal Mehta</p>
+          </div>
+          <div class="family__group">
+            <h4>Sister &amp; Jiju</h4>
+            <p>Riddhi Desai &amp; Parth Desai</p>
+          </div>
+          <div class="family__group">
+            <h4>Nieces &amp; Nephew</h4>
+            <p>Diya, Krisha &amp; Vivaan</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+     10. RSVP — a boarding pass for the journey the events just took, Ahmedabad to
+         Udaipur. The guest fills it in; sending it stamps the pass and turns
+         it into their issued ticket. A sample: replies are acknowledged but
+         not sent anywhere — see assets/js/rsvp.js to point it at your own
+         endpoint.
+     ========================================================================== -->
+      <section class="section rsvp" id="rsvp">
+        <h2 class="section__title" data-reveal="up">Kindly Respond</h2>
+        <p class="rsvp__lead" data-reveal="up">
+          Your seat on our journey is waiting — fill in your boarding pass.
+        </p>
+
+        <div class="pass" data-reveal="zoom">
+          <div class="pass__band">
+            <span class="pass__airline">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"></path>
+              </svg>
+              The Wedding Express
+            </span>
+            <span>Boarding Pass</span>
+          </div>
+
+          <div class="pass__route">
+            <div class="pass__city">
+              <span class="pass__code">AMD</span>
+              <span class="pass__place">Ahmedabad, Gujarat</span>
+              <span class="pass__when">12 Feb</span>
+            </div>
+            <div class="pass__path" aria-hidden="true">
+              <span class="pass__dash"></span>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"></path>
+              </svg>
+              <span class="pass__dash"></span>
+            </div>
+            <div class="pass__city pass__city--to">
+              <span class="pass__code">UDR</span>
+              <span class="pass__place">Udaipur, Rajasthan</span>
+              <span class="pass__when">14 Feb</span>
+            </div>
+          </div>
+
+          <form class="pass__form" id="rsvp-form" novalidate="">
+            <div class="pass__body">
+              <div class="pass__field">
+                <label class="pass__label" for="rsvp-name">Your name</label>
+                <input class="pass__input" id="rsvp-name" name="fullName" type="text" autocomplete="name" placeholder="Full name">
+                <p class="error" id="rsvp-name-error" hidden="">
+                  Please add your name to the pass.
+                </p>
+              </div>
+
+              <div class="pass__field">
+                <label class="pass__label" for="rsvp-phone">Phone number</label>
+                <input class="pass__input" id="rsvp-phone" name="phoneNumber" type="tel" autocomplete="tel" placeholder="+91 ...">
+                <p class="error" id="rsvp-phone-error" hidden="">
+                  Please add a number we can reach you on.
+                </p>
+              </div>
+
+              <fieldset class="pass__field">
+                <legend class="pass__label">Will you attend?</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="attendingStatus" value="Joyfully yes" checked="">
+                    <span class="choice__card">
+                      <span class="choice__name">Joyfully yes</span>
+                    </span>
+                  </label>
+                  <label class="choice choice--regret">
+                    <input type="radio" name="attendingStatus" value="Regretfully no">
+                    <span class="choice__card">
+                      <span class="choice__name">Regretfully no</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Only while the guest is coming. -->
+              <div class="pass__field" id="rsvp-guests">
+                <p class="pass__label">Number of guests</p>
+                <div class="counter">
+                  <button type="button" data-step="-1" aria-label="One guest fewer">
+                    −
+                  </button>
+                  <output id="rsvp-count" aria-label="Number of guests">1</output>
+                  <button type="button" data-step="1" aria-label="One guest more">
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="pass__field">
+                <label class="pass__label" for="rsvp-message">A message for the couple</label>
+                <textarea class="pass__input" id="rsvp-message" name="message" rows="2" placeholder="Your blessings &amp; wishes..."></textarea>
+              </div>
+            </div>
+
+            <div class="pass__tear" aria-hidden="true"></div>
+
+            <div class="pass__stub">
+              <span class="pass__barcode" aria-hidden="true"></span>
+              <button class="pass__send" type="submit" id="rsvp-send">
+                Send RSVP
+              </button>
+            </div>
+          </form>
+
+          <!-- The issued pass. assets/js/rsvp.js fills it in, and switches it
+               to its "regrets" look when the guest cannot come. -->
+          <div class="pass__issued" id="rsvp-thanks" tabindex="-1" hidden="">
+            <span class="pass__stamp" id="rsvp-stamp">Confirmed</span>
+            <p class="pass__label">Passenger</p>
+            <p class="pass__guest" id="rsvp-thanks-name"></p>
+            <div class="pass__summary" id="rsvp-thanks-summary">
+              <div>
+                <p class="pass__label">Guests</p>
+                <p class="pass__value" id="rsvp-thanks-seats"></p>
+              </div>
+            </div>
+            <p class="pass__note" id="rsvp-thanks-note"></p>
+            <button class="rsvp__again" type="button" id="rsvp-again">
+              Send another response
+            </button>
+          </div>
+        </div>
+
+        <p class="rsvp__sample">
+          This is a sample invitation, so replies are not collected. On your
+          own invitation every RSVP arrives straight in your inbox.
+        </p>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+     11. Footer — a postcard home, airmail border and all, addressed to the
+         guests.
+     ========================================================================== -->
+    <footer class="footer">
+      <div class="postcard" data-reveal="up">
+        <div class="postcard__paper">
+          <div class="postcard__message">
+            <p class="postcard__thanks">Thank You</p>
+            <p class="postcard__text">
+              for being part of our journey, from Ahmedabad to Udaipur. Your love
+              and blessings mean the world to us.
+            </p>
+            <p class="postcard__sign">
+              With love,
+              <span>Aayush &amp; Nikita</span>
+            </p>
+          </div>
+
+          <div class="postcard__address">
+            <div class="postcard__marks">
+              <div class="postcard__postmark" aria-hidden="true">
+                <span>Udaipur</span>
+                <strong>14 · 02 · 27</strong>
+                <span>India</span>
+              </div>
+              <div class="postcard__stamp">
+                <img src="images/monogram.webp" alt="" loading="lazy" decoding="async" width="110" height="110">
+              </div>
+            </div>
+
+            <p class="postcard__to">To</p>
+            <ul class="postcard__lines">
+              <li>Our dear family</li>
+              <li>&amp; friends,</li>
+              <li>with all our love</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer__credit">
+        A little piece of forever, crafted by <a href="https://shubhweds.in">ShubhWeds</a>.
+      </p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/scratch-card.js"></script>
+    <script src="js/journey.js"></script>
+    <script src="js/rsvp.js"></script>
+    <script src="js/event-videos.js"></script>
+    <script src="js/main.js"></script>
+</body></html>

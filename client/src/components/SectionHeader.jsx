@@ -11,10 +11,10 @@ export default function SectionHeader({
   showDivider = true
 }) {
   return (
-    <div className={`text-center max-w-3xl mx-auto mb-14 sm:mb-16 relative z-10 ${className}`.trim()}>
+    <div className={`text-center max-w-3xl mx-auto mb-10 relative z-10 ${className}`.trim()}>
       {/* 1. Pill Badge */}
       {badge && (
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 backdrop-blur-sm border border-[#D8B879]/45 text-[#0b0b10] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium mb-3 sm:mb-4 shadow-xs">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 backdrop-blur-sm border border-[#D8B879]/45 text-[#0b0b10] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#D8B879]" />
           <span>{badge}</span>
         </div>

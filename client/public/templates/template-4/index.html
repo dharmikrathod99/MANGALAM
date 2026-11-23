@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="en-IN"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Arjun &amp; Kiara — Sample Wedding Invitation | ShubhWeds</title>
+  <meta name="author" content="ShubhWeds">
+  <meta name="description" content="A sample Hindu wedding invitation website by ShubhWeds — a storybook film that opens onto a pop-up palace, then Shri Ganesh, the Vakratunda shloka and the couple with their parents inside an ivory arch under swaying jhumars, and a storybook for the Mehndi, Haldi, Sangeet and Wedding.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://shubhweds.in/demo/template-4/">
+  <meta name="theme-color" content="#F3D9C4">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shubhweds.in/demo/template-4/">
+  <meta property="og:site_name" content="ShubhWeds">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="Arjun &amp; Kiara — Sample Wedding Invitation | ShubhWeds">
+  <meta property="og:description" content="A sample Hindu wedding invitation website by ShubhWeds — a storybook film that opens onto a pop-up palace, then Shri Ganesh, the Vakratunda shloka and the couple with their parents inside an ivory arch under swaying jhumars, and a storybook for the Mehndi, Haldi, Sangeet and Wedding.">
+  <meta property="og:image" content="images/og-preview.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Arjun &amp; Kiara — Sunday 21 February 2027, The Palace Lawns, Udaipur">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <!-- The first things a guest sees: the closed book (the film's poster) and
+       "Tap to open", which is set in Cinzel. Fetched now rather than once the
+       stylesheet asks for them. The song is streamed from media.shubhweds.in
+       on that first tap, so the connection is opened ahead of it. -->
+  <link rel="preload" as="image" href="images/intro-poster.webp" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="fonts/cinzel-400-700var-latin.woff2" crossorigin="">
+  <link rel="preconnect" href="https://media.shubhweds.in">
+
+  <!-- Great Vibes, Cinzel, Cormorant Garamond and Tiro Devanagari Hindi —
+       all self-hosted. Bump a ?v= number whenever its file changes (see
+       _headers). -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- One small ornament, drawn once and reused under every heading. -->
+<svg width="0" height="0" class="sprite" aria-hidden="true">
+  <symbol id="flourish" viewBox="0 0 160 16">
+    <path d="M4 8h52M104 8h52" stroke="currentColor" stroke-width="1" stroke-linecap="round"></path>
+    <circle cx="64" cy="8" r="2" fill="currentColor"></circle>
+    <circle cx="96" cy="8" r="2" fill="currentColor"></circle>
+    <path d="M80 1.5 86.5 8 80 14.5 73.5 8Z" fill="currentColor"></path>
+  </symbol>
+  <symbol id="pin" viewBox="0 0 24 24">
+    <path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+    <circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+  </symbol>
+</svg>
+
+
+<!-- 1. Opening film ==========================================================
+     The page opens on the film's first frame, the closed storybook, with a
+     "Tap to open" button; a tap anywhere on the book plays the film. It plays
+     once, muted, and stops on its last frame: the couple under a mandap in
+     a pop-up palace, with an empty banner the doves carry in above them.
+     assets/js/main.js writes the names onto that banner when the film
+     reaches it, and gently zooms in on them once it ends. As in template-2,
+     the page cannot be scrolled until the film has played out or been
+     skipped. main.js plays data-src; give the video a data-lite (the same
+     film, lighter) and it plays that instead on a slow connection. -->
+<header class="intro">
+  <div class="intro__backdrop" aria-hidden="true"></div>
+
+  <div class="film">
+    <!-- the picture and the names zoom together, so the names stay on the banner -->
+    <div class="film__zoom">
+      <video class="film__video" data-src="https://media.shubhweds.in/videos/template-4-intro-preview.mp4" data-end="assets/media/intro-end.webp" poster="images/intro-poster.webp" muted="" playsinline="" preload="auto" aria-hidden="true"></video>
+
+      <h1 class="film__names">
+        <span class="film__couple">
+          <span class="film__name">Arjun</span>
+          <span class="amp">&amp;</span>
+          <span class="film__name">Kiara</span>
+        </span>
+      </h1>
+    </div>
+
+    <button class="film__play" type="button"><span>Tap to open</span></button>
+  </div>
+
+  <button class="film__skip" type="button">Skip</button>
+
+  <a class="scroll-cue" href="#invitation">
+    <span>Scroll</span>
+    <i aria-hidden="true"></i>
+  </a>
+</header>
+
+<!-- Background music: starts with the tap that opens the book (or Skip), the
+     gesture browsers need before a page may play sound, and loops. The round
+     button bottom-right turns it off and on; it appears once the film ends.
+     To change the song, change the src. -->
+<audio class="music" src="media/kudmayi.mp3" loop="" preload="metadata"></audio>
+
+<button class="music-toggle is-muted" type="button" aria-pressed="false" aria-label="Turn music on">
+  <span class="music-toggle__ring" aria-hidden="true"></span>
+  <svg class="music-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 18V5l12-2v13"></path>
+    <circle cx="6" cy="18" r="3"></circle>
+    <circle cx="18" cy="16" r="3"></circle>
+  </svg>
+  <svg class="music-toggle__slash" viewBox="0 0 24 24" aria-hidden="true">
+    <line x1="3" y1="3" x2="21" y2="21"></line>
+  </svg>
+</button>
+
+
+<main>
+
+  <!-- 2. The invitation =====================================================
+       Three layers, as in template-2: misty mustard fields and a Gurdwara
+       behind, the ivory arch with every word inside it, and jhumars swaying
+       in front. The arch grows with its text — longer names simply add
+       another flower to its sides — so edit the words freely. -->
+  <section class="invitation" id="invitation">
+    <picture class="invitation__bg" aria-hidden="true">
+      <source media="(min-aspect-ratio: 3/2)" srcset="images/invite-bg-wide.webp">
+      <img src="images/invite-bg.webp" width="941" height="1672" alt="" loading="lazy" decoding="async">
+    </picture>
+
+    <div class="invitation__stage">
+      <!-- one jhumar, hung three times on chains of different lengths -->
+      <img class="jhumar jhumar--1" src="images/jhumar.webp" width="320" height="1405" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="jhumar jhumar--2" src="images/jhumar.webp" width="320" height="1405" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <img class="jhumar jhumar--3" src="images/jhumar.webp" width="320" height="1405" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+      <div class="arch reveal">
+
+        <p class="invocation" lang="hi">॥ श्री गणेशाय नमः ॥</p>
+
+        <!-- one line each, so a narrow screen wraps within a line -->
+        <p class="shloka" lang="sa">
+          <span>वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।</span>
+          <span>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</span>
+        </p>
+
+        <p class="blessing">With the blessings of Lord Ganesha</p>
+        <p class="kicker">we request the honour of your presence<br>at the wedding celebration of</p>
+
+        <img class="lotus" src="images/lotus.webp" width="320" height="262" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+        <h2 class="couple">
+          <span class="person">
+            <span class="person__name">Arjun</span>
+            <span class="person__parents">S/O Shri Rajesh Malhotra &amp;&nbsp;Smt. Sunita Malhotra</span>
+          </span>
+          <span class="couple__and" aria-hidden="true">&amp;</span>
+          <span class="person">
+            <span class="person__name">Kiara</span>
+            <span class="person__parents">D/O Shri Vikram Mehta &amp;&nbsp;Smt. Neha Mehta</span>
+          </span>
+        </h2>
+
+        <img class="lotus" src="images/lotus.webp" width="320" height="262" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+        <div class="details">
+          <p class="details__date">Sunday, 21<sup>st</sup> February 2027</p>
+          <p class="details__ceremony">Shubh Vivah</p>
+          <p class="details__venue">The Palace Lawns, Udaipur</p>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Palace+Lawns+Udaipur" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>View on map
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 3. Our events =========================================================
+       One small closed storybook per event, stacked down the page and joined
+       by a gold vine. As each book scrolls up the screen its cover swings
+       open onto that event's page, and closes again on the way back. The
+       books take turns: odd chapters open to the left, even ones to the
+       right. assets/js/main.js builds the whole section from the JSON
+       below — the heading and intro picture, one book per event (3 to 8),
+       the outro — so a new couple only needs this block changed. Image
+       paths are relative to "images" (media.shubhweds.in/template-5/,
+       where the four event pictures live beside template-5's), unless
+       they start with ./ (beside this page) or https://. -->
+  <section class="tale" id="events" aria-label="Our events">
+    <script type="application/json" class="book-config">
+      {
+        "images": "https://media.shubhweds.in/template-5/",
+        "introTitle": "Our Celebrations",
+        "introSubtitle": "A story in four chapters",
+        "introImage": "book-intro.webp",
+        "outroText": "...and the story continues",
+        "outroImage": "book-outro.webp",
+        "events": [
+          {
+            "name": "Mehndi",
+            "date": "19th Feb 2027",
+            "time": "4:00 PM",
+            "venue": "Malhotra Residence, Fateh Sagar, Udaipur",
+            "note": "Wear green · Henna, songs and chai",
+            "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fateh+Sagar+Udaipur",
+            "image": "event-mehndi.webp"
+          },
+          {
+            "name": "Haldi",
+            "date": "20th Feb 2027",
+            "time": "11:00 AM",
+            "venue": "Malhotra Residence, Fateh Sagar, Udaipur",
+            "note": "Wear yellow · Haldi for the bride and groom",
+            "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fateh+Sagar+Udaipur",
+            "image": "event-haldi.webp"
+          },
+          {
+            "name": "Sangeet",
+            "date": "20th Feb 2027",
+            "time": "7:30 PM",
+            "venue": "The Lakeside Courtyard, Udaipur",
+            "note": "Music, dance and dinner till late",
+            "mapUrl": "https://www.google.com/maps/search/?api=1&query=Lake+Pichola+Udaipur",
+            "image": "event-sangeet.webp"
+          },
+          {
+            "name": "Wedding",
+            "date": "21st Feb 2027",
+            "time": "7:00 PM",
+            "venue": "The Palace Lawns, Udaipur",
+            "note": "Baraat, varmala and pheras · Dinner to follow",
+            "mapUrl": "https://www.google.com/maps/search/?api=1&query=Palace+Lawns+Udaipur",
+            "image": "event-wedding.webp"
+          }
+        ]
+      }
+    </script>
+
+    <!-- petals drifting slowly behind the books -->
+    <div class="tale__drift" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="tale__story"></div>
+  </section>
+
+
+  <!-- 4. Gallery ============================================================
+       One photo at a time inside the phulkari frame, a kalira hanging
+       beneath it, with arrows, dots and a row of framed thumbnails; a tap
+       opens it full screen. assets/js/main.js builds it from the JSON
+       below. Each photo needs two copies in assets/media/: "src", 1200px on
+       its long side, and "thumb", 240px. "focus" is where to crop
+       it inside the frame's window (as CSS object-position: across, down).
+       The photos are the only pictures kept here; the frames, the kalira
+       and the divider come from "artwork", like every other picture. -->
+  <section class="gallery section" id="gallery" aria-label="Gallery">
+    <script type="application/json" class="gallery-config">
+      {
+        "images": "assets/media/",
+        "artwork": "https://media.shubhweds.in/template-5/",
+        "title": "Painted Moments",
+        "subtitle": "A few pages from our album",
+        "photos": [
+          { "src": "gallery-photo-01.webp", "thumb": "gallery-thumb-01.webp", "caption": "A tender embrace", "focus": "50% 40%" },
+          { "src": "gallery-photo-02.webp", "thumb": "gallery-thumb-02.webp", "caption": "Sailing into the sunset", "focus": "50% 55%" },
+          { "src": "gallery-photo-03.webp", "thumb": "gallery-thumb-03.webp", "caption": "On the palace steps", "focus": "50% 62%" },
+          { "src": "gallery-photo-04.webp", "thumb": "gallery-thumb-04.webp", "caption": "The beginning of forever", "focus": "38% 50%" }
+        ]
+      }
+    </script>
+  </section>
+
+
+  <!-- 5. RSVP ===============================================================
+       Nothing is submitted anywhere: the reply is composed into a WhatsApp
+       message to data-whatsapp and the guest presses send themselves.
+       Set data-whatsapp to the family's number, country code first. -->
+  <section class="section rsvp-section">
+    <h2 class="title reveal">Will you come?</h2>
+    <p class="rsvp-note reveal">A seat at our table is already yours</p>
+    <img class="rsvp-divider reveal" src="images/gallery-divider.webp" width="900" height="118" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+    <form class="rsvp reveal" data-whatsapp="919998162602">
+      <label class="rsvp__field">
+        <span class="rsvp__label">Your name</span>
+        <input name="name" type="text" autocomplete="name" placeholder="Full name" required="">
+      </label>
+
+      <label class="rsvp__field">
+        <span class="rsvp__label">Phone number</span>
+        <input name="phone" type="tel" autocomplete="tel" placeholder="With country code, e.g. +91" required="">
+      </label>
+
+      <fieldset class="rsvp__field">
+        <legend class="rsvp__label">Will you be there?</legend>
+        <div class="rsvp__choices">
+          <label class="choice"><input type="radio" name="attending" value="Joyfully accepts" checked=""><span>Joyfully yes</span></label>
+          <label class="choice"><input type="radio" name="attending" value="Regretfully declines"><span>Regretfully no</span></label>
+        </div>
+      </fieldset>
+
+      <!-- Hidden unless the guest is coming. -->
+      <label class="rsvp__field rsvp__guests">
+        <span class="rsvp__label">Number of guests</span>
+        <input name="guests" type="number" inputmode="numeric" min="1" max="10" value="1" required="">
+      </label>
+
+      <label class="rsvp__field">
+        <span class="rsvp__label">A message for us</span>
+        <textarea name="message" rows="2" placeholder="Your blessings &amp; wishes..."></textarea>
+      </label>
+
+      <button class="rsvp__send" type="submit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+        Send RSVP
+      </button>
+    </form>
+  </section>
+
+</main>
+
+
+<!-- 6. Counting down to forever ==========================================
+     The close of the page, under one watercolour sky: the countdown on four
+     pendants hanging from a toran, a closing line, "Send a blessing" — a
+     paper dove carries a blessing to a string of notes — and the footer.
+     assets/js/main.js builds it all from the JSON below. weddingDateTime is
+     the moment it counts down to, with its time zone (+05:30 for India).
+     The blessings are what the doves carry, in turn. -->
+<div class="finale" id="finale">
+  <script type="application/json" class="finale-config">
+    {
+      "images": "https://media.shubhweds.in/template-5/",
+      "weddingDateTime": "2027-02-21T19:00:00+05:30",
+      "heading": "Counting Down to",
+      "headingScript": "Forever",
+      "line1": "Come early. Stay late.",
+      "line2": "Dance badly with us.",
+      "coupleNames": "Arjun & Kiara",
+      "families": "& Our Families",
+      "dateText": "Sunday, 21 February 2027",
+      "venueText": "The Palace Lawns, Udaipur",
+      "blessings": [
+        "May you keep choosing each other.",
+        "Wishing you a lifetime of laughter.",
+        "May your home always be full of love and dhol beats.",
+        "Two hearts, one beautiful story.",
+        "May every day feel like your wedding day.",
+        "Here's to forever, and then some.",
+        "May your love bloom like marigolds in spring.",
+        "Blessings, light and endless happiness."
+      ]
+    }
+  </script>
+</div>
+
+
+<!-- Rose and marigold petals drifting down over the paper, as they do in
+     the film. Pure CSS; hidden for visitors who prefer reduced motion. -->
+<div class="petals" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
+
+<script src="js/main.js" defer=""></script>
+</body></html>
