@@ -8,13 +8,19 @@ export default function InvitationDetailModal({ design, onClose, onCustomize }) 
   const [selectedColor, setSelectedColor] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
   const [previewMode, setPreviewMode] = useState(design?.previewUrl ? 'live' : 'card');
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+
+  // Reset loading state when previewUrl changes
+  React.useEffect(() => {
+    setIsIframeLoaded(false);
+  }, [design?.previewUrl, previewMode]);
 
   if (!design) return null;
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `${design.title} | Rivayat Wedding Invitations`,
+        title: `${design.title} | Nimantran Wedding Invitations`,
         text: `Take a look at this stunning wedding invitation design: ${design.title}`,
         url: window.location.href,
       }).catch(() => {});
@@ -83,16 +89,30 @@ export default function InvitationDetailModal({ design, onClose, onCustomize }) 
             {/* Interactive Live Website Demo Mode */}
             {previewMode === 'live' && design.previewUrl ? (
               <div className="my-2 flex flex-col items-center">
-                <div className="relative w-[280px] sm:w-[310px] h-[480px] bg-[#1a1a1a] rounded-[38px] p-2.5 shadow-2xl border-4 border-charcoal/90 overflow-hidden ring-1 ring-gold/40">
+                <div className="relative w-[280px] sm:w-[315px] h-[520px] sm:h-[550px] bg-[#1a1a1a] rounded-[40px] p-2.5 shadow-2xl border-4 border-charcoal/90 overflow-hidden ring-1 ring-gold/40">
                   {/* Speaker Notch */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-4 bg-charcoal rounded-full z-20 flex items-center justify-center">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#111] mr-2" />
                     <div className="w-1.5 h-1.5 rounded-full bg-[#333]" />
                   </div>
+
+                  {/* Loading Spinner for Iframe */}
+                  {!isIframeLoaded && (
+                    <div className="absolute inset-2.5 z-10 rounded-[28px] bg-[#121012] flex flex-col items-center justify-center text-ivory-100 gap-3">
+                      <div className="w-10 h-10 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
+                      <span className="text-[11px] uppercase tracking-widest text-gold/90 font-serif">
+                        Loading Invitation...
+                      </span>
+                    </div>
+                  )}
+
                   {/* Live Template Iframe */}
                   <iframe
                     src={design.previewUrl}
                     title={design.title}
+                    allow="autoplay; fullscreen; encrypted-media"
+                    loading="eager"
+                    onLoad={() => setIsIframeLoaded(true)}
                     className="w-full h-full rounded-[28px] bg-white border-0 shadow-inner"
                   />
                 </div>
