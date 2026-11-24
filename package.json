@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "pnpm --prefix client dev",
-    "build": "pnpm --prefix client build",
-    "preview": "pnpm --prefix client preview"
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "preview": "npm --prefix client run preview"
   }
 }

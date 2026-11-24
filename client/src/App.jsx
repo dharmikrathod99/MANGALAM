@@ -104,10 +104,10 @@ export default function App() {
           />
 
           {/* 12 Wedding Invitation Collections */}
-          <CollectionsSection
+          {/* <CollectionsSection
             onSelectCollection={handleSelectCollection}
             onOpenEnquiry={(title) => handleOpenEnquiry(title)}
-          />
+          /> */}
 
           {/* Featured Invitation Designs & Filterable Gallery */}
           <FeaturedGallerySection

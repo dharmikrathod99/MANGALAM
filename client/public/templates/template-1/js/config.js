@@ -1,0 +1,2 @@
+﻿(function(){window['WEDDING']={'weddingDate':new Date('2026-11-25T00:00:00'),'mapsLink':'https://www.google.com/maps/search/?api=1&query=The+Taj+Mahal+Palace,+Apollo+Bunder,+Colaba,+Mumbai','petals':{'scratching':0xc,'revealed':0x18},'music':{'src':'https://media.shubhweds.in/videos/sunehra.mp3','volume':0.55,'fadeMs':0x9c4},'intro':{'burstMs':0x258,'fadeMs':0x4b0,'tailMs':0x258,'maxMs':0x7530,'skipAfterMs':0x9c4,'stalledMs':0x2ee0,'errorMs':0x320}};
+})();

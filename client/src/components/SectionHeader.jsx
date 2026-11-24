@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sparkles } from './icons';
-import AnimatedContent from './AnimatedContent';
+import TechText from './TechText';
 
 export default function SectionHeader({
   badge = 'Bespoke Atelier',
@@ -11,27 +11,40 @@ export default function SectionHeader({
   showDivider = true
 }) {
   return (
-    <AnimatedContent
-      distance={45}
-      direction="vertical"
-      duration={0.8}
-      ease="power3.out"
-      threshold={0.12}
-      className={`text-center max-w-3xl mx-auto mb-14 sm:mb-16 relative z-10 ${className}`.trim()}
-    >
+    <div className={`text-center max-w-3xl mx-auto mb-10 relative z-10 ${className}`.trim()}>
       {/* 1. Pill Badge */}
       {badge && (
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 backdrop-blur-sm border border-[#D8B879]/45 text-[#0b0b10] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium mb-3 sm:mb-4 shadow-xs">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 backdrop-blur-sm border border-[#D8B879]/45 text-[#0b0b10] text-[11px] sm:text-xs uppercase tracking-[0.22em] font-medium shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#D8B879]" />
           <span>{badge}</span>
         </div>
       )}
 
-      {/* 2. Editorial Serif Heading (Matching User's Reference Style Exactly) */}
+      {/* 2. Interactive TechText Heading */}
       {title && (
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#0b0b10] font-normal tracking-tight leading-tight px-2 my-2 sm:my-3">
-          {title}
-        </h2>
+        <div className="w-full h-16 sm:h-20 md:h-24 relative flex items-center justify-center my-1">
+          <TechText
+            text={title}
+            fontFamily="'Playfair Display', 'Cormorant Garamond', Georgia, serif"
+            fontWeight={500}
+            fontSize={fontSize}
+            color="#0b0b10"
+            accentColor="#D8B879"
+            reveal="letter"
+            dashLength={3}
+            dashGap={2}
+            strokeWidth={1.5}
+            specks={14}
+            clickKick={true}
+            draggable={true}
+            bounce={0.4}
+            guides={false}
+            sweep={true}
+            speed={0.8}
+          />
+          {/* Accessible semantic heading for SEO and screen readers */}
+          <h2 className="sr-only">{title}</h2>
+        </div>
       )}
 
       {/* 3. Subtitle Description */}
@@ -45,7 +58,7 @@ export default function SectionHeader({
       {showDivider && (
         <div className="w-16 h-0.5 bg-[#D8B879]/60 mx-auto mt-5 sm:mt-6 rounded-full" />
       )}
-    </AnimatedContent>
+    </div>
   );
 }
 

@@ -1,0 +1,2662 @@
+/* ==========================================================================
+   Template 4 — Fairytale Shaadi
+
+   1. Colours, fonts, base        5. Our events (a book per event)
+   2. Opening film                6. Gallery
+   3. The invitation arch         7. RSVP
+   4. Section headings            8. Counting down to forever
+                                  9. Petals and scroll reveals
+   ========================================================================== */
+
+
+/* 1. Colours, fonts, base ------------------------------------------------- */
+
+:root {
+  --ink: #4E2A22;            /* body text — deep cocoa */
+  --ink-soft: #7A4E3F;
+  --rose: #A3304F;           /* the couple's names */
+  --gold: #A8761E;
+  --gold-light: #D9AE57;
+  --line: rgba(168, 118, 30, .42);
+  --card: rgba(255, 249, 242, .6);
+  --pill: rgba(236, 210, 188, .5);    /* Skip, Scroll and the music button: */
+  --pill-ink: #8E2541;               /* a soft blush glass, not bright cream */
+  --pill-solid: rgba(236, 210, 188, .8);    /* the same, unblurred: Scroll and the
+                                            music button go without the blur behind
+                                            them, which costs a phone on every frame
+                                            of a scroll */
+
+  --script: "Great Vibes", cursive;
+  --display: "Cinzel", Georgia, serif;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  color: var(--ink);
+  font: 500 1.15rem/1.55 var(--serif);
+  background: #F6E2CD;
+}
+
+/* The handmade paper behind the whole site. It is a fixed layer of its own
+   rather than background-attachment: fixed, which iOS ignores. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("../images/paper.webp") center / cover;
+}
+
+.sprite { position: absolute; }
+
+.amp { color: var(--gold); }
+
+
+/* 2. Opening film --------------------------------------------------------- */
+
+.intro {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* Wide screens see the film standing in the middle; this blurred copy of
+   its first frame fills the space either side. */
+.intro__backdrop {
+  position: absolute;
+  inset: -60px;
+  background: url("../images/intro-poster.webp") center / cover;
+  filter: blur(40px) saturate(1.1) brightness(.95);
+}
+
+/* The film keeps its own 9:16 shape at full screen height. On a tall phone
+   that crops a sliver off each side; on a laptop or tablet it stands in the
+   middle (a shorter phone screen is covered, below). Its bottom edge melts
+   into the paper below. */
+.film {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  transform: translateX(-50%);
+  overflow: hidden;
+  container-type: inline-size;
+  box-shadow: 0 0 80px rgba(78, 42, 34, .35);
+}
+
+/* When the film ends it slowly zooms in on the banner (its centre is 50%
+   across, 14.5% down), so the names read large and clear. */
+.film__zoom {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 14.5%;
+  transition: transform 3s cubic-bezier(.22, .61, .36, 1);
+}
+
+.intro.is-ended .film__zoom { transform: scale(1.22); }
+
+.intro__backdrop,
+.film {
+  -webkit-mask-image: linear-gradient(#000 86%, transparent);
+  mask-image: linear-gradient(#000 86%, transparent);
+}
+
+/* A phone held upright (anything up to 0.72 wide to 1 tall) is filled
+   edge to edge instead, even when its browser's bars leave a screen wider
+   than the film: the film stays 9:16 but is made large enough to cover
+   the screen, its top at the top, so whatever is left over comes off its
+   foot (the banner and the names are near its top). Its melt into the
+   paper is then measured from the foot of the screen, not of the film. */
+@media (max-aspect-ratio: 18 / 25) {
+  .film {
+    width: max(100%, 100vh * 9 / 16);
+    width: max(100%, 100svh * 9 / 16);
+    height: auto;
+    -webkit-mask-image: linear-gradient(#000 86vh, transparent 100vh);
+    -webkit-mask-image: linear-gradient(#000 86svh, transparent 100svh);
+    mask-image: linear-gradient(#000 86vh, transparent 100vh);
+    mask-image: linear-gradient(#000 86svh, transparent 100svh);
+  }
+}
+
+.film__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Skip rests on a still of the film's last frame, laid exactly over the
+   video (main.js). */
+.film__end {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The names, written onto the empty banner the doves carry in. The box is
+   the banner's inside, measured off the film's last frame. */
+.film__names {
+  position: absolute;
+  top: 10%;
+  left: 22%;
+  right: 21%;
+  height: 9%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 400;
+  opacity: 0;
+  filter: blur(8px);
+  transform: scale(.94);
+  transition: opacity 1.6s ease, filter 1.6s ease, transform 1.6s ease;
+}
+
+/* The banner is wide and short, so both names share one line with a small
+   gold "&" between them, each name kept whole. */
+.film__couple {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font: 400 7.2cqw/1 var(--script);
+  color: var(--rose);
+}
+
+.film__name {
+  white-space: nowrap;
+  padding: 0 .1em;
+}
+
+.film__couple .amp {
+  margin: 0 .3em;
+  font-size: .6em;
+  line-height: 1;
+}
+
+/* "Tap to open": a rose pill with a gold edge and a gold hairline just
+   inside it, a gold diamond either side of the words (as in the flourish
+   under every heading). It sits on the cover's lower panel, clear of the
+   bow's tassels. It rises in once the book is on screen; then a gold ring
+   ripples out from it and a band of light crosses it now and then. */
+.film__play {
+  position: absolute;
+  top: 61%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.1em 1.8em;
+  border: 1px solid rgba(240, 210, 140, .95);
+  border-radius: 999px;
+  outline: 1px solid rgba(255, 228, 175, .55);
+  outline-offset: -5px;
+  font: 600 .78rem/1 var(--display);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #FFF8EC;
+  text-shadow: 0 1px 2px rgba(78, 20, 34, .4);
+  background:
+    linear-gradient(105deg, transparent 42%, rgba(255, 238, 205, .5) 50%, transparent 58%) 100% 0 / 300% 100% no-repeat,
+    linear-gradient(135deg, #C24D6C, #8E2541);
+  box-shadow: 0 12px 30px -6px rgba(78, 20, 34, .55), 0 0 0 4px rgba(255, 240, 220, .22);
+  cursor: pointer;
+  transition: opacity .6s ease, visibility .6s;
+  animation:
+    play-in .9s cubic-bezier(.22, .61, .36, 1) .3s backwards,
+    play-shine 4s ease-in-out 1.6s infinite;
+}
+
+/* The words between two diamonds; the last letter's spacing is taken back
+   so the words sit in the middle. */
+.film__play span {
+  display: flex;
+  align-items: center;
+  gap: .85em;
+}
+
+.film__play span::before,
+.film__play span::after {
+  content: "";
+  flex: none;
+  width: .42em;
+  height: .42em;
+  background: linear-gradient(135deg, #FBE3A6, #D9AE57);
+  rotate: 45deg;
+}
+
+.film__play span::after { margin-left: -.26em; }
+
+/* the ring that ripples out */
+.film__play::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(240, 210, 140, .9);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: play-ripple 2.6s ease-out 1.2s infinite backwards;
+}
+
+.film__play:focus-visible {
+  outline: 2px solid #FFF8EC;
+  outline-offset: 4px;
+}
+
+/* the whole closed book is tappable until it opens */
+.intro:not(.is-open) .film { cursor: pointer; }
+
+/* Once faded out it is hidden too, so its glow stops being repainted over
+   the playing film. */
+.intro.is-open .film__play {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Skip, as on template-2's envelope: straight to the names, page unlocked. */
+.film__skip {
+  position: absolute;
+  right: 1.25rem;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  padding: .55rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 600 .62rem var(--display);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--pill-ink);
+  background: var(--pill);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(78, 42, 34, .14);
+  cursor: pointer;
+  transition: opacity .6s ease;
+}
+
+.intro.is-ended .film__skip {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .6s ease, visibility .6s;
+}
+
+/* The scroll cue: the word over two chevrons that run downward in turn,
+   on the same blush glass as Skip, with the gold hairline of "Tap to
+   open". It rises
+   into place once the page can scroll, then floats gently. */
+.scroll-cue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  margin-inline: auto;
+  padding: 11px 24px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  outline: 1px solid rgba(217, 174, 87, .35);
+  outline-offset: -5px;
+  font: 600 .7rem/1 var(--display);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--pill-ink);
+  background: var(--pill-solid);
+  box-shadow: 0 6px 18px rgba(78, 42, 34, .16);
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 16px;
+  transition: opacity 1s ease .8s, translate 1s cubic-bezier(.22, .61, .36, 1) .8s;
+}
+
+/* letter-spacing leaves a space after the last letter; the same space
+   before the first keeps the word in the middle */
+.scroll-cue span { padding-left: .32em; }
+
+.scroll-cue i {
+  position: relative;
+  width: 10px;
+  height: 13px;
+}
+
+.scroll-cue i::before,
+.scroll-cue i::after {
+  content: "";
+  position: absolute;
+  left: 1.5px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  rotate: 45deg;
+  animation: cue-chevron 1.6s ease-in-out infinite;
+}
+
+.scroll-cue i::before { top: -2px; }
+.scroll-cue i::after { top: 3px; animation-delay: .2s; }
+
+.intro.is-named .film__names {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+/* the scroll cue only once the page can actually scroll */
+.intro.is-ended .scroll-cue {
+  opacity: 1;
+  pointer-events: auto;
+  translate: none;
+  animation: cue-float 2.8s ease-in-out 1.8s infinite alternate;
+}
+
+.scroll-cue:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+/* The music toggle, as on template-2: fixed bottom-right for the rest of
+   the visit, shown once the film is over (Skip sits there until then).
+   Under the lightbox (z-index 50), so a full-screen photo still covers it. */
+.music-toggle {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--pill-ink);
+  background: var(--pill-solid);
+  box-shadow: 0 4px 14px rgba(78, 42, 34, .14);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease, transform .2s ease;
+}
+
+.music-toggle.is-shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.music-toggle:active { transform: scale(.94); }
+
+.music-toggle svg {
+  grid-area: 1 / 1;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music-toggle__slash {
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.music-toggle.is-muted { color: var(--ink-soft); }
+.music-toggle.is-muted .music-toggle__slash { opacity: 1; }
+
+/* a slow ring while the song is actually playing */
+.music-toggle__ring {
+  position: absolute;
+  inset: -7px;
+  border: 1px solid var(--gold-light);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .music-toggle:not(.is-muted) .music-toggle__ring { animation: music-pulse 2.6s ease-out infinite; }
+}
+
+@keyframes music-pulse {
+  0% { scale: .85; opacity: .6; }
+  100% { scale: 1.3; opacity: 0; }
+}
+
+@media (min-width: 640px) {
+  .music-toggle { right: 1.75rem; bottom: 1.75rem; }
+}
+
+
+/* 3. The invitation arch -------------------------------------------------- */
+
+/* Three layers, as in template-2's invitation: the painted fields behind,
+   the arch, and the jhumars in front. clip, not hidden, so the painting can
+   stay sticky. */
+.invitation {
+  position: relative;
+  overflow: clip;
+  padding: clamp(60px, 11vw, 96px) 6px clamp(48px, 8vw, 96px);
+  container-type: inline-size;
+}
+
+/* The painting stays put while the arch scrolls over it, so the mustard
+   fields and the Gurdwara keep to the foot of the screen; the section's top
+   and bottom melt into the paper. Its own sky is the same handmade paper. */
+.invitation__bg {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 90%, transparent);
+  mask-image: linear-gradient(transparent, #000 8%, #000 90%, transparent);
+}
+
+.invitation__bg img {
+  position: sticky;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+
+/* The arch and its jhumars share one box, so --u — one pixel of the arch's
+   source image — places both. */
+.invitation__stage {
+  --w: min(100cqw, 560px);
+  --u: calc(var(--w) / 941);
+
+  position: relative;
+  width: var(--w);
+  margin-inline: auto;
+}
+
+/* The ivory arch is one picture (941 × 1670), cut into nine pieces by
+   border-image. The dome (top 736px) and the base (bottom 830px) keep their
+   shape; the 104px band between them — one red flower and one gold dot down
+   each side — repeats as often as the text inside needs. Every measurement
+   below can be read straight off invite-frame.webp. */
+.arch {
+  position: relative;
+  z-index: 1;
+  padding: 0 calc(50 * var(--u));
+  border: solid transparent;
+  border-width: calc(736 * var(--u)) calc(105 * var(--u)) calc(830 * var(--u));
+  border-image: url("../images/invite-frame.webp") 736 105 830 fill stretch round;
+  text-align: center;
+  text-wrap: balance;
+  filter: drop-shadow(0 24px 40px rgba(78, 42, 34, .2));
+}
+
+/* ੴ starts in the top lobe of the dome (y = 190, after its 60px of padding)
+   rather than below it, and the map button sits down in the base (ending at
+   y = 1490). */
+.arch > :first-child { margin-top: calc(-606 * var(--u)); }
+.arch > :last-child { margin-bottom: calc(-650 * var(--u)); }
+
+/* The jhumars hang in front of the arch's shoulders on chains that run off
+   the top of the section. The dome of each is exactly half-way down its
+   image, so `top` is where the dome hangs; the chain fills the rest. Each
+   sways to its own rhythm, pivoting from far up the chain. */
+.jhumar {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+  translate: -50% -50%;
+  transform-origin: 50% 0;
+  pointer-events: none;
+  animation: jhumar-sway var(--t) ease-in-out var(--d) infinite alternate;
+}
+
+/* Hung high and a little out, so their tassels end beside the dome and
+   never cross the words below it. */
+.jhumar--1 { left: calc(80 * var(--u)); top: calc(-20 * var(--u)); width: calc(180 * var(--u)); --t: 2.6s; --d: -1s; }
+.jhumar--2 { left: calc(690 * var(--u)); top: calc(-40 * var(--u)); width: calc(120 * var(--u)); --t: 2.1s; --d: -.4s; }
+.jhumar--3 { left: calc(865 * var(--u)); top: calc(50 * var(--u)); width: calc(180 * var(--u)); --t: 2.9s; --d: -2s; }
+
+/* The words, top to bottom, as on a printed Hindu wedding card. Sizes are in
+   --u so they keep to the arch, with a floor in px so a phone still reads
+   them comfortably. */
+/* The gold is a gradient clipped to the letters, and a background only
+   paints inside the box: श्री's loop rises above its line, so the padding
+   lifts the box over it, or the loop comes out blank. It also sets the line
+   clear of the dome. */
+.invocation {
+  margin: 0;
+  padding-top: calc(110 * var(--u));
+  font: 400 max(22px, calc(50 * var(--u)))/1.5 var(--deva);
+  color: var(--gold);
+  background: linear-gradient(#E6BD62, #A26E19);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(217, 174, 87, .55));
+}
+
+/* Starts where the dome has opened out to full width (y = 345). Each line is
+   its own block, so on a narrow screen a line wraps within itself. */
+.shloka {
+  margin: calc(40 * var(--u)) 0 0;
+  font: 400 max(14px, calc(31 * var(--u)))/1.75 var(--deva);
+  color: var(--ink);
+}
+
+.shloka span { display: block; }
+
+.blessing {
+  margin: calc(34 * var(--u)) 0 0;
+  font: italic 400 max(17px, calc(38 * var(--u)))/1.3 var(--serif);
+  color: var(--ink);
+}
+
+.kicker {
+  margin: calc(14 * var(--u)) 0 0;
+  font: 500 max(16px, calc(33 * var(--u)))/1.4 var(--serif);
+  color: var(--ink-soft);
+}
+
+.lotus {
+  display: block;
+  width: max(60px, calc(124 * var(--u)));
+  height: auto;
+  margin: calc(40 * var(--u)) auto;
+}
+
+.couple {
+  margin: 0;
+  font-weight: 400;
+}
+
+.person { display: block; }
+
+.person__name {
+  display: block;
+  font: 500 max(32px, calc(84 * var(--u)))/1.1 var(--display);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.person__parents {
+  display: block;
+  margin-top: calc(8 * var(--u));
+  font: italic 400 max(15px, calc(34 * var(--u)))/1.35 var(--serif);
+  color: var(--ink-soft);
+}
+
+.couple__and {
+  display: block;
+  margin: calc(16 * var(--u)) 0;
+  font: italic 400 max(28px, calc(62 * var(--u)))/1 var(--serif);
+  color: var(--gold);
+}
+
+.details__date {
+  margin: 0;
+  font: 600 max(14px, calc(32 * var(--u)))/1.4 var(--display);
+  letter-spacing: .08em;
+  color: var(--rose);
+}
+
+.details__date sup {
+  font-size: .6em;
+  line-height: 0;
+  letter-spacing: .04em;
+}
+
+.details__ceremony {
+  margin: calc(8 * var(--u)) 0 0;
+  font: 600 max(12px, calc(26 * var(--u)))/1.3 var(--display);
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.details__venue {
+  margin: calc(8 * var(--u)) 0 0;
+  font: italic 400 max(16px, calc(35 * var(--u)))/1.35 var(--serif);
+  color: var(--ink-soft);
+}
+
+/* A small pill that opens the venue in Google Maps, dressed like the
+   Scroll and Skip pills. */
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  margin-top: calc(22 * var(--u));
+  padding: .55em 1.2em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font: 600 max(10.5px, calc(21 * var(--u)))/1 var(--display);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--rose);
+  background: rgba(255, 247, 238, .9);
+  transition: background .25s ease, color .25s ease;
+}
+
+.map-link:hover,
+.map-link:focus-visible {
+  color: #fff;
+  background: var(--rose);
+}
+
+.map-link svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* 4. Section headings ----------------------------------------------------- */
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 110px) 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 .5rem;
+  font: 600 .74rem var(--display);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.title {
+  margin: 0;
+  font: 400 clamp(2.8rem, 8vw, 4.2rem)/1.1 var(--script);
+  color: var(--rose);
+}
+
+.section > .flourish {
+  display: block;
+  width: 160px;
+  height: 16px;
+  margin: 14px auto 40px;
+  color: var(--gold);
+}
+
+
+/* 5. Our events: a storybook per event ------------------------------------ */
+
+/* Every book is 88% of a phone's width and 420px on a wider screen. It
+   starts 1.62 times as tall as it is wide (--h), never taller than the
+   screen, and grows with its page if the page has more to say. Odd chapters are hinged on the
+   left (--dir: 1), even ones on the right (--dir: -1). main.js writes --k,
+   how far a cover has opened (0 → 1). Wide enough for the open spread
+   (--spread: 1), the book slides over so the spread is centred; on a phone
+   the page stays centred and the cover swings off the side. */
+.tale {
+  --maroon: #7A1F2B;
+  --book-gold: #A67C2E;
+  --brown: #4A3426;
+  --cream: #F8E4C8;          /* the paper's own tone (paper.webp averages #FAE3C4) */
+  --w: min(88vw, 420px, calc((100svh - 96px) / 1.62));
+  --h: calc(var(--w) * 1.62);
+  --spread: 0;
+
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  padding: clamp(72px, 11vw, 128px) 0;
+  /* A faint warm glaze, so the handmade paper still shows through as it
+     does on the rest of the page, melting in over 140px at either end. */
+  background: linear-gradient(rgba(250, 230, 204, 0), rgba(250, 230, 204, .35) 140px, rgba(250, 230, 204, .35) calc(100% - 140px), rgba(250, 230, 204, 0));
+}
+
+@media (min-width: 900px) {
+  .tale { --spread: 1; }
+}
+
+/* Everything here is built by main.js. */
+html:not(.js) .tale { display: none; }
+
+/* A faint watercolour wash of blush, peach, mustard and sage. */
+.tale::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 18% at 12% 14%, rgba(244, 168, 176, .16), transparent 70%),
+    radial-gradient(36% 16% at 88% 34%, rgba(246, 196, 150, .18), transparent 70%),
+    radial-gradient(38% 16% at 10% 58%, rgba(232, 200, 110, .13), transparent 70%),
+    radial-gradient(40% 18% at 90% 80%, rgba(170, 190, 150, .14), transparent 70%);
+  -webkit-mask-image: linear-gradient(transparent, #000 140px, #000 calc(100% - 140px), transparent);
+  mask-image: linear-gradient(transparent, #000 140px, #000 calc(100% - 140px), transparent);
+}
+
+/* Petals drifting slowly down behind the books. main.js moves the whole
+   layer a little against the scroll (--parallax), so they seem further
+   away than the books. */
+.tale__drift {
+  position: absolute;
+  inset: -12% 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: translate;   /* main.js moves it with the scroll */
+}
+
+.tale__drift i {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: 12px;
+  height: 15px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #F4A3B0, #D4526B);
+  opacity: 0;
+  animation: drift var(--t) ease-in-out var(--d) infinite;
+}
+
+.tale__drift i:nth-child(3n) {
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(135deg, #FFC864, #EC8A1C);
+}
+
+.tale__drift i:nth-child(1)  { --x: 6%;  --y: 4%;  --t: 19s; --d: -2s; }
+.tale__drift i:nth-child(2)  { --x: 88%; --y: 11%; --t: 23s; --d: -9s; }
+.tale__drift i:nth-child(3)  { --x: 15%; --y: 24%; --t: 17s; --d: -5s; }
+.tale__drift i:nth-child(4)  { --x: 79%; --y: 33%; --t: 21s; --d: -14s; }
+.tale__drift i:nth-child(5)  { --x: 4%;  --y: 45%; --t: 25s; --d: -7s; }
+.tale__drift i:nth-child(6)  { --x: 93%; --y: 52%; --t: 18s; --d: -11s; }
+.tale__drift i:nth-child(7)  { --x: 12%; --y: 66%; --t: 22s; --d: -3s; }
+.tale__drift i:nth-child(8)  { --x: 84%; --y: 74%; --t: 20s; --d: -16s; }
+.tale__drift i:nth-child(9)  { --x: 8%;  --y: 86%; --t: 24s; --d: -12s; }
+.tale__drift i:nth-child(10) { --x: 90%; --y: 93%; --t: 19s; --d: -6s; }
+
+@keyframes drift {
+  0%   { transform: translate(0, -40px) rotate(0deg); opacity: 0; }
+  20%  { opacity: .4; }
+  50%  { transform: translate(22px, 60px) rotate(160deg); }
+  80%  { opacity: .4; }
+  100% { transform: translate(-10px, 160px) rotate(320deg); opacity: 0; }
+}
+
+.tale__story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The heading, and the intro and outro pictures on cards of page paper,
+   their edges melting into it. */
+.tale__head {
+  margin: 0 20px clamp(28px, 5vw, 44px);
+  text-align: center;
+}
+
+.tale__initials {
+  margin: 0 0 .2rem;
+  font: 400 clamp(1.6rem, 6vw, 2.1rem)/1 var(--script);
+  color: var(--book-gold);
+}
+
+.tale__title {
+  margin: 0;
+  font: 400 clamp(2.8rem, 9vw, 4.2rem)/1.1 var(--script);
+  color: var(--book-gold);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+}
+
+.tale__subtitle {
+  margin: .3rem 0 0;
+  font: italic 400 clamp(1.1rem, 4vw, 1.35rem)/1.3 var(--serif);
+  color: var(--brown);
+}
+
+.tale__card {
+  width: var(--w);
+  margin: 0;
+  padding: 4% 4% 0;
+  border-radius: 4px;
+  background: #F8EAD3 center / 100% 100%;
+  box-shadow: 0 1px 0 #E2C47F, 0 22px 40px -24px rgba(78, 42, 34, .55);
+}
+
+.tale.is-near .tale__card { background-image: url("../images/book-page.webp"); }
+
+.tale__card img:not(.ornament) {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 46%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 70% at 50% 46%, #000 62%, transparent 100%);
+}
+
+/* The intro picture is the couple over a page of blank paper: show the
+   couple. */
+.tale__card--intro img:not(.ornament) {
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.tale__card figcaption {
+  margin: 0;
+  padding: 2% 6% 9%;
+  text-align: center;
+  font: 400 max(30px, calc(var(--w) * .085))/1.15 var(--script);
+  color: var(--maroon);
+}
+
+.tale__card--intro { padding-bottom: 4%; }
+
+/* The vine between one book and the next: a faint dotted guide, and the
+   gold vine drawn down it as the guest scrolls (main.js writes --draw,
+   0 → 1). Its leaves open as the vine reaches them, and the chapter's
+   medallion lights up when it arrives. */
+.tale__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tale__vine {
+  display: block;
+  width: 40px;
+  height: clamp(96px, 16svh, 150px);
+  overflow: visible;
+  color: var(--book-gold);
+}
+
+.tale__vine-guide {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 0 7;
+  opacity: .45;
+}
+
+.tale__vine-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;     /* main.js draws it down to 0 */
+}
+
+.tale__vine-leaf {
+  fill: currentColor;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  transform: scale(.3);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.tale__vine-leaf.is-on {
+  opacity: .8;
+  transform: none;
+}
+
+.tale__medal {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 6px 0 clamp(20px, 4svh, 36px);
+  border-radius: 50%;
+  font: 600 1.05rem/1 var(--display);
+  color: #FFF8EC;
+  background: radial-gradient(circle at 35% 30%, #E9C779, #A67C2E 70%);
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 4px rgba(166, 124, 46, .6), 0 8px 18px -8px rgba(122, 31, 43, .55);
+  opacity: 0;
+  transform: scale(.6);
+  transition: opacity .5s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.tale__medal.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+/* A book. Its slot is about a screen tall on a phone, so one book opens at
+   a time. */
+.ebook {
+  --dir: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: clamp(8px, 3svh, 24px);
+}
+
+.ebook--right { --dir: -1; }
+
+.ebook__book {
+  position: relative;
+  width: var(--w);
+  perspective: 1800px;
+}
+
+/* The soft shadow on the floor: under the book, then under both boards of
+   the open spread. */
+.ebook__floor {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: calc(var(--h) * -.06);
+  height: calc(var(--h) * .12);
+  background: radial-gradient(closest-side, rgba(78, 42, 34, .32), rgba(78, 42, 34, 0));
+  transform-origin: calc(50% + var(--dir) * 50%) 50%;
+}
+
+/* The pages, with their gold-edged thickness and the back board showing
+   along the open side and the foot. The page sets the book's height; the
+   cover is drawn to match. */
+.ebook__block {
+  position: relative;
+  border-radius: 0 6px 6px 0;
+  box-shadow:
+    calc(var(--dir) * 1px) 1px 0 #FFF8EC,
+    calc(var(--dir) * 2px) 2px 0 #E2C47F,
+    calc(var(--dir) * 3px) 3px 0 #FFF8EC,
+    calc(var(--dir) * 4px) 4px 0 #D6AE5E,
+    calc(var(--dir) * 5px) 5px 0 #FFF8EC,
+    calc(var(--dir) * 6px) 6px 0 #C99A4C,
+    calc(var(--dir) * 8px) 8px 0 #D68D86,
+    0 26px 40px -22px rgba(78, 42, 34, .5);
+}
+
+.ebook--right .ebook__block,
+.ebook--right .ebook__block .page { border-radius: 6px 0 0 6px; }
+
+.ebook__block .page {
+  position: relative;
+  min-height: var(--h);
+  border-radius: 0 6px 6px 0;
+}
+
+/* The cover board, hinged at the spine: book-cover.webp in front, the lining
+   behind. main.js turns it. */
+.ebook__cover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transform-origin: 0 50%;
+  transform-style: preserve-3d;
+}
+
+.ebook--right .ebook__cover { transform-origin: 100% 50%; }
+
+.ebook__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0 6px 6px 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.ebook__face--back {
+  border-radius: 6px 0 0 6px;
+  transform: rotateY(180deg);
+}
+
+.ebook--right .ebook__face { border-radius: 6px 0 0 6px; }
+.ebook--right .ebook__face--back { border-radius: 0 6px 6px 0; }
+
+/* The cover picture, as tall as the page. border-image keeps its top
+   (624px of the 881 × 1122 book-cover.webp) and its foot (434px) at their own
+   shape, and repeats the 64px band between them: a little more vine down
+   each side and a little more arch, which joins without a seam. A
+   hinged-on-the-right book shows it mirrored, so its spine side is on the
+   right; the words on it are not mirrored. */
+.ebook__art {
+  position: absolute;
+  inset: 0;
+  border: solid transparent;
+  border-width: calc(var(--w) * 624 / 881) 0 calc(var(--w) * 434 / 881);
+  background: #E9A598;
+}
+
+.ebook--right .ebook__art { transform: scaleX(-1); }
+
+.ebook__lining {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  container-type: inline-size;
+  background: #EBAFA2 center / 100% 100%;
+}
+
+/* Nothing in a book loads until it is a screen away (.is-near). */
+.ebook.is-near .ebook__art { border-image: url("../images/book-cover.webp") 624 0 434 fill stretch round; }
+.ebook.is-near .ebook__lining { background-image: url("../images/book-lining.webp"); }
+.ebook.is-near .page { background-image: url("../images/book-page.webp"); }
+
+/* The chapter and the event, written into the empty arch on the cover. It
+   spans 20–80% across; its top is fixed below the cover's head and its
+   foot above the cover's foot, so the box is placed in book widths. */
+.ebook__title {
+  position: absolute;
+  top: calc(var(--w) * .33);
+  bottom: calc(var(--w) * .395);
+  left: 23%;
+  right: 23%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  container-type: inline-size;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ebook__title-chapter {
+  margin: 0;
+  font: 600 max(10px, 7cqi)/1.3 var(--display);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--book-gold);
+}
+
+.ebook__title-name {
+  margin: .15em 0 0;
+  font: 400 max(26px, 19cqi)/1.05 var(--script);
+  color: var(--book-gold);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .6), 0 0 14px rgba(255, 246, 230, .9);
+}
+
+/* Light across the turning cover: the shade darkens toward the spine as
+   the front lifts away and as the inside lands (main.js sets its
+   opacity), and a band of light, three faces wide, slides across it
+   (main.js moves it with a transform). Opacity and transform, so the
+   graphics card does it all without repainting the cover. */
+.ebook__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(74, 52, 38, .6), rgba(74, 52, 38, .12) 60%, rgba(74, 52, 38, .04));
+  opacity: 0;
+}
+
+.ebook__shine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300%;
+  background: linear-gradient(100deg, transparent 38%, rgba(255, 250, 240, .45) 50%, transparent 62%);
+}
+
+.ebook__face--back .ebook__shade { background-image: linear-gradient(to left, rgba(74, 52, 38, .6), rgba(74, 52, 38, .12) 60%, rgba(74, 52, 38, .04)); }
+.ebook__face--back .ebook__shine { background-image: linear-gradient(260deg, transparent 38%, rgba(255, 250, 240, .45) 50%, transparent 62%); }
+
+.ebook--right .ebook__shade { scale: -1 1; }
+
+/* Petals that fall over a book as it finishes opening (main.js). */
+.ebook__petals {
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  width: calc(var(--w) * (1 + var(--spread)));
+  height: 116%;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+/* A page. The text scales with the page (cqi), never below what a phone
+   reads comfortably. */
+.page {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+  background: #F8EAD3 center / 100% 100%;
+}
+
+/* The gutter, where the page curves into the spine. */
+.page--right::before,
+.page--left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 16%;
+  pointer-events: none;
+}
+
+.page--right::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(110, 72, 42, .3), rgba(110, 72, 42, 0));
+}
+
+.page--left::before {
+  right: 0;
+  background: linear-gradient(to left, rgba(110, 72, 42, .3), rgba(110, 72, 42, 0));
+}
+
+/* An event: its picture in the top half, edges melting into the paper,
+   and the details below. */
+.page--event {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The picture takes the top 55% of the page and the words the other 45%.
+   More words make the page taller; the picture keeps its size. */
+.page__art {
+  flex: none;
+  height: calc(var(--h) * .55 - var(--w) * .05);
+  margin: calc(var(--w) * .05) 6% 0;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 40%, #000 60%, transparent 100%);
+}
+
+.page__art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.page__text {
+  flex: 1;
+  min-height: calc(var(--h) * .45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3% 9% 8%;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.page__text > * { flex-shrink: 0; }
+
+.page__name {
+  margin: 0;
+  font: 400 max(32px, 10.5cqi)/1.1 var(--script);
+  color: var(--maroon);
+}
+
+.page__rule {
+  display: block;
+  width: max(110px, 30cqi);
+  height: max(11px, 3cqi);
+  margin: 1.5cqi 0 2.5cqi;
+  color: var(--book-gold);
+}
+
+.page__when {
+  margin: 0;
+  font: 600 max(15px, 3.5cqi)/1.35 var(--display);
+  letter-spacing: .06em;
+  color: var(--book-gold);
+}
+
+.page__venue {
+  margin: .25em 0 0;
+  font: italic 400 max(15px, 4cqi)/1.3 var(--serif);
+  color: var(--brown);
+}
+
+.page__note {
+  margin: .2em 0 0;
+  font: 500 max(15px, 3.5cqi)/1.3 var(--serif);
+  color: rgba(74, 52, 38, .78);
+}
+
+.page__map {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  margin-top: max(10px, 3cqi);
+  padding: .6em 1.2em;
+  border: 1px solid rgba(166, 124, 46, .65);
+  border-radius: 999px;
+  font: 600 max(10.5px, 2.4cqi)/1 var(--display);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--maroon);
+  background: rgba(255, 250, 242, .75);
+  transition: background .25s ease, color .25s ease;
+}
+
+.page__map:hover,
+.page__map:focus-visible {
+  color: #fff;
+  background: var(--maroon);
+}
+
+.page__map svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* The inside of each cover: its chapter on an ivory arch, like the empty
+   one on the front. */
+.lining__plate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 62%;
+  aspect-ratio: 3 / 4;
+  padding: 0 6%;
+  border: 1px solid rgba(166, 124, 46, .7);
+  border-radius: 999px 999px 12px 12px;
+  text-align: center;
+  text-wrap: balance;
+  background: rgba(253, 246, 236, .93);
+  box-shadow:
+    inset 0 0 0 5px rgba(253, 246, 236, .93),
+    inset 0 0 0 6px rgba(166, 124, 46, .45),
+    0 10px 30px -12px rgba(122, 31, 43, .35);
+}
+
+.lining__initials {
+  margin: 0;
+  font: 400 13cqi/1 var(--script);
+  white-space: nowrap;
+  color: var(--book-gold);
+}
+
+.lining__plate .page__rule {
+  width: 26cqi;
+  margin: 3cqi 0;
+}
+
+.lining__title {
+  margin: 0;
+  font: 400 max(26px, 9cqi)/1.1 var(--script);
+  color: var(--book-gold);
+}
+
+/* A page's contents arrive once its cover is 70% open (main.js adds
+   .is-shown): the picture settles in, then the lines follow 80ms apart.
+   Closing the cover hides them at once, ready to arrive again. */
+.page__art,
+.page__text > * {
+  opacity: 0;
+  transition: opacity .7s ease, transform .8s cubic-bezier(.22, .61, .36, 1);
+}
+
+.page__art { transform: scale(.96); }
+
+.page__text > * {
+  transform: translateY(10px);
+  transition-delay: calc(.25s + var(--i, 0) * 80ms);
+}
+
+.page.is-shown .page__art,
+.page.is-shown .page__text > * {
+  opacity: 1;
+  transform: none;
+}
+
+.page:not(.is-shown) * { transition: none; }
+
+.book-petal {
+  position: absolute;
+  top: 0;
+  width: 11px;
+  height: 14px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #F7B7C0, #D9667C);
+}
+
+.book-petal--marigold {
+  width: 9px;
+  height: 11px;
+  background: linear-gradient(135deg, #FFD36E, #EE9420);
+}
+
+/* Ornaments round the story (main.js places them): each drifts gently up
+   and down, and those that hang (lanterns, jhumkas) swing from a thread
+   drawn in their top padding. */
+.ornament {
+  position: absolute;
+  z-index: 0;
+  height: auto;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  filter: drop-shadow(0 8px 10px rgba(122, 64, 34, .18));
+  animation: ornament-bob var(--bob, 6s) ease-in-out infinite alternate;
+}
+
+.ornament--flip { scale: -1 1; }
+
+.ornament--hang {
+  --thread: 48px;
+  padding-top: var(--thread);
+  background: linear-gradient(rgba(201, 154, 76, 0), #C99A4C) 50% 0 / 1.5px var(--thread) no-repeat;
+  transform-origin: 50% 0;
+  animation-name: ornament-swing;
+}
+
+.tale__head,
+.tale__card,
+.tale__link { position: relative; }
+
+/* full width, so the heading's lanterns are placed from the page's middle */
+.tale__head { align-self: stretch; }
+
+/* Lanterns hanging over the heading, from the top of the section. */
+.ornament--head-l,
+.ornament--head-r {
+  --thread: clamp(18px, 5vw, 56px);
+  top: calc(-1 * clamp(72px, 11vw, 128px));
+  width: clamp(30px, 7vw, 66px);
+}
+
+.ornament--head-l { left: max(-14px, calc(50% - 340px)); }
+.ornament--head-r { right: max(-14px, calc(50% - 340px)); }
+
+.ornament--intro {
+  left: -7%;
+  bottom: -5%;
+  width: 24%;
+}
+
+/* In the wide margins beside each book, a lantern and a jhumka. */
+.ornament--edge-l,
+.ornament--edge-r { display: none; }
+
+@media (min-width: 1200px) {
+  .ornament--edge-l,
+  .ornament--edge-r {
+    --thread: 110px;
+    display: block;
+    top: 2%;
+    width: 92px;
+  }
+
+  .ornament--edge-l { left: max(24px, calc(50% - 680px)); }
+  .ornament--edge-r { right: max(24px, calc(50% - 680px)); }
+}
+
+.ornament--outro-dove {
+  left: -6%;
+  top: -9%;
+  width: 20%;
+}
+
+.ornament--outro-lotus {
+  left: -7%;
+  bottom: -5%;
+  width: 26%;
+}
+
+.ornament--outro-vase {
+  right: -6%;
+  bottom: -4%;
+  width: 19%;
+}
+
+@keyframes ornament-bob {
+  from { transform: translateY(-5px); }
+  to   { transform: translateY(5px); }
+}
+
+@keyframes ornament-swing {
+  from { transform: rotate(-3deg); }
+  to   { transform: rotate(3deg); }
+}
+
+/* Reduced motion: each event as an open page card, no cover and no 3D,
+   faded in by the scroll reveals. */
+.ebook--flat .ebook__book { transform: none; }
+.ebook--flat .ebook__cover,
+.ebook--flat .ebook__floor { display: none; }
+
+
+/* 6. Gallery -------------------------------------------------------------- */
+
+/* The main photo sits in gallery-frame-rect.webp and each thumbnail in the
+   arched gallery-frame.webp, both 3:4 (1086 × 1448, and 270 × 360 for the
+   64px thumbnails); the main one is 86% of a
+   phone's width, 460px at most. Each photo sits in its frame's window,
+   measured off the picture (top, right, bottom, left), and is cut to the
+   window's shape by a mask: the shapes of the two windows (--mask-window-
+   main, --mask-window) and the watercolour blob a new photo grows from
+   (--mask-bleed). They are written into this file rather than linked,
+   because a browser only applies a mask from another site (the pictures'
+   media.shubhweds.in) if that site allows it, which it does not. Each is
+   a WebP whose transparency is the shape. */
+.gallery {
+  --mask-window: url("data:image/webp;base64,UklGRhwFAABXRUJQVlA4TA8FAAAvQMMfEQ8QEfMfgnJsW5Ek6WMsWCICoiAaiIYoiEDvaDOMv0gPZ3o/vKp68Ij+TwCd2FmTkMxGiChHYrZCZGYnRGH2cgQhKjML0ZhZydCZWYsQmZmNCOmHFSH/cCKUH16E+iOI0H6wCP1CS8CXRoB0ZQXIV06AchUEaFcsQP+g4EX+aOClTxZe+eThtU8Mr9/Q4CLftODyHQeu3gng+h1W0CLfNtDyPQet3mNoPGiA5REHrI4EYH2ENazEwxZWGQuw+hhrUJknOlB1BoPqUzSkxFMtpDLHQ2pzGBJP1oDSLAuozPKA2iwGxNM1nDjPwsnzHJw6L8Bp8xhOX6DARF5owKQVFkxZ4cHUFQFMW8Fg+hKFhZdqKHGNgZLWWCh5jYNS1ngodU2A0tYwlL5IIeHFWg4DJMqRVlkgeZX7xsoqL0cAUuVoq/gb68vUF8bLtRwGRnwgaZ19IA5GfmIeRnliAUZ9YgyjyVCZ9Q6qszutMDP3Df5mZn9W5K31UWUvf1Tfi09KvLk9qO7mD+q7sTom8vbmmLyfO6buF45p+/ExfKA+JJ5gDsknuEPKCf6QegIf0o9QZ/CR+oh4hjkinWGPyGe4I8oZ/oh6RjiincFH9EPUCXyoPiCeYg5Ip9hvJp/iDiin+APqKeGbaafwAf0Y9cXwsVoOs12UI51jv5d8jvteyjn+gYTt6gNp5/D30r8h9fz4YP344ldkfp2lk+xvEbdZ/lOgMLM+rjG7dYV/UjnJU2Vmtsv40p2V+FItKlf811H1yi1ihJ4/qiUZwk27pGIJSxisXpDQ2AUVjV/Q0bCaFhmumZbxuGkVT5jW8fA0BqwnJURmUkbkJlVEflJHxJMYspoSMZkpGZOdUjC5KRWTn9IwhSkdE6sZDFpPSKjMhIzKTiio3ISKyk9oqMKEjoonMGwlhx6KuMxQwmWHMi43VOSouPxQwxXk4KEuBwNXAxGZliohMwMZmZXDDZRH4AcqsjDQHgEP9Geg7rEYEZuWw9xKD8Heyg+kYHMyVWz+gYRb7YF0bPxE1B1+HhGd/pVjbqTfGPZG/vXiJCq/MbxE9U+A8Odc+zcpvsHw1YeMz31o+PgqsoD6IklgL4oE/qJJwBcsoiKiKIMhoiSDJaIsgyOiIoMnoipDIKImAxNRF0IRsZCa4uMwlKSwlB+HoyKFp/o4ArXHwdSfhxKEX/+9/nv99/rv9d/rv9d/r/9e/73+e/33+u/13+u/13+v/17/vcLqfxY0MeiXTpUi/NopUvhfO1kK90iSFPaRRCnMIyEp9ANRRP2BNCFIlPowgixFBi9LlsHJkmSwskQZjCwkgxami6CEaSKQMFWCcFEehb/IEjhpkgRWDnMR5SAJtBzqqsvRBCAxwocqR8HnP2R8Tp6Ez36I+MwHwqflUJ+6HA0efa7oghz+RkHnbmR09kZCZ25EOQidvtPBqTsNHN2t2MKtgs3fytjcrYTN3orYzC3Cpu91aOpeg0b3K7IwUJD5gYzMDSRkdiAiMwPUgamRBoxGK64wVHD5oYzLDkVcZohw6bEGi8YrqjChoPITEio7IaIyE6iDUjMaKJpZMPkpCZOdEjGZKdQhqTkNUaC5BZGbFBGZSdT3afuoWXWbULcJNDvvU7Zx0+I2fh8zjfouLm9D88s2aRe/IO1itzELaBcTd1Er6iZ6F08r0y60iV1CfQ9FfQ9aW5DYRdS3IGpbqFUFh6PldYNAVHegcQA=");
+  --mask-window-main: url("data:image/webp;base64,UklGRigEAABXRUJQVlA4TBwEAAAvLYMVEQ8QEfMfgm5sW3Fta1MYmIRAKIQGmX2FQgiYGBTbEP1fSOe3iuj/BNDmgR0RXcyCoKeWwlaYawaa50pgdtAiM4sKC2S5FplZIWNmljULLDQSM7PAlW+qoWB5buSbhRUrusECVakYolLRoC4ecX+2xMwsJ+SaJeK6muCZmcUmiatqyHPLN9xY5KrY4uKmHkkN18FqJHPdbpFbbPo8t+lquYHCbbXBxb26K3eI0GLdlbjTbZC62HREnsOyo3C3XMeDthG4V8Yelo3C/WZZGGEWt8jdKnWxvF08vCyNzVS5b7ZaVXbQW5hFnnc0ZQe3KGxheUuxJm3xxx5yTd5iU72GcZolHohbEoDwkohErkhI1IqMRK8oSMwKRmoXeChuQYDCCyIWMS9hkYdQ8zIWPa9gMfP4idlpHoybdj0ynhbQiFnxmclZ6ZmpWRmNPltBY87Gz8xO8g/NHe16aPyCAh7xK4p45K8o/TbU32L0nPwPpYLHzGG8dooH5GZ4hjwWGbQaCAxb9BVcpisw8K6ETPUwcttxQeOOhE22Cjbd8IzdNi5w3IjoRC2hU7WCTtcYval4eK5yweNKwCduEZ+8JXzqlvHpW8FnbozfEpE/xHUAR0ThAHwKQRRPIInSe1BE+QSaqLwHQ8QntORfhKPrRTCFNyHiq0hnkK9C5d+LLm/CvAv+vdjPf5//Pv99/vv89/nv89/nv89/n/8+/33++/z3+e/z3+e/z3+f/z7//b8A8/eY8ib0Lyb/VaF+MekM8l3ENyHeRXgTdIrrRbhj+BdhiV6EOUc5gT5HPoE6RzqBPEc8gThHOAERXQdwB/EHsEREBzAnKfj0LeNTt4RPniTiE7eAj+4enqsQPFsr6Ewto9O1hE7VIjpRC+iofoFzDQJnWhmbbiVsshWwiZaH5qgTmulJyGTPhYy6Cy7TF3HJPg/L0GBARcMJkxgjKng0Tc141Jz01OTf3eJvQ/x9J/wVQO/nemjuaP6nYV8QPTRztoJGny0/M3W2hEaeLaIRZwto6GwXGHcIO80fgsCY0xUs+nQZi5qXsMh5EYuYFw5xYaEzuAUeil1AUMyKcoiMRK9ISOSKiESsCEhopd/jjz3cEgJi1uQtzB56TdpCly3UmrhH3kKsubZQWzha67eQaQeziMoWcQe9Ku0gtpCrwhZhB1o+wVAeoTE5wa7LI4aIyPc5uvos3a8RtS4MSKp32QFN9Tgg1lGXo7bv8z2O2r7L0oaxw1Lv1WGIOhz1xh65A7Uc9ec5ootCS9OWoWZo0Lc0UWkYGvQNsQelm6bhNEOMEOWboD+1byiiXDMEOY1JTKEmiVLFEeghhSpWRItgDxhcqRFvEle4UYOANwIzG2SpRyELtYuZCblndjULjUpLYUstge2qeHa0Ow==");
+  --mask-bleed: url("data:image/webp;base64,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");
+  padding-bottom: clamp(32px, 5vw, 64px);
+  --fw: min(86vw, 460px);
+  --window-main: 10.77% 12.52% 12.50% 12.52%;
+  --window: 11.74% 11.79% 8.70% 11.51%;
+  padding-inline: 0;
+}
+
+/* Everything here is built by main.js. */
+html:not(.js) .gallery { display: none; }
+
+.gallery__subtitle {
+  margin: .3rem 0 0;
+  font: italic 400 clamp(1.1rem, 4vw, 1.35rem)/1.3 var(--serif);
+  color: var(--ink-soft);
+}
+
+/* The divider opens out from its middle as the heading arrives. */
+.gallery__divider {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin: 14px auto clamp(30px, 6vw, 48px);
+  clip-path: inset(0 50%);
+  transition: clip-path 1.1s cubic-bezier(.22, .61, .36, 1) .35s;
+}
+
+html:not(.js) .gallery__divider,
+.gallery__head.is-visible .gallery__divider { clip-path: inset(0); }
+
+/* The frame, its arrows either side, and the kalira under it. */
+.gallery__viewer {
+  position: relative;
+  width: var(--fw);
+  margin: 0 auto;
+}
+
+.js .gallery__viewer.reveal { transform: scale(.95); }
+.js .gallery__viewer.reveal.is-visible { transform: none; }
+
+/* Pictures here are never dragged out, so a swipe stays a swipe. */
+.gallery img,
+.lightbox img { -webkit-user-drag: none; }
+
+.gallery__frame {
+  position: relative;
+  aspect-ratio: 1086 / 1448;
+  cursor: zoom-in;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 18px 28px rgba(122, 64, 34, .26));
+}
+
+.gallery__frame:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+.gallery__window,
+.gallery__thumb-window {
+  position: absolute;
+  inset: var(--window);
+  overflow: hidden;
+  background: #EAD9C2;
+  -webkit-mask: var(--mask-window) 0 0 / 100% 100% no-repeat;
+  mask: var(--mask-window) 0 0 / 100% 100% no-repeat;
+}
+
+.gallery__window {
+  inset: var(--window-main);
+  -webkit-mask-image: var(--mask-window-main);
+  mask-image: var(--mask-window-main);
+}
+
+.gallery__art,
+.gallery__thumb-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.gallery__photo,
+.gallery__thumb-window img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* The next photo waits, hidden, until it has loaded; then it bleeds in
+   from the middle like paint soaking into paper, over the one before. */
+.gallery__photo.is-entering { opacity: 0; }
+
+.gallery__photo.is-bleeding {
+  opacity: 1;
+  -webkit-mask: var(--mask-bleed) 50% 50% / 0% auto no-repeat;
+  mask: var(--mask-bleed) 50% 50% / 0% auto no-repeat;
+  animation: gallery-bleed .9s cubic-bezier(.45, 0, .55, 1) forwards;
+}
+
+.gallery__photo.is-fading {
+  opacity: 1;
+  animation: gallery-fade .3s ease forwards;
+}
+
+@keyframes gallery-bleed {
+  from { -webkit-mask-size: 0% auto; mask-size: 0% auto; }
+  to   { -webkit-mask-size: 470% auto; mask-size: 470% auto; }
+}
+
+@keyframes gallery-fade {
+  from { opacity: 0; }
+}
+
+/* The kalira, hung from the medallion at the foot of the frame. It sways
+   a little on its own, and swings properly whenever the photo changes. */
+.gallery__kalira {
+  position: absolute;
+  top: 97.4%;
+  left: 50%;
+  width: 10.5%;
+  margin-left: -5.25%;
+  transform-origin: 50% 0;
+  pointer-events: none;
+  animation: kalira-sway 4.5s ease-in-out infinite alternate;
+}
+
+.gallery__kalira img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 0;
+}
+
+@keyframes kalira-sway {
+  from { transform: rotate(-2deg); }
+  to   { transform: rotate(2deg); }
+}
+
+.gallery__petals {
+  position: absolute;
+  top: -6%;
+  left: -8%;
+  right: -8%;
+  height: 112%;
+  pointer-events: none;
+}
+
+/* Round arrows on either side, over the edge of the frame. */
+.gallery__arrow {
+  position: absolute;
+  top: 52%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-top: -23px;
+  padding: 0;
+  border: 1px solid rgba(168, 118, 30, .6);
+  border-radius: 50%;
+  color: var(--rose);
+  background: #FFF8EE;
+  box-shadow: 0 6px 16px -6px rgba(122, 64, 34, .45);
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.gallery__arrow--prev { left: -16px; }
+.gallery__arrow--next { right: -16px; }
+
+.gallery__arrow:hover,
+.gallery__arrow:focus-visible {
+  color: #fff;
+  background: var(--rose);
+}
+
+.gallery__arrow:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+.gallery__arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The caption, clear of the kalira. Two lines share one place, so the old
+   one fades out as the new one fades in. */
+.gallery__caption {
+  display: grid;
+  margin: calc(var(--fw) * .24 + 6px) 20px 0;
+  font: italic 500 clamp(1.25rem, 4.6vw, 1.5rem)/1.3 var(--serif);
+  color: var(--gold);
+}
+
+.gallery__caption span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.gallery__caption span.is-on { opacity: 1; }
+
+/* The dots: the current one is a wider gold pill, with a thin line under
+   it that fills while autoplay counts down to the next photo. */
+.gallery__dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.gallery__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: width .45s ease;
+}
+
+.gallery__dot::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(122, 78, 63, .28);
+  transition: width .45s ease, background .45s ease;
+}
+
+.gallery__dot.is-on { width: 40px; }
+
+.gallery__dot.is-on::before {
+  width: 26px;
+  background: var(--gold);
+}
+
+.gallery__dot:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.gallery__dot i {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  bottom: 5px;
+  height: 1.5px;
+  background: var(--gold-light);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.gallery.is-playing .gallery__dot.is-on i { animation: gallery-count 5s linear forwards; }
+
+@keyframes gallery-count {
+  to { transform: scaleX(1); }
+}
+
+/* The thumbnails, each a little framed copy. The row scrolls sideways on
+   its own when it is wider than the screen; the empty ends centre it when
+   it is not. */
+.gallery__thumbs {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 10px 16px 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.gallery__thumbs::-webkit-scrollbar { display: none; }
+
+.gallery__thumbs::before,
+.gallery__thumbs::after {
+  content: "";
+  margin: auto;
+}
+
+.gallery__thumb {
+  position: relative;
+  flex: none;
+  width: 64px;
+  aspect-ratio: 1086 / 1448;
+  padding: 0;
+  border: 0;
+  background: none;
+  opacity: .6;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.gallery__thumb.is-on {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+.gallery__thumb:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Full screen, on the cream of the page. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  padding: calc(64px + env(safe-area-inset-top)) 12px calc(28px + env(safe-area-inset-bottom));
+  background: rgba(251, 244, 236, .97);
+  touch-action: pan-y;
+  animation: gallery-fade .3s ease;
+}
+
+.lightbox__img {
+  max-width: min(100%, 1100px);
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px -24px rgba(78, 42, 34, .6);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.lightbox__caption {
+  margin: 14px 0 0;
+  font: italic 500 1.35rem/1.3 var(--serif);
+  color: var(--gold);
+  text-align: center;
+}
+
+.lightbox .gallery__arrow { top: 50%; }
+.lightbox .gallery__arrow--prev { left: 10px; }
+.lightbox .gallery__arrow--next { right: 10px; }
+
+.lightbox .lightbox__close {
+  top: calc(12px + env(safe-area-inset-top));
+  right: 12px;
+  margin-top: 0;
+}
+
+.lightbox__close svg { stroke-width: 1.6; }
+
+
+/* 7. RSVP ----------------------------------------------------------------- */
+
+/* It follows straight on from the gallery, so the two share one gap. */
+.rsvp-section { padding-top: clamp(16px, 3vw, 40px); }
+
+.rsvp-note {
+  margin: .2rem 0 0;
+  font: italic 400 clamp(1.15rem, 4vw, 1.4rem)/1.3 var(--serif);
+  color: var(--ink-soft);
+}
+
+.rsvp-divider {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin: 10px auto clamp(20px, 4vw, 30px);
+}
+
+/* A card of the same warm paper as the page, a shade lighter; every field
+   a soft pill of deeper cream. --field is that cream. */
+.rsvp {
+  display: grid;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 36px) clamp(18px, 5vw, 44px);
+  text-align: left;
+  --field: rgba(250, 236, 214, .75);
+  border: 1px solid rgba(168, 118, 30, .38);
+  border-radius: 28px;
+  background: linear-gradient(170deg, rgba(253, 244, 230, .82), rgba(248, 232, 208, .74));
+  box-shadow: 0 30px 60px -36px rgba(122, 64, 34, .5), inset 0 0 0 5px rgba(253, 244, 230, .5), inset 0 0 0 6px rgba(168, 118, 30, .18);
+}
+
+.rsvp__field {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rsvp__label {
+  display: block;
+  margin-bottom: 7px;
+  padding: 0;
+  font: 600 .68rem/1.2 var(--display);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.rsvp input[type="text"],
+.rsvp input[type="tel"],
+.rsvp input[type="number"],
+.rsvp textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 9px 20px;
+  border: 1px solid rgba(168, 118, 30, .38);
+  border-radius: 999px;
+  font: 500 1.1rem/1.35 var(--serif);
+  color: var(--ink);
+  background: var(--field);
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.rsvp textarea {
+  min-height: 84px;
+  border-radius: 20px;
+  resize: vertical;
+}
+
+.rsvp ::placeholder {
+  color: var(--ink-soft);
+  opacity: .62;
+}
+
+.rsvp input:focus,
+.rsvp textarea:focus {
+  outline: none;
+  border-color: var(--rose);
+  background: rgba(253, 244, 230, .95);
+  box-shadow: 0 0 0 3px rgba(163, 48, 79, .14);
+}
+
+/* Yes or no: two pills, the chosen one filled. The radios stay underneath
+   for the keyboard and screen readers. */
+.rsvp__choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.choice {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.choice input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice span {
+  display: grid;
+  place-items: center;
+  min-height: 46px;
+  padding: 6px 12px;
+  border: 1px solid rgba(168, 118, 30, .38);
+  border-radius: 999px;
+  font: 600 .74rem/1.2 var(--display);
+  letter-spacing: .24em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: var(--field);
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.choice input:checked + span {
+  border-color: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, #BC4565, #8E2541);
+  box-shadow: 0 12px 22px -14px rgba(142, 37, 65, .9);
+}
+
+.choice input:focus-visible + span {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+.rsvp__send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 999px;
+  font: 600 .8rem var(--display);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #BC4565, #8E2541);
+  box-shadow: 0 16px 28px -16px rgba(142, 37, 65, .9);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.rsvp__send:hover { transform: translateY(-1px); }
+
+.rsvp__send:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+.rsvp__send svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* On a phone the two pills share a narrow row: keep each on one line. */
+@media (max-width: 440px) {
+  .rsvp__choices { gap: 10px; }
+
+  .choice span {
+    padding-inline: 6px;
+    font-size: .66rem;
+    letter-spacing: .12em;
+  }
+}
+
+
+/* 8. Counting down to forever, and the footer ------------------------------ */
+
+/* One watercolour sky behind the countdown, the blessings and the footer,
+   anchored to its foot so the mustard fields always show. It sits above
+   the page's drifting petals, so nothing falls over the numbers. --tw is
+   the toran's width; everything in the countdown is sized from it. */
+.finale {
+  --maroon: #7A1F2B;
+  --brown: #4A3426;
+  --tw: min(100vw - 32px, 560px);
+
+  position: relative;
+  z-index: 6;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(80px, 13vw, 128px) 0 calc(36px + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+/* Everything here is built by main.js. */
+html:not(.js) .finale { display: none; }
+
+/* The page's paper melts into the sky over most of a screen, on an eased
+   curve, so cream turns to blush gradually rather than at a line. */
+.finale__sky {
+  --melt: clamp(380px, 60svh, 620px);
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, rgba(0, 0, 0, .08) calc(var(--melt) * .2), rgba(0, 0, 0, .3) calc(var(--melt) * .45), rgba(0, 0, 0, .65) calc(var(--melt) * .7), #000 var(--melt));
+  mask-image: linear-gradient(transparent, rgba(0, 0, 0, .08) calc(var(--melt) * .2), rgba(0, 0, 0, .3) calc(var(--melt) * .45), rgba(0, 0, 0, .65) calc(var(--melt) * .7), #000 var(--melt));
+}
+
+/* A glaze of the paper's own cream over the top of the sky, thinning out
+   lower down, so the two colours meet half-way. */
+.finale__sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(248, 230, 206, .85), rgba(248, 230, 206, .4) calc(var(--melt) * .9), rgba(248, 230, 206, 0) calc(var(--melt) * 1.5));
+  pointer-events: none;
+}
+
+/* A touch wider than the section, so it can drift side to side (the clouds
+   moving) without an edge ever showing. */
+.finale__sky-art {
+  position: absolute;
+  inset: 0 -4%;
+  background: #F6D7C4 50% 100% / cover no-repeat;
+  animation: sky-drift 60s ease-in-out infinite alternate;
+}
+
+.finale.is-near .finale__sky-art { background-image: url("../images/finale-bg.webp"); }
+
+/* The low sun's glow, placed on the painted sun by main.js (--sun-x,
+   --sun-y), breathing slowly. */
+.finale__glow {
+  position: absolute;
+  top: var(--sun-y, 82%);
+  left: var(--sun-x, 42%);
+  width: min(120vw, 900px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background: radial-gradient(closest-side, rgba(255, 214, 140, .55), rgba(255, 200, 120, .18) 45%, transparent);
+  animation: glow-breathe 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* A paper dove that crosses the top of the sky now and then, far behind
+   everything (main.js). */
+.finale__sky-dove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 46px;
+  opacity: .32;
+  pointer-events: none;
+}
+
+/* The heading. */
+.finale__lead {
+  display: block;
+  margin: 0;
+  font: italic 500 clamp(1.4rem, 5vw, 1.8rem)/1.2 var(--serif);
+  color: var(--brown);
+}
+
+.finale__forever {
+  display: block;
+  margin: 0;
+  font: 400 clamp(3.4rem, 13vw, 5.2rem)/1 var(--script);
+  color: var(--gold);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .55), 0 0 22px rgba(255, 246, 225, .8);
+}
+
+.finale__title { margin: 0; font-weight: 400; }
+
+.finale .flourish {
+  display: block;
+  width: 120px;
+  height: 12px;
+  margin: 10px auto 0;
+  color: var(--gold);
+}
+
+/* The countdown: a toran across the top, four pendants hanging from it on
+   gold threads, a number in each. They always share one row. */
+.finale__countdown {
+  position: relative;
+  width: var(--tw);
+  margin: clamp(26px, 6vw, 40px) auto 0;
+}
+
+.finale__toran {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.finale__toran > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The brass bells, lifted out of the toran so they can swing: one picture
+   (58 × 72, at the toran's own scale), placed eight times by main.js. */
+.finale__toran > .finale__bell {
+  position: absolute;
+  width: 4.143%;
+  height: auto;
+  transform-origin: 50% 0;
+  animation: bell-swing var(--t, 2.8s) ease-in-out var(--d, 0s) infinite alternate;
+}
+
+.finale__pendants {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3%;
+  margin-top: calc(var(--tw) * -.1);
+}
+
+.cd {
+  position: relative;
+  padding-top: var(--drop);
+}
+
+/* The thread runs up behind the toran. */
+.cd__thread {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.5px;
+  height: calc(var(--drop) + 4px);
+  margin-left: -.75px;
+  background: linear-gradient(#C99A4C, #E7C77F);
+}
+
+.cd--1, .cd--4 { --drop: calc(var(--tw) * .045); }
+.cd--2, .cd--3 { --drop: calc(var(--tw) * .1); }
+
+/* Each pendant sways from its hook, at its own pace; its tassels swing a
+   little more. */
+.cd__swing {
+  position: relative;
+  container-type: inline-size;
+  transform-origin: 50% 0;
+  animation: cd-sway var(--t) ease-in-out infinite alternate;
+}
+
+.cd--1 .cd__swing { --t: 3.6s; }
+.cd--2 .cd__swing { --t: 4.3s; animation-delay: -1.2s; }
+.cd--3 .cd__swing { --t: 3.9s; animation-delay: -2.6s; }
+.cd--4 .cd__swing { --t: 4.5s; animation-delay: -.7s; }
+
+.cd__frame,
+.cd__tassels {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cd__tassels {
+  margin-top: -1px;
+  transform-origin: 50% 0;
+  animation: tassel-sway calc(var(--t) * .7) ease-in-out infinite alternate;
+}
+
+/* The cream face of the frame (pendant.webp is 354 × 559, so 100cqi wide
+   is 158cqi tall): the number and its label sit in its lower part, clear
+   of the arch. */
+.cd__face {
+  position: absolute;
+  top: 58cqi;
+  left: 15cqi;
+  right: 15cqi;
+  height: 78cqi;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cd__num {
+  position: relative;
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  font: 600 26cqi/1.1 var(--display);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--maroon);
+}
+
+.cd__num span {
+  grid-area: 1 / 1;
+}
+
+/* A changed number: the old one rises and fades as the new one comes up
+   from below. */
+.cd__num .is-out { animation: cd-out .3s ease forwards; }
+.cd__num .is-in { animation: cd-in .3s ease both; }
+
+.cd__label {
+  margin-top: 4cqi;
+  font: 600 max(7px, 8.5cqi)/1 var(--display);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* The day itself: a word in each pendant instead. */
+.finale.is-today .cd__num { font: 400 21cqi/1.1 var(--script); }
+.finale.is-today .cd__label { visibility: hidden; }
+
+.finale__shower {
+  position: absolute;
+  inset: -10% -6% 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The divider and the closing lines. */
+.finale__divider {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin: clamp(30px, 7vw, 48px) auto clamp(18px, 4vw, 26px);
+}
+
+.finale__lines {
+  margin: 0 20px;
+  font: italic 500 clamp(1.6rem, 6.2vw, 2.3rem)/1.25 var(--serif);
+  color: var(--brown);
+}
+
+.finale__lines span { display: block; }
+
+/* "Send a blessing", and the string the notes hang on. The band between
+   the button and the string is where the doves fly. */
+.sendoff {
+  position: relative;
+  margin-top: 64px;
+}
+
+.sendoff__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 26px 0 18px;
+  border: 1px solid rgba(168, 118, 30, .55);
+  border-radius: 999px;
+  font: 600 .74rem/1 var(--display);
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  background: rgba(253, 244, 230, .9);
+  box-shadow: 0 12px 26px -16px rgba(122, 64, 34, .6);
+  cursor: pointer;
+  transition: background .25s ease, opacity .25s ease;
+}
+
+.sendoff__btn:hover { background: #FFF8EE; }
+.sendoff__btn:disabled { opacity: .55; cursor: default; }
+
+.sendoff__btn:focus-visible,
+.note:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+.sendoff__btn img {
+  width: 30px;
+  height: auto;
+  margin: -6px 0;
+}
+
+/* The string: a sagging gold thread with marigold beads, drawn by main.js
+   to the screen's width, 16px in from each side. */
+.sendoff__line {
+  position: relative;
+  height: 170px;
+  margin: 92px 16px 0;
+}
+
+.sendoff__string {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+.sendoff__notes {
+  position: absolute;
+  inset: 0;
+}
+
+/* A note on the string, placed by main.js (--x, --y, --tilt). It sways
+   from its clip; tapped, it grows to be read. */
+.note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--nw);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: translate(var(--x), var(--y));
+  transition: transform .7s cubic-bezier(.3, .7, .3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.note__swing {
+  display: block;
+  transform-origin: 50% 0;
+  animation: note-sway var(--t, 3.4s) ease-in-out infinite alternate;
+}
+
+/* The card is finale-note.webp (640 × 457): a deckled paper card with a gold clip
+   at the top, which is what holds it to the string. The blessing is written
+   on the paper, clear of the clip above and the flower in the corner. */
+.note__card {
+  position: relative;
+  display: block;
+  aspect-ratio: 640 / 457;
+  background: #F8EAD3 center / 100% 100% no-repeat;
+  filter: drop-shadow(0 6px 8px rgba(78, 42, 34, .3));
+  transform: rotate(var(--tilt, 0deg));
+  transform-origin: 50% 0;
+  transition: transform .35s ease;
+}
+
+.finale.is-near .note__card { background: url("../images/finale-note.webp") center / 100% 100% no-repeat; }
+
+.note__text {
+  position: absolute;
+  top: 21%;
+  bottom: 21%;
+  left: 7%;
+  right: 14%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  text-wrap: balance;
+  font: italic 600 max(12.5px, calc(var(--nw) * .088))/1.15 var(--serif);
+  color: #3B2216;
+  text-shadow: 0 0 6px rgba(255, 248, 232, .9);
+}
+
+.note__by {
+  display: block;
+  margin-top: 3px;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
+.note.is-open { z-index: 3; }
+
+.note.is-open .note__card { transform: scale(1.45); }
+
+.note.is-open .note__text { bottom: 12%; }
+
+/* The dove that carries a blessing: its two frames take turns, so its
+   wings beat. */
+.dove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 62px;
+  aspect-ratio: 480 / 438;
+  margin: -28px 0 0 -31px;
+  pointer-events: none;
+}
+
+.dove img,
+.finale__sky-dove img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+}
+
+.finale__sky-dove { aspect-ratio: 480 / 438; }
+
+.dove img + img,
+.finale__sky-dove img + img { animation: flap .22s steps(1) infinite; }
+
+.dove img:first-child,
+.finale__sky-dove img:first-child { animation: flap .22s steps(1) -.11s infinite; }
+
+/* The footer. */
+.finale__foot {
+  margin: 34px 20px 0;
+  color: var(--brown);
+}
+
+.finale__foot p { margin: 0; }
+
+.finale__love {
+  font: italic 500 1.2rem var(--serif);
+}
+
+.finale__names {
+  margin-top: 2px !important;
+  font: 400 clamp(2.6rem, 10vw, 3.6rem)/1.1 var(--script);
+  color: var(--rose);
+}
+
+.finale__families {
+  font: italic 500 1.2rem var(--serif);
+}
+
+.finale__when {
+  margin-top: 16px !important;
+  font: 600 .72rem/1.7 var(--display);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.finale__made {
+  margin-top: 22px !important;
+  font: italic 500 1.05rem var(--serif);
+}
+
+.finale__made b {
+  font-weight: 400;
+  color: var(--rose);
+}
+
+.finale__credit {
+  margin-top: 4px !important;
+  font: 500 1rem var(--serif);
+}
+
+.finale__credit a { color: var(--gold); }
+
+/* Off screen, everything holds still (main.js adds .is-off — here and on
+   the film, the invitation, the events and the gallery). */
+.is-off *,
+.is-off *::before,
+.is-off *::after { animation-play-state: paused !important; }
+
+@keyframes sky-drift {
+  from { transform: translateX(-1.6%); }
+  to   { transform: translateX(1.6%); }
+}
+
+@keyframes glow-breathe {
+  from { opacity: .55; transform: scale(.94); }
+  to   { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes bell-swing {
+  from { transform: rotate(-4deg); }
+  to   { transform: rotate(4deg); }
+}
+
+@keyframes cd-sway {
+  from { transform: rotate(-2deg); }
+  to   { transform: rotate(2deg); }
+}
+
+@keyframes tassel-sway {
+  from { transform: rotate(-3.5deg); }
+  to   { transform: rotate(3.5deg); }
+}
+
+@keyframes cd-out {
+  to { opacity: 0; transform: translateY(-55%); }
+}
+
+@keyframes cd-in {
+  from { opacity: 0; transform: translateY(55%); }
+}
+
+@keyframes note-sway {
+  from { transform: rotate(-2deg); }
+  to   { transform: rotate(2deg); }
+}
+
+@keyframes flap {
+  0%  { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+/* 9. Petals and scroll reveals -------------------------------------------- */
+
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Each petal falls with one animation and sways with another; the two use
+   the separate transform and translate properties, so they add together. */
+.petals i {
+  position: absolute;
+  top: -30px;
+  left: var(--x);
+  width: 12px;
+  height: 15px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #F4A3B0, #D4526B);
+  opacity: .7;
+  animation:
+    fall var(--t) linear var(--d) infinite,
+    sway calc(var(--t) / 4) ease-in-out var(--d) infinite alternate;
+}
+
+.petals i:nth-child(3n) {
+  width: 10px;
+  height: 12px;
+  background: linear-gradient(135deg, #FFC864, #EC8A1C);
+}
+
+.petals i:nth-child(1)  { --x: 4%;  --t: 17s; --d: -3s; }
+.petals i:nth-child(2)  { --x: 13%; --t: 21s; --d: -12s; }
+.petals i:nth-child(3)  { --x: 22%; --t: 15s; --d: -7s; }
+.petals i:nth-child(4)  { --x: 31%; --t: 23s; --d: -17s; }
+.petals i:nth-child(5)  { --x: 40%; --t: 18s; --d: -1s; }
+.petals i:nth-child(6)  { --x: 49%; --t: 20s; --d: -14s; }
+.petals i:nth-child(7)  { --x: 58%; --t: 16s; --d: -9s; }
+.petals i:nth-child(8)  { --x: 67%; --t: 22s; --d: -5s; }
+.petals i:nth-child(9)  { --x: 76%; --t: 19s; --d: -15s; }
+.petals i:nth-child(10) { --x: 84%; --t: 17s; --d: -11s; }
+.petals i:nth-child(11) { --x: 91%; --t: 24s; --d: -20s; }
+.petals i:nth-child(12) { --x: 97%; --t: 18s; --d: -6s; }
+
+@keyframes fall {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(calc(100vh + 60px)) rotate(420deg); }
+}
+
+@keyframes sway {
+  from { translate: -26px 0; }
+  to   { translate: 26px 0; }
+}
+
+@keyframes play-in {
+  from { opacity: 0; translate: 0 14px; }
+}
+
+/* the band of light crosses in the first third, then rests */
+@keyframes play-shine {
+  0%       { background-position: 100% 0, 0 0; }
+  35%, to  { background-position: 0 0, 0 0; }
+}
+
+@keyframes play-ripple {
+  from { opacity: .85; scale: 1; }
+  to   { opacity: 0; scale: 1.08 1.45; }
+}
+
+@keyframes cue-chevron {
+  0%       { opacity: 0; translate: 0 -3px; }
+  40%      { opacity: 1; }
+  80%, to  { opacity: 0; translate: 0 3px; }
+}
+
+@keyframes cue-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-4px); }
+}
+
+@keyframes jhumar-sway {
+  from { transform: rotate(-1.6deg); }
+  to   { transform: rotate(1.6deg); }
+}
+
+/* Only hidden once main.js has run, so the page reads fine without it. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1.1s ease, transform 1.1s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .petals { display: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .film__zoom { transition: none; }
+  .film__play,
+  .film__play::after,
+  .intro.is-ended .scroll-cue,
+  .scroll-cue i::before,
+  .scroll-cue i::after,
+  .jhumar,
+  .gallery__kalira,
+  .ornament,
+  .finale__sky-art,
+  .finale__glow,
+  .finale__toran > .finale__bell,
+  .cd__swing,
+  .cd__tassels,
+  .note__swing { animation: none; }
+
+  .tale__drift { display: none; }
+  .film__play::after { display: none; }
+  .scroll-cue { translate: none; }
+
+  /* the open page cards still fade in, without moving */
+  .js .ebook.reveal { opacity: 0; transition: opacity .9s ease; }
+  .js .ebook.reveal.is-visible { opacity: 1; }
+}
